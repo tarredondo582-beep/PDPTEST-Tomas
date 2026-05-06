@@ -240,6 +240,61 @@ footer{background:var(--ink);color:white;padding:40px 24px}
   .page-option{font-size:.78rem;padding:7px 12px}
 }
 
+
+/* V55: one consistent dark/green menu on mobile; no separate white menu strip */
+.page-options{display:none !important}
+@media(max-width:720px){
+  nav{
+    height:auto !important;
+    min-height:var(--nh, var(--nav-h, 62px));
+    padding:12px 16px !important;
+    flex-wrap:wrap !important;
+    align-items:center !important;
+    gap:10px !important;
+  }
+  .nav-logo{
+    flex:1 1 auto !important;
+    min-width:210px !important;
+  }
+  .nav-links{
+    display:flex !important;
+    flex:1 0 100% !important;
+    width:100% !important;
+    margin-left:0 !important;
+    gap:8px !important;
+    align-items:center !important;
+    overflow-x:auto !important;
+    padding-top:8px !important;
+    -webkit-overflow-scrolling:touch !important;
+  }
+  .nav-links .nav-link:not(.nav-phone),
+  .nav-links .nav-cta{
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    white-space:nowrap !important;
+    flex:0 0 auto !important;
+    padding:8px 12px !important;
+    border-radius:999px !important;
+    background:rgba(255,255,255,.08) !important;
+    color:white !important;
+    font-size:.82rem !important;
+    font-weight:700 !important;
+    text-decoration:none !important;
+  }
+  .nav-links .nav-link.active{
+    background:var(--forest) !important;
+    color:white !important;
+  }
+  .nav-links .nav-cta{
+    background:var(--leaf) !important;
+  }
+  .nav-links .nav-phone,
+  .nav-sep{
+    display:none !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -261,14 +316,6 @@ footer{background:var(--ink);color:white;padding:40px 24px}
     <a class="nav-cta" href="https://pueblodepalmas.com/make-a-payment/" target="_blank">💳 Make a Payment</a>
   </div>
 </nav>
-
-<div class="page-options">
-  <a href="./index.html" class="page-option active">Properties</a>
-  <a href="./how-it-works.html" class="page-option">How It Works</a>
-  <a href="./contact.html" class="page-option">Contact</a>
-  <a href="https://pueblodepalmas.com/make-a-payment/" target="_blank" class="page-option pay">Make a Payment</a>
-</div>
-
 
 <div id="page-home" class="page active">
   <div class="hero">
