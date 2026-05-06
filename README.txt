@@ -1,22 +1,15 @@
-Pueblo de Palmas Static Website — V16
+Pueblo de Palmas full static website V17
 
-Deployment notes:
-- This package uses stable production filenames: index.html, properties.html, available-lots.html, styles.css, site.js, etc.
-- Upload the CONTENTS of this folder to the GitHub repository root.
-- Because filenames are stable, new uploads should replace the prior files cleanly.
-- GitHub Pages should be set to: Deploy from a branch → main → / (root).
-- The homepage loads from index.html automatically.
+Stable production filenames are used. Upload the CONTENTS of this folder to the GitHub repository root.
 
-What changed in V16:
-- Stable production naming so future uploads overwrite old files instead of creating version clutter.
-- Repaired missing Milanos Phase III plat thumbnail.
-- Added stronger mobile polish and safer fallback behavior for broken images.
-- Improved property cards, plat/map presentation, lot-finder behavior, and buyer CTA flow.
-- Reduced public-facing wording that made the site feel like a prototype.
+V17 focus:
+- Rebuilt Buying Process page for mobile-first buyer flow.
+- Improved homepage buyer path and mobile scrolling behavior.
+- Added thumb-friendly sticky process navigation.
+- Improved mobile header, CTA buttons, card spacing, and horizontal filters.
+- Reduced stacked clutter on phones and made the next action clearer.
 
-Recommended workflow now:
-1. Delete old versioned HTML files from the repository if you want a clean repo.
-2. Upload all files from this V16 folder.
-3. Commit changes.
-4. Wait for GitHub Pages to finish deploying.
-5. Open the GitHub Pages URL and hard-refresh.
+Important:
+- index.html must remain in the root for GitHub Pages.
+- Delete old _V14/_V15 files from the repository or start with a clean repo.
+- Exact plat tracing is still the biggest visual improvement remaining.
