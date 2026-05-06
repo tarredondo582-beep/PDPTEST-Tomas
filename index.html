@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pueblo de Palmas | Owner-Financed Land in the RGV</title>
+<meta name="description" content="Owner-financed land in the Rio Grande Valley. No bank required. Donna, Edinburg, Weslaco & more. Call (956) 383-3222.">
+<link rel="icon" href="https://pueblodepalmas.com/wp-content/uploads/2024/08/cropped-PDP-FAVICON-WHITE-BACKGROUND-270x270.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a2318;--forest:#2d5a3d;--sage:#4a7c59;--leaf:#6aab7a;
+  --cream:#faf7f2;--paper:#f2ece0;--sand:#e8dfc9;--border:#d8ceb8;
+  --sold:#8b1a1a;--sold-bg:rgba(139,26,26,.14);
+  --pend:#7a4a0a;--pend-bg:rgba(122,74,10,.14);
+  --avail:#2d5a3d;--avail-bg:rgba(45,90,61,.14);
+  --r:8px;--sh:0 4px 24px rgba(0,0,0,.1);--nh:62px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.55}
+@media(max-width:640px){body{padding-bottom:56px}}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--paper)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+/* PROMO */
+.promo-bar{background:linear-gradient(90deg,var(--forest),var(--sage));color:white;text-align:center;padding:8px 16px;font-size:.8rem;font-weight:600}
+.promo-bar a{color:white;text-decoration:underline}
+/* NAV */
+nav{position:sticky;top:0;z-index:200;background:var(--ink);height:var(--nh);display:flex;align-items:center;padding:0 20px;gap:14px;box-shadow:0 2px 16px rgba(0,0,0,.32)}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0}
+.nav-logo img{height:36px;width:36px;border-radius:4px;background:white;padding:3px;object-fit:contain}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:white;line-height:1.1}
+.nav-brand small{display:block;font-family:'DM Sans',sans-serif;font-size:.6rem;font-weight:400;color:#8fb09a;letter-spacing:.08em;text-transform:uppercase}
+.nav-links{display:flex;gap:2px;margin-left:auto;align-items:center;flex-wrap:nowrap}
+.nav-link{color:rgba(255,255,255,.72);text-decoration:none;font-size:.82rem;padding:6px 10px;border-radius:5px;transition:.15s;white-space:nowrap}
+.nav-link:hover,.nav-link.active{color:white;background:rgba(255,255,255,.1)}
+.nav-phone{color:white;font-weight:600}
+.nav-sep{width:1px;height:18px;background:rgba(255,255,255,.18);margin:0 4px;flex-shrink:0}
+.nav-cta{background:var(--leaf)!important;color:white!important;padding:7px 13px;border-radius:5px;font-weight:600;margin-left:5px;text-decoration:none;font-size:.82rem}
+.nav-cta:hover{background:var(--sage)!important}
+@media(max-width:720px){.nav-link:not(.nav-phone):not(.nav-cta){display:none}.nav-sep{display:none}.nav-brand small{display:none}}
+@media(max-width:480px){.nav-phone{display:none}}
+/* PAGE TOGGLE (index only) */
+.pg{display:none}.pg.active{display:block}
+/* HERO */
+.hero{background:linear-gradient(135deg,#0d1c10 0%,#1a3020 55%,#213328 100%);padding:58px 24px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.018'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E") repeat;pointer-events:none}
+.hero-inner{position:relative;max-width:640px;margin:0 auto}
+.eyebrow{display:inline-block;background:rgba(106,171,122,.2);border:1px solid rgba(106,171,122,.4);color:#9fd4ad;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 13px;border-radius:20px;margin-bottom:16px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,5vw,3rem);font-weight:700;color:white;line-height:1.18;margin-bottom:12px}
+.hero h1 em{font-style:italic;color:#9fd4ad}
+.hero p{font-size:.98rem;color:#b0c9b5;max-width:460px;margin:0 auto 24px}
+.hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hbtn{padding:11px 22px;border-radius:6px;font-size:.88rem;font-weight:600;text-decoration:none;cursor:pointer;border:none;font-family:inherit;transition:.18s}
+.hbtn-p{background:var(--leaf);color:white}.hbtn-p:hover{background:var(--sage)}
+.hbtn-o{background:transparent;color:white;border:1px solid rgba(255,255,255,.35)}.hbtn-o:hover{background:rgba(255,255,255,.09)}
+.hero-stats{margin-top:30px;display:flex;gap:22px;justify-content:center;flex-wrap:wrap}
+.hstat{text-align:center}
+.hstat-n{font-family:'Cormorant Garamond',serif;font-size:1.85rem;font-weight:700;color:white;line-height:1}
+.hstat-l{font-size:.67rem;color:#8fb09a;letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+/* FILTER */
+.filter-bar{background:white;border-bottom:1px solid var(--border);padding:11px 20px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;position:sticky;top:var(--nh);z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.fl{font-size:.7rem;font-weight:700;color:var(--sage);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;flex-shrink:0}
+.chips{display:flex;gap:5px;flex-wrap:wrap}
+.chip{padding:4px 12px;border-radius:20px;border:1px solid var(--border);background:white;font-size:.76rem;font-weight:500;cursor:pointer;transition:.15s;color:var(--ink);font-family:inherit;white-space:nowrap}
+.chip:hover{border-color:var(--sage);color:var(--sage)}.chip.on{background:var(--forest);color:white;border-color:var(--forest)}
+.fcount{margin-left:auto;font-size:.76rem;color:var(--sage);font-weight:600;white-space:nowrap;flex-shrink:0}
+/* PROPERTY GRID */
+.props-wrap{max-width:1180px;margin:0 auto;padding:34px 20px 60px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--ink);margin-bottom:4px}
+.sec-sub{font-size:.82rem;color:var(--sage);margin-bottom:22px}
+.prop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:16px}
+.pcard{background:white;border-radius:10px;border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:.2s;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.pcard:hover{transform:translateY(-3px);box-shadow:var(--sh);border-color:var(--sage)}
+.pcard-img{position:relative;height:172px;overflow:hidden;background:var(--sand)}
+.pcard-img img{width:100%;height:100%;object-fit:cover;transition:.3s}
+.pcard:hover .pcard-img img{transform:scale(1.04)}
+.pcard-badges{position:absolute;top:9px;left:9px;display:flex;gap:4px;flex-wrap:wrap}
+.badge{font-size:.6rem;font-weight:700;padding:2px 7px;border-radius:20px;letter-spacing:.05em;text-transform:uppercase}
+.b-hot{background:#e85d04;color:white}.b-new{background:var(--forest);color:white}
+.b-low{background:#7a5c00;color:white}.b-promo{background:white;color:var(--forest);border:1px solid var(--forest)}
+.b-soon{background:#4a6fa5;color:white}
+.avail-pip{position:absolute;bottom:9px;right:9px;background:rgba(26,35,24,.82);backdrop-filter:blur(4px);color:white;font-size:.68rem;font-weight:700;padding:3px 8px;border-radius:20px;display:flex;align-items:center;gap:4px}
+.pip-dot{width:6px;height:6px;border-radius:50%;background:var(--leaf)}
+.pcard-body{padding:14px}
+.pcard-name{font-family:'Cormorant Garamond',serif;font-size:1.06rem;font-weight:700;margin-bottom:2px}
+.pcard-loc{font-size:.74rem;color:var(--sage);margin-bottom:10px}
+.pcard-meta{display:flex;justify-content:space-between;align-items:flex-end}
+.pcard-size{font-size:.72rem;color:#666;background:var(--paper);padding:2px 7px;border-radius:4px}
+.pcard-price{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-weight:700;color:var(--forest);text-align:right}
+.pcard-price small{font-family:'DM Sans',sans-serif;font-size:.61rem;color:var(--sage);display:block}
+.pcard-cta{display:block;text-align:center;margin-top:10px;padding:8px;background:var(--forest);color:white;border-radius:6px;font-size:.78rem;font-weight:600;border:none;cursor:pointer;width:100%;font-family:inherit;transition:.15s}
+.pcard-cta:hover{background:var(--sage)}
+.no-results{text-align:center;padding:60px;color:var(--sage)}
+/* DETAIL PAGE */
+.back-btn{display:flex;align-items:center;gap:6px;padding:12px 20px;cursor:pointer;color:var(--sage);font-size:.84rem;font-weight:600;border:none;background:none;font-family:inherit;border-bottom:1px solid var(--border);width:100%;transition:.15s}
+.back-btn:hover{color:var(--forest)}
+.detail-wrap{max-width:1180px;margin:0 auto;padding:22px 20px 60px;display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start}
+@media(max-width:860px){.detail-wrap{grid-template-columns:1fr}}
+.d-labels{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+.d-name{font-family:'Cormorant Garamond',serif;font-size:1.85rem;font-weight:700;line-height:1.2;margin-bottom:4px}
+.d-loc{color:var(--sage);font-size:.86rem;margin-bottom:12px}
+.d-price-row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.d-price{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:700;color:var(--forest)}
+.d-price small{font-family:'DM Sans',sans-serif;font-size:.7rem;font-weight:400;color:var(--sage);margin-left:3px}
+.d-pill{font-size:.78rem;color:var(--sage);background:var(--paper);padding:3px 10px;border-radius:5px;border:1px solid var(--border)}
+/* PLAT IMAGE + OVERLAY */
+.sec-label{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--sage);margin-bottom:9px}
+.plat-wrap{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);background:var(--sand);box-shadow:var(--sh);margin-bottom:20px}
+.plat-wrap img{width:100%;display:block}
+.plat-hint{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(26,35,24,.82);backdrop-filter:blur(5px);color:white;font-size:.66rem;padding:4px 12px;border-radius:20px;white-space:nowrap;pointer-events:none}
+/* LOT OVERLAY CELLS */
+.lot-cell{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:3px;border:1.5px solid;font-weight:800;font-family:'DM Sans',sans-serif;transition:all .14s;line-height:1;font-size:clamp(6px,1vw,11px);padding:1px}
+.lot-cell.available{background:rgba(45,90,61,.45);border-color:rgba(45,90,61,.9);color:#0a2015}
+.lot-cell.available:hover{background:rgba(45,90,61,.75);transform:scale(1.08);z-index:5;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.lot-cell.sold{background:rgba(139,26,26,.48);border-color:rgba(139,26,26,.9);color:#350808;cursor:default}
+.lot-cell.pending{background:rgba(122,74,10,.48);border-color:rgba(122,74,10,.9);color:#2a1500;cursor:pointer}
+.lot-cell.pending:hover{background:rgba(122,74,10,.72);z-index:5;cursor:pointer}
+.lot-cell.sel{box-shadow:0 0 0 2px white,0 0 0 4px var(--forest)!important;z-index:10}
+/* LOT GRID (number squares) */
+.lot-legend{display:flex;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:.76rem;color:#555}
+.l-sw{width:13px;height:13px;border-radius:3px}
+.l-av{background:var(--avail-bg);border:2px solid var(--avail)}
+.l-so{background:var(--sold-bg);border:2px solid var(--sold)}
+.l-pe{background:var(--pend-bg);border:2px solid var(--pend)}
+.lot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:5px;margin-bottom:20px}
+.lbtn{aspect-ratio:1;border-radius:5px;border:2px solid;cursor:pointer;font-family:inherit;transition:.15s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:3px}
+.lbtn.available{background:var(--avail-bg);border-color:var(--avail);color:var(--avail)}
+.lbtn.sold{background:var(--sold-bg);border-color:var(--sold);color:var(--sold);cursor:default;opacity:.65}
+.lbtn.pending{background:var(--pend-bg);border-color:var(--pend);color:var(--pend)}
+.lbtn:not(.sold):hover{transform:scale(1.07);box-shadow:0 2px 8px rgba(0,0,0,.15);z-index:1}
+.lbtn.sel{box-shadow:0 0 0 3px var(--forest)!important;z-index:2}
+.ln{font-size:.68rem;font-weight:800}.lp{font-size:.55rem;font-weight:600;text-align:center}.ls{font-size:.5rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+/* SIDE CARDS */
+.sc{background:white;border-radius:var(--r);border:1px solid var(--border);overflow:hidden;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.sc-h{background:var(--ink);color:white;padding:11px 15px;font-size:.76rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.sc-b{padding:15px}
+.stat3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:700;line-height:1}
+.stat-l{font-size:.65rem;color:var(--sage);text-transform:uppercase;letter-spacing:.07em}
+.cl{font-size:.7rem;font-weight:700;color:var(--sage);text-transform:uppercase;letter-spacing:.07em;margin:10px 0 4px;display:block}
+.ci{width:100%;padding:8px 11px;border:1px solid var(--border);border-radius:5px;font-family:inherit;font-size:.86rem;background:var(--paper);color:var(--ink);transition:.15s}
+.ci:focus{outline:none;border-color:var(--sage);background:white}
+.cres{background:var(--forest);color:white;border-radius:6px;padding:13px;text-align:center;margin-top:9px}
+.cres-n{font-family:'Cormorant Garamond',serif;font-size:1.85rem;font-weight:700;line-height:1}
+.cres-l{font-size:.68rem;color:rgba(255,255,255,.75);margin-top:2px}
+.cdis{font-size:.64rem;color:var(--sage);margin-top:8px;line-height:1.45;text-align:center}
+.cfi{width:100%;padding:8px 11px;border:1px solid var(--border);border-radius:5px;font-family:inherit;font-size:.86rem;background:var(--paper);color:var(--ink);margin-bottom:8px}
+.cfsel{width:100%;padding:8px 11px;border:1px solid var(--border);border-radius:5px;font-family:inherit;font-size:.86rem;background:var(--paper);color:var(--ink);margin-bottom:8px;-webkit-appearance:none}
+.cfbtn{width:100%;padding:10px;background:var(--forest);color:white;border:none;border-radius:6px;font-family:inherit;font-size:.86rem;font-weight:700;cursor:pointer;transition:.15s}
+.cfbtn:hover{background:var(--sage)}
+/* FAQ */
+.fq-item{border-bottom:1px solid var(--border)}.fq-item:last-child{border-bottom:none}
+.fq-q{width:100%;text-align:left;padding:11px 0;background:none;border:none;font-family:inherit;font-size:.84rem;font-weight:700;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.fq-q:hover{color:var(--forest)}.fq-ic{font-size:.72rem;color:var(--sage);transition:.2s;flex-shrink:0}
+.fq-a{font-size:.79rem;color:#555;line-height:1.6;padding-bottom:10px;display:none}
+.fq-a.open{display:block}.fq-ic.open{transform:rotate(180deg)}
+.map-fr{width:100%;height:196px;border:none;border-radius:5px}
+.vid-wrap{position:relative;padding-top:56.25%;border-radius:var(--r);overflow:hidden;margin-bottom:18px;background:#000}
+.vid-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%}
+/* LOT PANEL */
+.ov-bg{position:fixed;inset:0;background:rgba(0,0,0,.36);opacity:0;pointer-events:none;transition:.25s;z-index:300}
+.ov-bg.on{opacity:1;pointer-events:all}
+.lot-panel{position:fixed;right:-420px;top:0;bottom:0;width:400px;background:white;box-shadow:-6px 0 40px rgba(0,0,0,.18);transition:right .28s cubic-bezier(.4,0,.2,1);z-index:301;display:flex;flex-direction:column}
+.lot-panel.open{right:0}
+.pt{background:var(--ink);color:white;padding:18px 20px 14px;display:flex;justify-content:space-between;align-items:flex-start}
+.pt-tag{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#8fb09a;margin-bottom:2px}
+.pt-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;line-height:1}
+.pc-btn{background:none;border:none;color:rgba(255,255,255,.6);font-size:1.3rem;cursor:pointer;padding:0;line-height:1;transition:.15s}
+.pc-btn:hover{color:white}
+.sp{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.63rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;margin-top:6px}
+.sp-a{background:var(--avail-bg);color:var(--avail)}.sp-s{background:var(--sold-bg);color:var(--sold)}.sp-p{background:var(--pend-bg);color:var(--pend)}
+.pb{flex:1;overflow-y:auto;padding:18px 20px}
+.pp{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--forest);line-height:1}
+.pp.sold{color:var(--sold)}
+.ppn{font-size:.7rem;color:var(--sage);margin-bottom:13px;margin-top:2px}
+.pcs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px}
+.pc2{background:var(--paper);border-radius:6px;padding:8px 11px}
+.pc2-l{font-size:.6rem;text-transform:uppercase;letter-spacing:.09em;color:var(--sage);margin-bottom:1px}
+.pc2-v{font-size:.86rem;font-weight:700}
+.phr{border:none;border-top:1px solid var(--border);margin:11px 0}
+.pn{font-size:.71rem;color:#777;line-height:1.5;margin-bottom:13px}
+.pacts{display:flex;flex-direction:column;gap:7px}
+.pact{padding:11px;border-radius:6px;font-family:inherit;font-weight:700;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;font-size:.86rem;transition:.15s;text-align:center}
+.pa-call{background:var(--forest);color:white}.pa-call:hover{background:var(--sage)}
+.pa-wa{background:#25d366;color:white}.pa-wa:hover{background:#1ebe5d}
+.pa-email{background:white;color:var(--forest);border:2px solid var(--forest)}.pa-email:hover{background:var(--avail-bg)}
+.pa-pay{background:var(--leaf);color:white}.pa-pay:hover{background:var(--sage)}
+.alert-s{background:var(--sold-bg);color:var(--sold);border-radius:6px;padding:9px;font-size:.78rem;font-weight:600;text-align:center;margin-bottom:9px}
+.alert-p{background:var(--pend-bg);color:var(--pend);border-radius:6px;padding:9px;font-size:.78rem;font-weight:600;text-align:center;margin-bottom:9px}
+.pfoot{padding:9px 20px;border-top:1px solid var(--border);font-size:.62rem;color:var(--sage);text-align:center;line-height:1.55}
+/* HOME SECTIONS */
+.how-sec{background:var(--ink);padding:68px 24px;color:white;text-align:center}
+.how-sec h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.65rem,4vw,2.5rem);font-weight:700;margin:12px 0 8px}
+.how-sec .sub{color:#8fb09a;font-size:.88rem;margin-bottom:0;max-width:460px;margin-left:auto;margin-right:auto}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0;max-width:920px;margin:42px auto 0;position:relative}
+.steps::before{content:'';position:absolute;top:33px;left:8%;right:8%;height:2px;background:linear-gradient(90deg,var(--forest),var(--leaf),var(--forest));opacity:.4}
+.step{text-align:center;padding:0 10px}
+.step-n{width:66px;height:66px;border-radius:50%;background:linear-gradient(135deg,var(--forest),var(--sage));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:white;margin:0 auto 13px;box-shadow:0 4px 16px rgba(45,90,61,.4)}
+.step-t{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;color:white;margin-bottom:6px}
+.step-d{font-size:.76rem;color:#8fb09a;line-height:1.55}
+@media(max-width:600px){.steps::before{display:none}}
+.why-sec{background:var(--paper);padding:68px 24px;text-align:center}
+.why-sec h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.65rem,4vw,2.5rem);font-weight:700;margin:12px 0 8px}
+.why-sec .sub{color:var(--sage);font-size:.88rem}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;max-width:1100px;margin:36px auto 0}
+.wcard{background:white;border-radius:10px;border:1px solid var(--border);padding:24px 20px;text-align:left;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.wcard-ico{font-size:1.65rem;margin-bottom:9px}
+.wcard-t{font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-weight:700;margin-bottom:5px;color:var(--forest)}
+.wcard-d{font-size:.79rem;color:#555;line-height:1.6}
+.test-sec{background:white;padding:68px 24px;text-align:center}
+.test-sec h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.65rem,4vw,2.5rem);font-weight:700;margin:12px 0 8px}
+.test-sec .sub{color:var(--sage);font-size:.88rem}
+.tests{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;max-width:1040px;margin:36px auto 0}
+.tcard{background:var(--paper);border-radius:10px;border:1px solid var(--border);padding:22px;text-align:left}
+.tstars{color:#e8a202;font-size:.9rem;margin-bottom:8px;letter-spacing:2px}
+.ttext{font-size:.83rem;color:var(--ink);line-height:1.65;margin-bottom:12px;font-style:italic}
+.tauth{display:flex;align-items:center;gap:8px}
+.tav{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--forest),var(--sage));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:.9rem;font-weight:700;color:white;flex-shrink:0}
+.tname{font-size:.78rem;font-weight:700}.tcity{font-size:.68rem;color:var(--sage)}
+.cta-sec{background:linear-gradient(135deg,var(--forest),var(--sage));padding:56px 24px;text-align:center}
+.cta-sec h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;color:white;margin-bottom:8px}
+.cta-sec p{color:rgba(255,255,255,.82);font-size:.9rem;margin-bottom:24px;max-width:440px;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.cta-w{padding:11px 22px;border-radius:6px;font-size:.9rem;font-weight:700;text-decoration:none;cursor:pointer;border:none;font-family:inherit;background:white;color:var(--forest);transition:.15s}.cta-w:hover{background:var(--cream)}
+.cta-o{padding:11px 22px;border-radius:6px;font-size:.9rem;font-weight:700;text-decoration:none;border:2px solid rgba(255,255,255,.55);background:transparent;font-family:inherit;color:white;transition:.15s}.cta-o:hover{background:rgba(255,255,255,.1)}
+/* FOOTER */
+footer{background:var(--ink);color:white;padding:38px 24px}
+.foot-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:26px}
+.foot-brand{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-weight:700;color:white}
+.foot-brand small{display:block;font-family:'DM Sans',sans-serif;font-size:.6rem;font-weight:400;color:#8fb09a;letter-spacing:.08em;text-transform:uppercase}
+.foot-desc{font-size:.77rem;color:#8fb09a;margin-top:7px;line-height:1.6;max-width:230px}
+.fcol h4{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#8fb09a;margin-bottom:10px}
+.fcol a,.fcol p{font-size:.78rem;color:rgba(255,255,255,.65);text-decoration:none;display:block;margin-bottom:5px;transition:.15s}
+.fcol a:hover{color:white}
+.foot-bot{max-width:1180px;margin:24px auto 0;padding-top:16px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:.68rem;color:rgba(255,255,255,.36)}
+.flink{color:rgba(255,255,255,.55);text-decoration:none;font-size:.76rem;transition:.15s}.flink:hover{color:white}
+/* WA FAB */
+.wa-fab{position:fixed;bottom:22px;right:22px;z-index:250;background:#25d366;color:white;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 18px rgba(37,211,102,.42);transition:.2s}
+.wa-fab:hover{transform:scale(1.1)}
+/* MOBILE BAR */
+.mob-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:240;background:var(--ink);padding:8px 12px;gap:6px}
+@media(max-width:640px){.mob-bar{display:flex}}
+.mob-btn{flex:1;padding:9px 4px;border-radius:6px;text-align:center;text-decoration:none;font-size:.74rem;font-weight:700;font-family:inherit;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center;gap:3px;transition:.15s}
+.mob-call{background:var(--forest);color:white}.mob-wa{background:#25d366;color:white}.mob-pay{background:var(--leaf);color:white}
+/* HOW-IT-WORKS PAGE */
+.page-wrap{max-width:820px;margin:0 auto;padding:40px 24px 80px}
+.page-hero-sec{text-align:center;padding:52px 24px 40px;background:linear-gradient(135deg,#0d1c10,#1a3020)}
+.page-hero-sec h1{font-family:'Cormorant Garamond',serif;font-size:clamp(1.85rem,5vw,2.8rem);font-weight:700;color:white;margin-bottom:10px}
+.page-hero-sec p{color:#b0c9b5;font-size:.95rem;max-width:460px;margin:0 auto}
+.step-card{background:white;border-radius:10px;border:1px solid var(--border);padding:24px;display:flex;gap:18px;align-items:flex-start;box-shadow:0 2px 8px rgba(0,0,0,.05);margin-bottom:14px}
+.sc-num{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--forest),var(--sage));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:white;flex-shrink:0}
+.sc-num + div h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;margin-bottom:5px;color:var(--forest)}
+.sc-num + div p{font-size:.85rem;color:#444;line-height:1.72}
+.sc-num + div p a{color:var(--forest);font-weight:600}
+.faq-box{background:var(--paper);border-radius:10px;padding:26px;border:1px solid var(--border);margin-top:34px}
+.faq-box h3{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:700;color:var(--forest);margin-bottom:16px}
+/* CONTACT PAGE */
+.contact-wrap{max-width:1060px;margin:0 auto;padding:36px 20px 80px}
+.contact-hero-sec{background:linear-gradient(135deg,#0d1c10,#1a3020);border-radius:12px;padding:42px 32px;color:white;margin-bottom:32px;text-align:center}
+.contact-hero-sec h1{font-family:'Cormorant Garamond',serif;font-size:clamp(1.7rem,4vw,2.5rem);font-weight:700;margin-bottom:8px}
+.contact-hero-sec p{color:#b0c9b5;font-size:.92rem;max-width:420px;margin:0 auto}
+.c2col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px}
+@media(max-width:660px){.c2col{grid-template-columns:1fr}}
+.cblock{background:white;border-radius:10px;border:1px solid var(--border);padding:24px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.cblock h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;margin-bottom:12px;color:var(--forest)}
+.irow{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;font-size:.84rem}
+.irow a{color:var(--forest);text-decoration:none;font-weight:600}.irow a:hover{text-decoration:underline}
+.hgrid{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:.81rem;margin-top:6px}
+.hday{font-weight:700;color:var(--sage)}.htime{color:var(--ink)}
+.bigform{background:white;border-radius:10px;border:1px solid var(--border);padding:26px;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:24px}
+.bigform h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;margin-bottom:16px;color:var(--forest)}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+@media(max-width:560px){.fg2{grid-template-columns:1fr}}
+.fg{display:flex;flex-direction:column;gap:3px;margin-bottom:11px}
+.fg label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--sage)}
+.fg input,.fg select,.fg textarea{padding:9px 11px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:.86rem;background:var(--paper);color:var(--ink);transition:.15s;width:100%}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--sage);background:white}
+.fg textarea{resize:vertical;min-height:90px}
+.fgsub{background:var(--forest);color:white;padding:11px;border:none;border-radius:7px;font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;transition:.15s;width:100%;margin-top:3px}
+.fgsub:hover{background:var(--sage)}
+.c3col{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-bottom:24px}
+.qcard{background:white;border-radius:10px;border:1px solid var(--border);padding:22px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.qcard .qi{font-size:1.9rem;margin-bottom:8px}
+.qcard h3{font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-weight:700;margin-bottom:5px}
+.qcard p{font-size:.8rem;color:#555;margin-bottom:12px;line-height:1.55}
+.qbtn{display:block;padding:9px;border-radius:7px;text-decoration:none;font-weight:700;font-size:.8rem;transition:.15s;text-align:center}
+.qf{background:var(--forest);color:white}.qf:hover{background:var(--sage)}
+.qw{background:#25d366;color:white}.qw:hover{background:#1ebe5d}
+.ql{background:var(--leaf);color:white}.ql:hover{background:var(--sage)}
+.about-box{background:white;border-radius:10px;border:1px solid var(--border);padding:26px;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:24px}
+.about-box h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--forest);margin-bottom:12px}
+.about-box p{font-size:.84rem;color:#444;line-height:1.75;margin-bottom:9px}
+.legal-note{background:var(--paper);border-radius:10px;border:1px solid var(--border);padding:16px 20px;font-size:.74rem;color:#666;line-height:1.7;text-align:center}
+.legal-note a{color:var(--forest)}
+</style>
+</head>
+<body>
+<div class="promo-bar">&#127881; Seller Paid Closing Costs on Select Properties &mdash; <a href="index.html">View Available Lots</a></div>
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="https://pueblodepalmas.com/wp-content/uploads/2025/01/PDP-WP-350-x-350-Logo.png" alt="Logo" onerror="this.style.display='none'">
+    <div class="nav-brand">Pueblo de Palmas<small>NMLS #319106 &middot; Owner Finance Land</small></div>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link active" href="index.html">Properties</a>
+    <a class="nav-link" href="how-it-works.html">How It Works</a>
+    <a class="nav-link" href="contact.html">Contact</a>
+    <div class="nav-sep"></div>
+    <a class="nav-link nav-phone" href="tel:9563833222">&#9990; (956) 383-3222</a>
+    <a class="nav-cta" href="https://pueblodepalmas.com/make-a-payment/" target="_blank">&#128179; Make a Payment</a>
+  </div>
+</nav>
+
+<!-- HOME PAGE -->
+<div class="pg active" id="pg-home">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Rio Grande Valley &middot; Texas</div>
+      <h1>Owner-Financed Land<br><em>No Bank Required</em></h1>
+      <p>Affordable lots across the RGV &mdash; easy payments, no credit check.</p>
+      <div class="hero-btns">
+        <button class="hbtn hbtn-p" onclick="scrollToProps()">View All Properties</button>
+        <a class="hbtn hbtn-o" href="tel:9563833222">Call (956) 383-3222</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><div class="hstat-n">12</div><div class="hstat-l">Subdivisions</div></div>
+        <div class="hstat"><div class="hstat-n">7</div><div class="hstat-l">Cities</div></div>
+        <div class="hstat"><div class="hstat-n" id="hero-avail">200+</div><div class="hstat-l">Lots Available</div></div>
+        <div class="hstat"><div class="hstat-n">0%</div><div class="hstat-l">Bank Needed</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <span class="fl">Filter:</span>
+    <div class="chips">
+      <button class="chip on" onclick="setFlt('all',this)">All</button>
+      <button class="chip" onclick="setFlt('Donna',this)">Donna</button>
+      <button class="chip" onclick="setFlt('Edinburg',this)">Edinburg</button>
+      <button class="chip" onclick="setFlt('Weslaco',this)">Weslaco</button>
+      <button class="chip" onclick="setFlt('Mercedes',this)">Mercedes</button>
+      <button class="chip" onclick="setFlt('Sullivan City',this)">Sullivan City</button>
+      <button class="chip" onclick="setFlt('Monte Alto',this)">Monte Alto</button>
+      <button class="chip" onclick="setFlt('Rio Grande City',this)">Rio Grande City</button>
+      <button class="chip" onclick="setFlt('half',this)">&frac12; Acre</button>
+      <button class="chip" onclick="setFlt('city',this)">City Size</button>
+      <button class="chip" onclick="setFlt('acre',this)">1+ Acre</button>
+    </div>
+    <span class="fcount" id="fcount"></span>
+  </div>
+
+  <div class="props-wrap" id="props-wrap">
+    <div class="sec-title">Available Subdivisions</div>
+    <div class="sec-sub">Click any property to view the interactive plat map, pricing &amp; lot availability</div>
+    <div class="prop-grid" id="prop-grid"></div>
+    <div class="no-results" id="no-results" style="display:none">No properties match that filter.</div>
+  </div>
+
+  <!-- HOW IT WORKS STRIP -->
+  <div class="how-sec">
+    <div class="eyebrow">Simple Process</div>
+    <h2>How Owner Financing Works</h2>
+    <p class="sub">No banks, no long approvals. We finance you directly.</p>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div class="step-t">Pick Your Lot</div><div class="step-d">Browse our interactive plat maps and find the perfect lot for your family.</div></div>
+      <div class="step"><div class="step-n">2</div><div class="step-t">Call Us</div><div class="step-d">Call or WhatsApp (956) 383-3222 to confirm availability and discuss terms.</div></div>
+      <div class="step"><div class="step-n">3</div><div class="step-t">Sign & Down Payment</div><div class="step-d">Sign the contract and make your down payment. No bank approval needed.</div></div>
+      <div class="step"><div class="step-n">4</div><div class="step-t">Monthly Payments</div><div class="step-d">Pay online, by phone, or in person. Once paid in full, the deed is yours.</div></div>
+      <div class="step"><div class="step-n">5</div><div class="step-t">Your Land</div><div class="step-d">Build your home, place a manufactured home, or hold as investment.</div></div>
+    </div>
+    <div style="margin-top:30px"><a href="how-it-works.html" style="display:inline-block;padding:11px 26px;border-radius:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:white;text-decoration:none;font-size:.85rem;font-weight:600;transition:.15s">Learn the Full Process &rarr;</a></div>
+  </div>
+
+  <!-- WHY CHOOSE US -->
+  <div class="why-sec">
+    <div class="eyebrow" style="background:rgba(45,90,61,.1);border:1px solid rgba(45,90,61,.25);color:var(--sage)">Why Pueblo de Palmas</div>
+    <h2>Land Ownership Made Simple</h2>
+    <p class="sub">Family-owned and operated. We know the RGV because we live here too.</p>
+    <div class="why-grid">
+      <div class="wcard"><div class="wcard-ico">&#127974;</div><div class="wcard-t">No Bank Required</div><div class="wcard-d">We finance you directly. No credit check, no bank approval, no lengthy applications.</div></div>
+      <div class="wcard"><div class="wcard-ico">&#128203;</div><div class="wcard-t">Simple Qualification</div><div class="wcard-d">If you can make a down payment and monthly payments, you can own land with us.</div></div>
+      <div class="wcard"><div class="wcard-ico">&#127968;</div><div class="wcard-t">Manufactured Home Friendly</div><div class="wcard-d">Most lots allow manufactured and mobile homes with developer approval.</div></div>
+      <div class="wcard"><div class="wcard-ico">&#128205;</div><div class="wcard-t">12 Locations Across the RGV</div><div class="wcard-d">Donna, Edinburg, Weslaco, Mercedes, Sullivan City, Monte Alto &amp; Rio Grande City.</div></div>
+      <div class="wcard"><div class="wcard-ico">&#128176;</div><div class="wcard-t">Low Down Payments</div><div class="wcard-d">Get started with as little as 10% down. Use our estimator to see what fits your budget.</div></div>
+      <div class="wcard"><div class="wcard-ico">&#129309;</div><div class="wcard-t">Local Family Business</div><div class="wcard-d">NMLS #319106. Serving the RGV community for decades. We stand behind every sale.</div></div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="test-sec">
+    <div class="eyebrow" style="background:rgba(45,90,61,.1);border:1px solid rgba(45,90,61,.25);color:var(--sage)">Happy Customers</div>
+    <h2>What Our Customers Say</h2>
+    <p class="sub">Hundreds of families across the RGV now own land through our owner-financing program.</p>
+    <div class="tests">
+      <div class="tcard"><div class="tstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="ttext">"We never thought we could own land without a bank loan. Pueblo de Palmas made it possible. The process was easy and the staff was so helpful."</p>
+        <div class="tauth"><div class="tav">M</div><div><div class="tname">Maria G.</div><div class="tcity">Donna, TX</div></div></div></div>
+      <div class="tcard"><div class="tstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="ttext">"We bought in Las Gaviotas and couldn't be happier. Payments are affordable and we're finally building our dream home."</p>
+        <div class="tauth"><div class="tav">R</div><div><div class="tname">Roberto &amp; Ana L.</div><div class="tcity">Edinburg, TX</div></div></div></div>
+      <div class="tcard"><div class="tstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="ttext">"I called on Monday, signed Wednesday, and by Friday I owned half an acre. That's how fast it went. Highly recommend to anyone in the RGV looking for land."</p>
+        <div class="tauth"><div class="tav">J</div><div><div class="tname">Juan T.</div><div class="tcity">Weslaco, TX</div></div></div></div>
+    </div>
+  </div>
+
+  <!-- CTA BAND -->
+  <div class="cta-sec">
+    <h2>Ready to Own Your Land?</h2>
+    <p>Browse our interactive lot maps or call us today. No bank needed.</p>
+    <div class="cta-btns">
+      <button class="cta-w" onclick="scrollToProps()">View All Properties</button>
+      <a class="cta-o" href="tel:9563833222">&#128222; (956) 383-3222</a>
+      <a class="cta-o" href="https://wa.me/19563833222" target="_blank">&#128172; WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL PAGE -->
+<div class="pg" id="pg-detail">
+  <button class="back-btn" onclick="showPg('home')">&larr; Back to All Properties</button>
+  <div class="detail-wrap">
+
+    <!-- LEFT: Plat + Lot Map -->
+    <div>
+      <div class="d-labels" id="d-labels"></div>
+      <h1 class="d-name" id="d-name"></h1>
+      <p class="d-loc" id="d-loc"></p>
+      <div class="d-price-row">
+        <div class="d-price" id="d-price"></div>
+        <span class="d-pill" id="d-lots"></span>
+      </div>
+
+      <!-- PLAT IMAGE with lot overlays -->
+      <div class="sec-label">&#128196; Official Plat / Layout Map &mdash; <span style="font-weight:400;text-transform:none;letter-spacing:0">Click to open full size</span></div>
+      <div class="plat-wrap" id="plat-wrap" onclick="openPlat()">
+        <img id="plat-img" src="" alt="Plat Map">
+        <div class="plat-hint">&#128269; Colored squares = lot status &middot; Click a square to view details &middot; Click image to enlarge</div>
+      </div>
+
+      <!-- LEGEND -->
+      <div class="lot-legend">
+        <div class="leg-item"><div class="l-sw l-av"></div>Available</div>
+        <div class="leg-item"><div class="l-sw l-so"></div>Sold</div>
+        <div class="leg-item"><div class="l-sw l-pe"></div>Pending</div>
+      </div>
+
+      <!-- NUMBERED LOT GRID -->
+      <div class="sec-label" style="margin-top:4px">&#128306; Interactive Lot Map &mdash; Click Any Lot for Details</div>
+      <div class="lot-grid" id="lot-grid"></div>
+
+      <!-- VIDEO -->
+      <div id="vid-wrap" style="display:none">
+        <div class="sec-label">&#127909; Property Video Tour</div>
+        <div class="vid-wrap"><div id="vid-frame"></div></div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="sec-label" style="margin-top:8px">&#10067; Frequently Asked Questions</div>
+      <div class="sc" style="margin-top:8px"><div class="sc-b" id="d-faq"></div></div>
+    </div>
+
+    <!-- RIGHT: Sidebar -->
+    <div>
+      <!-- INVENTORY STATS -->
+      <div class="sc">
+        <div class="sc-h">&#128202; Inventory Summary</div>
+        <div class="sc-b"><div class="stat3">
+          <div><div class="stat-n" id="stat-a" style="color:var(--forest)">0</div><div class="stat-l">Available</div></div>
+          <div><div class="stat-n" id="stat-s" style="color:var(--sold)">0</div><div class="stat-l">Sold</div></div>
+          <div><div class="stat-n" id="stat-p" style="color:var(--pend)">0</div><div class="stat-l">Pending</div></div>
+        </div></div>
+      </div>
+
+      <!-- PAYMENT ESTIMATOR -->
+      <div class="sc">
+        <div class="sc-h">&#129518; Payment Estimator</div>
+        <div class="sc-b">
+          <label class="cl">Purchase Price</label>
+          <input class="ci" type="number" id="ci-price" placeholder="e.g. 82495" oninput="calcPmt()">
+          <label class="cl">Down Payment (%)</label>
+          <input class="ci" type="number" id="ci-down" value="10" min="0" max="90" oninput="calcPmt()">
+          <label class="cl">Interest Rate (%)</label>
+          <input class="ci" type="number" id="ci-rate" value="12" step="0.5" oninput="calcPmt()">
+          <label class="cl">Term (Years)</label>
+          <input class="ci" type="number" id="ci-term" value="15" min="1" max="30" oninput="calcPmt()">
+          <div class="cres"><div class="cres-n" id="cres-n">&mdash;</div><div class="cres-l">Estimated Monthly Payment</div></div>
+          <p class="cdis">Estimate only. Actual terms confirmed by our office. <a href="tel:9563833222" style="color:var(--leaf)">Call us</a> to discuss your options.</p>
+        </div>
+      </div>
+
+      <!-- EXPRESS INTEREST -->
+      <div class="sc">
+        <div class="sc-h">&#9993; Express Interest</div>
+        <div class="sc-b">
+          <input class="cfi" type="text" id="cf-name" placeholder="Your Name">
+          <input class="cfi" type="tel" id="cf-phone" placeholder="Phone Number">
+          <input class="cfi" type="email" id="cf-email" placeholder="Email Address">
+          <select class="cfsel" id="cf-lot"><option value="">— Select a Lot —</option></select>
+          <button class="cfbtn" onclick="submitInquiry()">&#128232; Send Inquiry</button>
+          <p style="font-size:.68rem;color:var(--sage);margin-top:7px;text-align:center">Or call: <a href="tel:9563833222" style="color:var(--forest);font-weight:700">(956) 383-3222</a></p>
+        </div>
+      </div>
+
+      <!-- MAP -->
+      <div class="sc">
+        <div class="sc-h">&#128205; Location Map</div>
+        <div class="sc-b" style="padding:0"><iframe id="map-frame" class="map-fr" src="" allowfullscreen loading="lazy"></iframe></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LOT PANEL -->
+<div class="ov-bg" id="ov-bg" onclick="closePanel()"></div>
+<div class="lot-panel" id="lot-panel">
+  <div class="pt">
+    <div>
+      <div class="pt-tag">Lot Number</div>
+      <div class="pt-num" id="p-num">&mdash;</div>
+      <span class="sp sp-a" id="p-pill">&mdash;</span>
+    </div>
+    <button class="pc-btn" onclick="closePanel()">&times;</button>
+  </div>
+  <div class="pb">
+    <div class="pp" id="p-price">&mdash;</div>
+    <div class="ppn">Owner-Financed Purchase Price</div>
+    <div class="pcs">
+      <div class="pc2"><div class="pc2-l">Dimensions</div><div class="pc2-v" id="p-dims">&mdash;</div></div>
+      <div class="pc2"><div class="pc2-l">Acreage</div><div class="pc2-v" id="p-acres">&mdash;</div></div>
+      <div class="pc2"><div class="pc2-l">Subdivision</div><div class="pc2-v" id="p-sub" style="font-size:.72rem">&mdash;</div></div>
+      <div class="pc2"><div class="pc2-l">Financing</div><div class="pc2-v">Owner Carry</div></div>
+    </div>
+    <hr class="phr">
+    <p class="pn">Prices subject to change. Contact our office to confirm current pricing and availability before making any decisions.</p>
+    <div class="pacts" id="p-acts"></div>
+  </div>
+  <div class="pfoot">Pueblo de Palmas, Inc. &middot; NMLS #319106<br>3505 E. FM 2812, Edinburg, TX 78542</div>
+</div>
+<footer>
+  <div class="foot-inner">
+    <div>
+      <div class="foot-brand">Pueblo de Palmas<small>Owner Finance Land &middot; NMLS #319106</small></div>
+      <p class="foot-desc">Helping RGV families own land through flexible owner-financed terms. No bank required.</p>
+      <div style="display:flex;gap:10px;margin-top:10px">
+        <a class="flink" href="https://www.facebook.com/PuebloDePalmas" target="_blank">Facebook</a>
+        <a class="flink" href="https://www.instagram.com/pueblodepalmas" target="_blank">Instagram</a>
+        <a class="flink" href="https://www.youtube.com/@PueblodePalmas" target="_blank">YouTube</a>
+      </div>
+    </div>
+    <div class="fcol">
+      <h4>Office</h4>
+      <p>3505 E. FM 2812, Edinburg, TX 78542</p>
+      <a href="tel:9563833222">(956) 383-3222</a>
+      <a href="mailto:CustomerService@PueblodePalmas.com" style="font-size:.74rem">CustomerService@PueblodePalmas.com</a>
+      <p style="margin-top:5px">Mon&ndash;Fri 8:30 AM &ndash; 5:30 PM</p>
+    </div>
+    <div class="fcol">
+      <h4>Links</h4>
+      <a href="index.html">All Properties</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="https://pueblodepalmas.com/make-a-payment/" target="_blank">Make a Payment</a>
+      <a href="https://pueblodepalmas.com/complaint-recovery-fund-notice/" target="_blank" style="font-size:.74rem">Consumer Complaint Notice</a>
+    </div>
+    <div class="fcol">
+      <h4>Disclaimer</h4>
+      <p style="font-size:.74rem;color:rgba(255,255,255,.42);line-height:1.65">Prices and availability change daily without notice. All dimensions approximate. Buyers should obtain a survey and verify all details with proper authorities before purchase.</p>
+      <img src="https://pueblodepalmas.com/wp-content/uploads/2025/02/equal-housing-logowhite-250.png" alt="Equal Housing" style="margin-top:12px;height:28px;opacity:.48">
+    </div>
+  </div>
+  <div class="foot-bot">
+    <span>&copy; 2026 Pueblo de Palmas Inc. &middot; NMLS #319106</span>
+    <span>Prices subject to change without notice</span>
+  </div>
+</footer>
+<a class="wa-fab" href="https://wa.me/19563833222?text=Hi!%20I%27m%20interested%20in%20owner-financed%20land%20in%20the%20RGV." target="_blank" title="Chat on WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<div class="mob-bar">
+  <a class="mob-btn mob-call" href="tel:9563833222">&#128222; Call</a>
+  <a class="mob-btn mob-wa" href="https://wa.me/19563833222" target="_blank">&#128172; WhatsApp</a>
+  <a class="mob-btn mob-pay" href="https://pueblodepalmas.com/make-a-payment/" target="_blank">&#128179; Pay</a>
+</div>
+<script>
+
+const SD=[
+{id:'phase31',name:'Pueblo de Palmas Phase 31',city:'Donna',county:'Hidalgo',size:'Half Acre',sk:'half',
+ img:'https://pueblodepalmas.com/wp-content/uploads/2026/04/V2.jpg',
+ layoutImg:'https://pueblodepalmas.com/wp-content/uploads/2026/04/LAYOUT-2.jpg',
+ map:'https://maps.google.com/maps?q=Donna+TX+Wisconsin+Dillon&output=embed',vid:'',
+ tags:['hot','new','promo'],addr:'Corner of Wisconsin & Dillon Rd, Donna, TX',
+ ov:{s:[
+  {l:6,t:9,w:80,h:47,c:9,r:2,lots:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18']},
+  {l:6,t:59,w:80,h:33,c:6,r:2,lots:['19','20','21','22','23','24','25','26','27','28','29','30']}
+ ]},
+ lots:[
+  {id:'1',price:109950,acres:'.50',dims:"128'x171'",s:'available'},{id:'2',price:109950,acres:'.50',dims:"128'x171'",s:'available'},
+  {id:'3',price:109950,acres:'.50',dims:"128'x171'",s:'available'},{id:'4',price:109950,acres:'.50',dims:"128'x171'",s:'available'},
+  {id:'5',price:109950,acres:'.50',dims:"128'x171'",s:'available'},{id:'6',price:109950,acres:'.50',dims:"128'x171'",s:'available'},
+  {id:'7',price:109950,acres:'.50',dims:"128'x171'",s:'available'},{id:'8',price:109950,acres:'.50',dims:"128'x171'",s:'available'},
+  {id:'9',price:109950,acres:'.50',dims:"128'x171'",s:'available'},{id:'10',price:109950,acres:'.50',dims:"128'x171'",s:'available'},
+  {id:'11',price:109950,acres:'.50',dims:"128'x171'",s:'available'},{id:'12',price:109950,acres:'.50',dims:"128'x171'",s:'available'},
+  {id:'13',price:109950,acres:'.50',dims:"128'x171'",s:'available'},{id:'14',price:109950,acres:'.50',dims:"128'x171'",s:'available'},
+  {id:'15',price:109950,acres:'.50',dims:"128'x171'",s:'available'},{id:'16',price:109950,acres:'.50',dims:"128'x171'",s:'available'},
+  {id:'17',price:109950,acres:'.50',dims:"128'x171'",s:'available'},{id:'18',price:109950,acres:'.50',dims:"128'x171'",s:'available'},
+  {id:'19',price:117495,acres:'.50',dims:"122'x175'",s:'available'},{id:'20',price:119950,acres:'.50',dims:"122'x175'",s:'available'},
+  {id:'21',price:114950,acres:'.50',dims:"100'x218'",s:'available'},{id:'22',price:114950,acres:'.50',dims:"100'x218'",s:'available'},
+  {id:'23',price:114950,acres:'.50',dims:"100'x218'",s:'available'},{id:'24',price:114950,acres:'.50',dims:"100'x218'",s:'available'},
+  {id:'25',price:114950,acres:'.50',dims:"100'x218'",s:'available'},{id:'26',price:114950,acres:'.50',dims:"100'x218'",s:'available'},
+  {id:'27',price:114950,acres:'.50',dims:"100'x218'",s:'available'},{id:'28',price:114950,acres:'.50',dims:"100'x218'",s:'available'},
+  {id:'29',price:114950,acres:'.50',dims:"100'x218'",s:'available'},{id:'30',price:114950,acres:'.50',dims:"100'x218'",s:'available'}
+ ],
+ faq:[{q:'Mobile Homes Allowed?',a:'Yes with developer approval. Check with Hidalgo County Precinct. 1 home per lot.'},
+      {q:'Setback Requirements?',a:'Front: 25 ft | Rear: 15 ft | Side: 6 ft | Corner: 10–20 ft.'},
+      {q:'Can Lots 19–30 Be Commercial?',a:'Yes, lots 19–30 may be commercial or residential with proper Hidalgo County approvals.'},
+      {q:'18-Wheeler Parking?',a:'No tractor-trailers allowed except for household delivery/pickup.'}]
+},
+{id:'lasgaviotas',name:'Las Gaviotas Subdivision',city:'Donna',county:'Hidalgo',size:'Half Acre',sk:'half',
+ img:'https://pueblodepalmas.com/wp-content/uploads/2025/10/Las-Gaviotas-Subdivision-Marketing-Plat-scaled.jpg',
+ layoutImg:'https://pueblodepalmas.com/wp-content/uploads/2025/10/Las-Gaviotas-Subdivision-Marketing-Plat-scaled.jpg',
+ map:'https://maps.google.com/maps?q=N+Val+Verde+Rd+Donna+TX&output=embed',vid:'pX38PXeFQUc',
+ tags:['hot','new','promo'],addr:'N Val Verde Rd & El Dora Rd, Donna, TX',
+ ov:{s:[
+  {l:5,t:6,w:55,h:57,c:6,r:6,lots:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36']},
+  {l:5,t:65,w:73,h:14,c:4,r:1,lots:['37','38','39','40']},
+  {l:62,t:6,w:33,h:57,c:3,r:4,lots:['41','42','43','44','45','46','47','48','49','50','51','52']},
+  {l:62,t:65,w:33,h:14,c:2,r:1,lots:['53','54']}
+ ]},
+ lots:[
+  {id:'1',price:99995,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'2',price:84995,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'3',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'4',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'5',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'6',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'7',price:82495,acres:'.50',dims:"1/2 Acre",s:'sold'},{id:'8',price:82495,acres:'.50',dims:"1/2 Acre",s:'sold'},
+  {id:'9',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'10',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'11',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'12',price:82495,acres:'.50',dims:"1/2 Acre",s:'sold'},
+  {id:'13',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'14',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'15',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'16',price:84995,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'17',price:84995,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'18',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'19',price:82495,acres:'.50',dims:"1/2 Acre",s:'sold'},{id:'20',price:82495,acres:'.50',dims:"1/2 Acre",s:'sold'},
+  {id:'21',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'22',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'23',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'24',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'25',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'26',price:82495,acres:'.50',dims:"1/2 Acre",s:'sold'},
+  {id:'27',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'28',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'29',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'30',price:84995,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'31',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'32',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'33',price:82495,acres:'.50',dims:"1/2 Acre",s:'sold'},{id:'34',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'35',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'36',price:89995,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'37',price:130000,acres:'.50',dims:"Corner/Commercial",s:'available'},{id:'38',price:130000,acres:'.50',dims:"Corner/Commercial",s:'available'},
+  {id:'39',price:130000,acres:'.50',dims:"Corner/Commercial",s:'available'},{id:'40',price:130000,acres:'.50',dims:"Corner/Commercial",s:'available'},
+  {id:'41',price:84995,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'42',price:84995,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'43',price:84995,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'44',price:84995,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'45',price:84995,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'46',price:84995,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'47',price:84995,acres:'.50',dims:"1/2 Acre",s:'sold'},{id:'48',price:84995,acres:'.50',dims:"1/2 Acre",s:'sold'},
+  {id:'49',price:84995,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'50',price:84995,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'51',price:84995,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'52',price:84995,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'53',price:135000,acres:'.50',dims:"Corner/Commercial",s:'available'},{id:'54',price:140000,acres:'.50',dims:"Corner/Commercial",s:'available'}
+ ],
+ faq:[{q:'Mobile Homes Allowed?',a:'Yes with developer and Hidalgo County Precinct approval. 1 home per lot.'},
+      {q:'Animals Allowed?',a:'No livestock. Small fowl allowed if fully penned. Pets leashed outside.'},
+      {q:'Setback Requirements?',a:'Front (Eldora): 20 ft | Front (Val Verde): 50 ft | Front: 25 ft | Rear: 15 ft | Side: 6 ft.'},
+      {q:'Which Lots Are Commercial?',a:'Lots 1, 37–40, 53, 54 (fronting Eldora Rd) may be commercial or residential. Others residential only.'}]
+},
+{id:'ph27',name:'Pueblo de Palmas PH 27',city:'Edinburg',county:'Hidalgo',size:'Half Acre',sk:'half',
+ img:'https://pueblodepalmas.com/wp-content/uploads/2025/02/P27-Marketing-Map-scaled.jpg',
+ layoutImg:'https://pueblodepalmas.com/wp-content/uploads/2025/02/P27-Marketing-Map-scaled.jpg',
+ map:'https://maps.google.com/maps?q=Edinburg+TX+Mile+19+N&output=embed',vid:'AOKbuG1jNVE',
+ tags:['hot','new','promo','low'],addr:'E Mile 19 N Rd & N Kenyon Rd, Edinburg, TX',
+ ov:{s:[
+  {l:5,t:7,w:24,h:85,c:2,r:1,lots:['2','3']},
+  {l:32,t:7,w:63,h:42,c:7,r:1,lots:['1','4','5','6','7','8','9']},
+  {l:32,t:52,w:63,h:40,c:7,r:1,lots:['10','11','12','13','14','15','16','17']}
+ ]},
+ lots:[
+  {id:'1',price:99995,acres:'.51',dims:"Irregular Corner",s:'available'},{id:'2',price:92495,acres:'.50',dims:"96'x228'",s:'available'},
+  {id:'3',price:79995,acres:'.50',dims:"75'x290'",s:'sold'},{id:'4',price:79995,acres:'.50',dims:"75'x290'",s:'sold'},
+  {id:'5',price:79995,acres:'.50',dims:"75'x290'",s:'available'},{id:'6',price:79995,acres:'.50',dims:"75'x290'",s:'available'},
+  {id:'7',price:79995,acres:'.50',dims:"75'x290'",s:'sold'},{id:'8',price:79995,acres:'.50',dims:"75'x290'",s:'pending'},
+  {id:'9',price:79995,acres:'.50',dims:"75'x290'",s:'available'},{id:'10',price:79995,acres:'.50',dims:"75'x290'",s:'available'},
+  {id:'11',price:79995,acres:'.50',dims:"75'x290'",s:'available'},{id:'12',price:79995,acres:'.50',dims:"75'x290'",s:'sold'},
+  {id:'13',price:79995,acres:'.50',dims:"75'x290'",s:'available'},{id:'14',price:79995,acres:'.50',dims:"75'x290'",s:'available'},
+  {id:'15',price:79995,acres:'.50',dims:"75'x290'",s:'sold'},{id:'16',price:79995,acres:'.50',dims:"75'x290'",s:'available'},
+  {id:'17',price:79995,acres:'.50',dims:"75'x290'",s:'available'}
+ ],
+ faq:[{q:'Mobile Homes Allowed?',a:'Yes with developer approval. 1 home per lot.'},
+      {q:'Animals Allowed?',a:'Poultry, goats, sheep, pets allowed with proper fence. No livestock tethered in front.'},
+      {q:'Setback Requirements?',a:'Lots 2–3 (Kenyon): 40 ft front | Lots 1, 4–17 (Mile 19): 60 ft front | Rear: 15 ft | Side: 6 ft.'},
+      {q:'Is Lot 1 Commercial?',a:'Yes, Lot 1 may be commercial or residential with Hidalgo County approvals.'}]
+},
+{id:'uri4',name:'URI Estates No. 4 Subdivision',city:'Donna',county:'Hidalgo',size:'Half Acre',sk:'half',
+ img:'https://pueblodepalmas.com/wp-content/uploads/2026/04/V4.png',
+ layoutImg:'https://pueblodepalmas.com/wp-content/uploads/2026/04/Layout.jpg',
+ map:'https://maps.google.com/maps?q=Val+Verde+Rd+El+Dora+Donna+TX&output=embed',vid:'',
+ tags:['hot','new','promo'],addr:'N Val Verde Rd & El Dora Rd, Donna, TX',
+ ov:{s:[
+  {l:5,t:7,w:82,h:44,c:7,r:3,lots:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21']},
+  {l:5,t:53,w:82,h:40,c:7,r:2,lots:['22','23','24','25','26','27','28','29','30','31','32','33','34','35',null]}
+ ]},
+ lots:[
+  {id:'1',price:69995,acres:'.62',dims:"Corner Lot",s:'available'},{id:'2',price:92495,acres:'.57',dims:"Irregular",s:'available'},
+  {id:'3',price:92495,acres:'.50',dims:"87'x250'",s:'available'},{id:'4',price:92495,acres:'.50',dims:"87'x250'",s:'available'},
+  {id:'5',price:84950,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'6',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'7',price:82495,acres:'.54',dims:"1/2+ Acre",s:'available'},{id:'8',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'9',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'10',price:82950,acres:'.51',dims:"76'x294'",s:'available'},
+  {id:'11',price:82495,acres:'.51',dims:"76'x294'",s:'available'},{id:'12',price:82495,acres:'.51',dims:"76'x294'",s:'available'},
+  {id:'13',price:82495,acres:'.51',dims:"76'x294'",s:'available'},{id:'14',price:82495,acres:'.51',dims:"76'x294'",s:'available'},
+  {id:'15',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'16',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'17',price:82495,acres:'.51',dims:"76'x294'",s:'available'},{id:'18',price:82495,acres:'.51',dims:"76'x294'",s:'available'},
+  {id:'19',price:82495,acres:'.51',dims:"76'x294'",s:'available'},{id:'20',price:82495,acres:'.51',dims:"76'x294'",s:'available'},
+  {id:'21',price:82495,acres:'.51',dims:"1/2+ Acre",s:'available'},{id:'22',price:84995,acres:'.56',dims:"Irregular",s:'available'},
+  {id:'23',price:99995,acres:'.84',dims:"Large Corner",s:'available'},{id:'24',price:82495,acres:'.51',dims:"1/2+ Acre",s:'available'},
+  {id:'25',price:82495,acres:'.51',dims:"1/2+ Acre",s:'available'},{id:'26',price:82495,acres:'.51',dims:"76'x294'",s:'available'},
+  {id:'27',price:82495,acres:'.51',dims:"76'x294'",s:'available'},{id:'28',price:82495,acres:'.51',dims:"76'x294'",s:'available'},
+  {id:'29',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'30',price:82495,acres:'.50',dims:"1/2 Acre",s:'available'},
+  {id:'31',price:82495,acres:'.51',dims:"76'x294'",s:'available'},{id:'32',price:82495,acres:'.51',dims:"76'x294'",s:'available'},
+  {id:'33',price:94950,acres:'.55',dims:"Irregular",s:'available'},{id:'34',price:94950,acres:'.55',dims:"97'x246'",s:'available'},
+  {id:'35',price:94950,acres:'.55',dims:"97'x246'",s:'available'}
+ ],
+ faq:[{q:'Mobile Homes Allowed?',a:'Yes with developer approval. 1 home per lot.'},
+      {q:'Setback Requirements?',a:'Front: 25 ft | Rear: 15 ft or easement | Side: 6 ft or easement.'},
+      {q:'Allowed Uses?',a:'All lots restricted to permanent single-family residential use with Hidalgo County approvals.'}]
+},
+{id:'riorico2',name:'Rio Rico Ranchettes No. 2',city:'Mercedes',county:'Hidalgo',size:'Half Acre',sk:'half',
+ img:'https://pueblodepalmas.com/wp-content/uploads/2024/07/RIO_RICO-II-New-Map-min-scaled.jpg',
+ layoutImg:'https://pueblodepalmas.com/wp-content/uploads/2024/07/RIO_RICO-II-New-Map-min-scaled.jpg',
+ map:'https://maps.google.com/maps?q=Mercedes+TX&output=embed',vid:'',
+ tags:['promo','low'],addr:'Mercedes, Hidalgo County, TX',
+ ov:{s:[{l:8,t:15,w:82,h:68,c:5,r:1,lots:['1','2','3','4','5']}]},
+ lots:[
+  {id:'1',price:62495,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'2',price:62495,acres:'.50',dims:"1/2 Acre",s:'sold'},
+  {id:'3',price:62495,acres:'.50',dims:"1/2 Acre",s:'sold'},{id:'4',price:62495,acres:'.50',dims:"1/2 Acre",s:'sold'},
+  {id:'5',price:62495,acres:'.50',dims:"1/2 Acre",s:'available'}
+ ],
+ faq:[{q:'Mobile Homes Allowed?',a:'Yes with developer approval.'},
+      {q:'Current Availability',a:'Call (956) 383-3222 for current lot availability — this subdivision has low inventory.'}]
+},
+{id:'milanos1',name:'Milanos Estates PH I',city:'Weslaco',county:'Hidalgo',size:'City Size',sk:'city',
+ img:'https://pueblodepalmas.com/wp-content/uploads/2024/08/MILANOS-PHASE-1-min-scaled.webp',
+ layoutImg:'https://pueblodepalmas.com/wp-content/uploads/2024/08/MILANOS-PHASE-1-min-scaled.webp',
+ map:'https://maps.google.com/maps?q=S+Milanos+Rd+Weslaco+TX&output=embed',vid:'',
+ tags:['promo','low'],addr:'S. Milanos Rd, Weslaco, TX',
+ ov:{s:[{l:5,t:6,w:88,h:88,c:9,r:9,
+   lots:['1',null,'3','4','5','6','7',null,'9','10','11','4',null,null,null,null,'16',null,'18','19','20','21','22','23','24','25',null,'27','28','29','30','31',null,null,'34','35','36',null,'38','39','40','41','42','43','44',null,null,null,null,null,'50','51','52','53','54','55','56','57','58','59','60','61','62',null,null,null,null,null,'68',null,null,null,'73']}
+ ]},
+ lots:[
+  {id:'4',price:67500,acres:'.24',dims:"70'x150'",s:'available'},{id:'6',price:67500,acres:'.24',dims:"10,500 sf",s:'available'},
+  {id:'11',price:169995,acres:'.40',dims:"Commercial",s:'available'},{id:'16',price:44950,acres:'.15',dims:"60'x110'",s:'available'},
+  {id:'30',price:47950,acres:'.19',dims:"City Size",s:'available'},{id:'31',price:46950,acres:'.19',dims:"City Size",s:'available'},
+  {id:'36',price:44950,acres:'.15',dims:"60'x110'",s:'available'},{id:'38',price:47950,acres:'.19',dims:"8,094 sf",s:'available'},
+  {id:'40',price:44950,acres:'.15',dims:"60'x110'",s:'available'},{id:'42',price:129950,acres:'.15',dims:"60'x110'",s:'available'},
+  {id:'44',price:44950,acres:'.15',dims:"6,600 sf",s:'available'},{id:'58',price:44950,acres:'.14',dims:"6,000 sf",s:'available'},
+  {id:'60',price:82500,acres:'.15',dims:"55'x110'",s:'available'},{id:'62',price:129950,acres:'.15',dims:"Home Included",s:'available'},
+  {id:'73',price:129950,acres:'.16',dims:"63'x110'",s:'available'}
+ ],
+ faq:[{q:'Mobile Homes Allowed?',a:'Yes with developer approval. 1 home per lot.'},
+      {q:'Setback Requirements?',a:'Front: 20 ft | Rear: 10 ft | Side: 6 ft | Corner Side: 10 ft.'},
+      {q:'Which Lots Are Commercial?',a:'Lots 1 and 40 may be commercial or residential. Lots 2–39 are residential only.'}]
+},
+{id:'milanos2',name:'Milanos Estates PH II',city:'Weslaco',county:'Hidalgo',size:'City Size',sk:'city',
+ img:'https://pueblodepalmas.com/wp-content/uploads/2024/08/MILANOS-PHASE-2-Map-test-min-scaled.webp',
+ layoutImg:'https://pueblodepalmas.com/wp-content/uploads/2024/08/MILANOS-PHASE-2-Map-test-min-scaled.webp',
+ map:'https://maps.google.com/maps?q=Weslaco+TX&output=embed',vid:'',
+ tags:['promo','low'],addr:'S. Milanos Rd, Weslaco, TX',
+ ov:{s:[{l:8,t:15,w:82,h:68,c:5,r:1,lots:['1','2','3','4','5']}]},
+ lots:[
+  {id:'1',price:50950,acres:'.15',dims:"City Size",s:'available'},{id:'2',price:50950,acres:'.15',dims:"City Size",s:'sold'},
+  {id:'3',price:50950,acres:'.15',dims:"City Size",s:'available'},{id:'4',price:50950,acres:'.15',dims:"City Size",s:'available'},
+  {id:'5',price:50950,acres:'.15',dims:"City Size",s:'sold'}
+ ],
+ faq:[{q:'Mobile Homes Allowed?',a:'Yes with developer approval.'},{q:'Availability',a:'Call (956) 383-3222 for current lot availability.'}]
+},
+{id:'milanos3',name:'Milanos Estates Phase III',city:'Weslaco',county:'Hidalgo',size:'City Size',sk:'city',
+ img:'https://pueblodepalmas.com/wp-content/uploads/2025/03/1742492183937-2eb3be10-ddc3-4d80-aa40-a73724a645cd_1-1-scaled.jpg',
+ layoutImg:'https://pueblodepalmas.com/wp-content/uploads/2025/03/1742492183937-2eb3be10-ddc3-4d80-aa40-a73724a645cd_1-1-scaled.jpg',
+ map:'https://maps.google.com/maps?q=Weslaco+TX&output=embed',vid:'',
+ tags:['promo','low'],addr:'Weslaco, Hidalgo County, TX',
+ ov:{s:[{l:8,t:15,w:82,h:68,c:5,r:1,lots:['1','2','3','4','5']}]},
+ lots:[
+  {id:'1',price:51950,acres:'.15',dims:"City Size",s:'available'},{id:'2',price:51950,acres:'.15',dims:"City Size",s:'available'},
+  {id:'3',price:51950,acres:'.15',dims:"City Size",s:'sold'},{id:'4',price:51950,acres:'.15',dims:"City Size",s:'available'},
+  {id:'5',price:51950,acres:'.15',dims:"City Size",s:'available'}
+ ],
+ faq:[{q:'Mobile Homes Allowed?',a:'Yes with developer approval.'},{q:'Availability',a:'Call (956) 383-3222 for full lot details.'}]
+},
+{id:'milanos4',name:'Milanos Estates Phase IV',city:'Weslaco',county:'Hidalgo',size:'City Size',sk:'city',
+ img:'https://pueblodepalmas.com/wp-content/uploads/2026/03/Milanos-Estates-Phase-4.png',
+ layoutImg:'https://pueblodepalmas.com/wp-content/uploads/2026/03/Milanos-Estates-Phase-4.png',
+ map:'https://maps.google.com/maps?q=Weslaco+TX&output=embed',vid:'',
+ tags:['hot','new','low'],addr:'Weslaco, Hidalgo County, TX',
+ ov:{s:[{l:8,t:15,w:82,h:68,c:6,r:1,lots:['1','2','3','4','5','6']}]},
+ lots:[
+  {id:'1',price:51950,acres:'.15',dims:"City Size",s:'available'},{id:'2',price:51950,acres:'.15',dims:"City Size",s:'available'},
+  {id:'3',price:51950,acres:'.15',dims:"City Size",s:'available'},{id:'4',price:51950,acres:'.15',dims:"City Size",s:'available'},
+  {id:'5',price:51950,acres:'.15',dims:"City Size",s:'available'},{id:'6',price:51950,acres:'.15',dims:"City Size",s:'sold'}
+ ],
+ faq:[{q:'Mobile Homes Allowed?',a:'Yes with developer approval.'},{q:'Availability',a:'Call (956) 383-3222 for full lot details.'}]
+},
+{id:'grapefruit',name:'Grapefruit Acres 1 & 2',city:'Monte Alto',county:'Hidalgo',size:'Half & 1 Acre',sk:'acre',
+ img:'https://pueblodepalmas.com/wp-content/uploads/2024/08/Grapefruit-Acres-Map_rev2.webp',
+ layoutImg:'https://pueblodepalmas.com/wp-content/uploads/2024/08/Grapefruit-Acres-Map_rev2.webp',
+ map:'https://maps.google.com/maps?q=Monte+Alto+TX&output=embed',vid:'',
+ tags:['promo','low'],addr:'Monte Alto, Hidalgo County, TX',
+ ov:{s:[{l:8,t:15,w:82,h:68,c:5,r:1,lots:['1','2','3','4','5']}]},
+ lots:[
+  {id:'1',price:64995,acres:'.50',dims:"1/2 Acre",s:'available'},{id:'2',price:64995,acres:'.50',dims:"1/2 Acre",s:'sold'},
+  {id:'3',price:79995,acres:'1.0',dims:"1 Acre",s:'available'},{id:'4',price:79995,acres:'1.0',dims:"1 Acre",s:'available'},
+  {id:'5',price:64995,acres:'.50',dims:"1/2 Acre",s:'sold'}
+ ],
+ faq:[{q:'Mobile Homes Allowed?',a:'Yes with developer approval.'},{q:'Availability',a:'Call (956) 383-3222 for current availability.'}]
+},
+{id:'elpinto3',name:'El Pinto Estates PH III',city:'Sullivan City',county:'Hidalgo',size:'1 Acre',sk:'acre',
+ img:'https://pueblodepalmas.com/wp-content/uploads/2024/08/El-Pinto-P3-New.webp',
+ layoutImg:'https://pueblodepalmas.com/wp-content/uploads/2024/08/El-Pinto-P3-New.webp',
+ map:'https://maps.google.com/maps?q=Sullivan+City+TX&output=embed',vid:'',
+ tags:['promo','low'],addr:'Sullivan City, Hidalgo County, TX',
+ ov:{s:[{l:8,t:15,w:82,h:68,c:6,r:1,lots:['1','2','3','4','5','6']}]},
+ lots:[
+  {id:'1',price:79995,acres:'1.0',dims:"1 Acre",s:'available'},{id:'2',price:79995,acres:'1.0',dims:"1 Acre",s:'available'},
+  {id:'3',price:79995,acres:'1.0',dims:"1 Acre",s:'sold'},{id:'4',price:79995,acres:'1.0',dims:"1 Acre",s:'available'},
+  {id:'5',price:79995,acres:'1.0',dims:"1 Acre",s:'sold'},{id:'6',price:79995,acres:'1.0',dims:"1 Acre",s:'available'}
+ ],
+ faq:[{q:'Mobile Homes Allowed?',a:'Yes with developer approval.'},{q:'Availability',a:'Call (956) 383-3222 for current availability.'}]
+},
+{id:'lamulada2',name:'La Mulada Phase 2',city:'Rio Grande City',county:'Starr',size:'10 Acre Tracts',sk:'acre',
+ img:'https://pueblodepalmas.com/wp-content/uploads/2025/05/1000009942.jpg',
+ layoutImg:'https://pueblodepalmas.com/wp-content/uploads/2025/05/1000009942.jpg',
+ map:'https://maps.google.com/maps?q=Rio+Grande+City+TX&output=embed',vid:'',
+ tags:['hot','new','low'],addr:'Rio Grande City, Starr County, TX',
+ ov:{s:[{l:8,t:15,w:82,h:68,c:5,r:1,lots:['1','2','3','4','5']}]},
+ lots:[
+  {id:'1',price:122500,acres:'10',dims:"10 Acres",s:'available'},{id:'2',price:122500,acres:'10',dims:"10 Acres",s:'available'},
+  {id:'3',price:122500,acres:'10',dims:"10 Acres",s:'sold'},{id:'4',price:122500,acres:'10',dims:"10 Acres",s:'available'},
+  {id:'5',price:135000,acres:'10',dims:"10 Acres",s:'available'}
+ ],
+ faq:[{q:'Mobile Homes Allowed?',a:'Yes with developer approval.'},{q:'Availability',a:'Call (956) 383-3222 for current availability on 10-acre ranch tracts.'}]
+}
+];
+
+let cur=null, actLot=null, flt='all';
+const $=id=>document.getElementById(id);
+const fmtP=n=>'$'+n.toLocaleString();
+
+function badges(tags){
+  const m={hot:'<span class="badge b-hot">&#128293; Hot</span>',new:'<span class="badge b-new">New</span>',
+   low:'<span class="badge b-low">Low Inventory</span>',promo:'<span class="badge b-promo">Seller Paid Closing</span>',
+   soon:'<span class="badge b-soon">Coming Soon</span>'};
+  return (tags||[]).map(t=>m[t]||'').join('');
+}
+function cnt(lots){
+  const c={available:0,sold:0,pending:0};
+  lots.forEach(l=>{c[l.s]=(c[l.s]||0)+1;});return c;
+}
+
+function renderGrid(){
+  const g=$('prop-grid'),nr=$('no-results'),fc=$('fcount');
+  let shown=0,avTotal=0;g.innerHTML='';
+  SD.forEach(s=>{
+    const match=flt==='all'||s.city===flt||s.sk===flt;
+    if(!match)return;
+    shown++;
+    const c=cnt(s.lots);avTotal+=c.available;
+    const minP=s.lots.filter(l=>l.s==='available').reduce((m,l)=>Math.min(m,l.price),Infinity);
+    const el=document.createElement('div');el.className='pcard';
+    el.innerHTML=`<div class="pcard-img"><img src="${s.img}" alt="${s.name}" loading="lazy" onerror="this.style.display='none'">
+      <div class="pcard-badges">${badges(s.tags)}</div>
+      <div class="avail-pip"><div class="pip-dot"></div>${c.available} lots available</div></div>
+      <div class="pcard-body"><div class="pcard-name">${s.name}</div>
+      <div class="pcard-loc">&#128205; ${s.city}, ${s.county} County</div>
+      <div class="pcard-meta"><span class="pcard-size">${s.size}</span>
+      <div class="pcard-price">${minP<Infinity?fmtP(minP):'Call'}<small>Starting Price</small></div></div>
+      <button class="pcard-cta" onclick="openDetail('${s.id}')">View Lot Map &amp; Pricing &rarr;</button></div>`;
+    g.appendChild(el);
+  });
+  nr.style.display=shown?'none':'block';
+  if(fc)fc.textContent=shown+' subdivision'+(shown!==1?'s':'')+' shown';
+  const ha=$('hero-avail');if(ha)ha.textContent=avTotal+'+';
+}
+
+function setFlt(f,el){
+  flt=f;document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');renderGrid();
+}
+
+function openDetail(id){
+  cur=SD.find(s=>s.id===id);if(!cur)return;
+  const s=cur,c=cnt(s.lots);
+  const minP=s.lots.filter(l=>l.s==='available').reduce((m,l)=>Math.min(m,l.price),Infinity);
+  showPg('detail');window.scrollTo(0,0);
+  $('d-labels').innerHTML=badges(s.tags);
+  $('d-name').textContent=s.name;
+  $('d-loc').textContent='&#128205; '+s.addr;
+  $('d-price').innerHTML=(minP<Infinity?fmtP(minP):'Call for Price')+'<small> Starting &middot; Owner Finance</small>';
+  $('d-lots').textContent=s.lots.length+' Total Lots';
+  $('stat-a').textContent=c.available;$('stat-s').textContent=c.sold||0;$('stat-p').textContent=c.pending||0;
+  // plat images — layout image on top, marketing below
+  const pi=$('plat-img');pi.src=s.layoutImg;pi.alt=s.name+' Plat';
+  // video
+  const vw=$('vid-wrap');
+  if(s.vid){vw.style.display='block';$('vid-frame').innerHTML=`<iframe src="https://www.youtube.com/embed/${s.vid}?muted=1" frameborder="0" allowfullscreen></iframe>`;}
+  else vw.style.display='none';
+  // map
+  $('map-frame').src=s.map;
+  // overlays + grid
+  renderOverlay(s);renderLotGrid(s);renderFAQ(s);
+  // calculator pre-fill
+  $('ci-price').value=minP<Infinity?minP:'';calcPmt();
+  // contact lot select
+  const sel=$('cf-lot');sel.innerHTML='<option value="">— Select a Lot —</option>';
+  s.lots.filter(l=>l.s==='available').forEach(l=>{
+    sel.innerHTML+=`<option value="Lot #${l.id}">Lot #${l.id} — ${fmtP(l.price)}</option>`;
+  });
+}
+
+function renderOverlay(s){
+  const wrap=$('plat-wrap');
+  wrap.querySelectorAll('.lot-cell').forEach(e=>e.remove());
+  if(!s.ov)return;
+  s.ov.s.forEach(sec=>{
+    const cw=sec.w/sec.c,ch=sec.h/sec.r,gap=0.5;
+    sec.lots.forEach((lid,i)=>{
+      if(!lid)return;
+      const lot=s.lots.find(l=>l.id===lid);if(!lot)return;
+      const col=i%sec.c,row=Math.floor(i/sec.c);
+      const lft=sec.l+col*cw+gap*0.4,top=sec.t+row*ch+gap*0.3;
+      const el=document.createElement('div');
+      el.className='lot-cell '+lot.s;el.id='lc-'+lid;
+      el.style.cssText=`left:${lft}%;top:${top}%;width:${cw-gap*0.8}%;height:${ch-gap*0.6}%;`;
+      el.innerHTML=`<span>${lid}</span>`;
+      el.title=`Lot #${lid} — ${lot.s==='available'?fmtP(lot.price):lot.s.toUpperCase()}`;
+      if(lot.s!=='sold'){el.onclick=e=>{e.stopPropagation();openPanel(lot);};}
+      wrap.appendChild(el);
+    });
+  });
+}
+
+function renderLotGrid(s){
+  const g=$('lot-grid');g.innerHTML='';
+  s.lots.forEach(lot=>{
+    const b=document.createElement('button');
+    b.className='lbtn '+lot.s;b.id='lb-'+lot.id;
+    const ps=lot.s==='available'?`<span class="lp">${fmtP(lot.price)}</span>`:
+             lot.s==='sold'?'<span class="ls">SOLD</span>':'<span class="ls">PEND</span>';
+    b.innerHTML=`<span class="ln">#${lot.id}</span>${ps}`;
+    if(lot.s!=='sold'){b.onclick=()=>openPanel(lot);}else b.title='This lot has been sold';
+    g.appendChild(b);
+  });
+}
+
+function renderFAQ(s){
+  $('d-faq').innerHTML=(s.faq||[]).map((f,i)=>`
+    <div class="fq-item"><button class="fq-q" onclick="tFAQ(${i})">
+      <span>${f.q}</span><span class="fq-ic" id="fi${i}">&#9660;</span></button>
+    <div class="fq-a" id="fa${i}">${f.a}</div></div>`).join('');
+}
+function tFAQ(i){const a=$('fa'+i),ic=$('fi'+i),o=a.classList.contains('open');
+  a.classList.toggle('open',!o);ic.classList.toggle('open',!o);}
+
+function openPanel(lot){
+  if(actLot){
+    document.getElementById('lb-'+actLot)?.classList.remove('sel');
+    document.getElementById('lc-'+actLot)?.classList.remove('sel');
+  }
+  actLot=lot.id;
+  document.getElementById('lb-'+lot.id)?.classList.add('sel');
+  document.getElementById('lc-'+lot.id)?.classList.add('sel');
+  const pill=$('p-pill');
+  const pc={available:'sp-a',sold:'sp-s',pending:'sp-p'};
+  pill.className='sp '+pc[lot.s];
+  pill.textContent=lot.s.charAt(0).toUpperCase()+lot.s.slice(1);
+  $('p-num').textContent='Lot #'+lot.id;
+  const pp=$('p-price');
+  pp.textContent=lot.s==='sold'?'SOLD':fmtP(lot.price);
+  pp.className='pp'+(lot.s==='sold'?' sold':'');
+  $('p-dims').textContent=lot.dims||'See plat';
+  $('p-acres').textContent=lot.acres?' '+lot.acres+' ac':'—';
+  $('p-sub').textContent=cur?.name||'';
+  if(lot.s==='available'){$('ci-price').value=lot.price;calcPmt();}
+  const acts=$('p-acts'),ph='9563833222';
+  const subj=encodeURIComponent((cur?.name||'')+' – Lot #'+lot.id);
+  const bod=encodeURIComponent('I am interested in Lot #'+lot.id+' in '+(cur?.name||'')+'. Please contact me.');
+  const wa=encodeURIComponent('Hi! Interested in Lot #'+lot.id+' in '+(cur?.name||'')+'. Can you help?');
+  if(lot.s==='available'){
+    acts.innerHTML=`<a href="tel:${ph}" class="pact pa-call">&#128222; Call (956) 383-3222</a>
+      <a href="https://wa.me/1${ph}?text=${wa}" class="pact pa-wa" target="_blank">&#128172; WhatsApp Us</a>
+      <a href="mailto:CustomerService@PueblodePalmas.com?subject=${subj}&body=${bod}" class="pact pa-email">&#9993; Email About This Lot</a>`;
+  } else if(lot.s==='pending'){
+    acts.innerHTML=`<div class="alert-p">&#9203; Pending — call to confirm availability</div>
+      <a href="tel:${ph}" class="pact pa-call">&#128222; Call (956) 383-3222</a>`;
+  } else {
+    acts.innerHTML=`<div class="alert-s">&#127968; This lot has been sold</div>
+      <a href="https://pueblodepalmas.com/make-a-payment/" class="pact pa-pay" target="_blank">&#128179; Make a Payment Online</a>`;
+  }
+  $('ov-bg').classList.add('on');$('lot-panel').classList.add('open');
+}
+function closePanel(){
+  if(actLot){document.getElementById('lb-'+actLot)?.classList.remove('sel');
+    document.getElementById('lc-'+actLot)?.classList.remove('sel');actLot=null;}
+  $('ov-bg').classList.remove('on');$('lot-panel').classList.remove('open');
+}
+
+function calcPmt(){
+  const P=parseFloat($('ci-price').value)||0,dn=parseFloat($('ci-down').value)||0,
+    r=parseFloat($('ci-rate').value)||12,y=parseFloat($('ci-term').value)||15;
+  const loan=P*(1-dn/100),mr=r/100/12,n=y*12;
+  let m=0;if(loan>0&&mr>0&&n>0)m=loan*mr*Math.pow(1+mr,n)/(Math.pow(1+mr,n)-1);
+  $('cres-n').textContent=m>0?'$'+Math.round(m).toLocaleString()+'/mo':'—';
+}
+
+function submitInquiry(){
+  const nm=$('cf-name').value.trim(),ph=$('cf-phone').value.trim(),
+    em=$('cf-email').value.trim(),lt=$('cf-lot').value;
+  if(!nm||!ph){alert('Please enter your name and phone number.');return;}
+  const s=encodeURIComponent('Inquiry: '+(cur?.name||'')+' '+lt);
+  const b=encodeURIComponent('Name: '+nm+'\nPhone: '+ph+'\nEmail: '+em+'\nProperty: '+(cur?.name||'')+'\nLot: '+(lt||'General')+'\n\nSent from Pueblo de Palmas website.');
+  window.open('mailto:CustomerService@PueblodePalmas.com?subject='+s+'&body='+b);
+}
+
+function openPlat(){if(cur)window.open(cur.layoutImg,'_blank');}
+
+function showPg(p){
+  document.querySelectorAll('.pg').forEach(e=>e.classList.remove('active'));
+  const el=$(p==='home'?'pg-home':'pg-detail');if(el)el.classList.add('active');
+  if(p==='home')closePanel();
+  window.scrollTo(0,0);
+}
+
+// HOW FAQ (for home page section)
+const HOW_FAQ=[
+  {q:'Do I need good credit?',a:'No credit check required. If you can make a down payment and monthly payments, you can own land with us.'},
+  {q:'What is the typical down payment?',a:'Down payments typically start around 10% of the purchase price. Call us to discuss terms for the specific lot you want.'},
+  {q:'What interest rate do you charge?',a:'Our standard rate is 12% per annum. Use the Payment Estimator on any lot page to estimate your monthly payment.'},
+  {q:'What happens if I miss a payment?',a:'Contact our office immediately. We work with our customers — call before a payment is missed.'},
+  {q:'Can I put a home on the lot during the payment period?',a:'In most subdivisions yes, with developer approval and the appropriate county permits. Call us before starting.'},
+  {q:'Can I pay off my land early?',a:'Yes! No prepayment penalties. Pay extra anytime or pay the full balance early and receive the deed immediately.'},
+];
+function renderHowFAQ(){
+  const el=$('how-faq');if(!el)return;
+  el.innerHTML=HOW_FAQ.map((f,i)=>`<div class="fq-item"><button class="fq-q" onclick="tHFAQ(${i})">
+    <span>${f.q}</span><span class="fq-ic" id="hfi${i}">&#9660;</span></button>
+    <div class="fq-a" id="hfa${i}">${f.a}</div></div>`).join('');
+}
+function tHFAQ(i){const a=$('hfa'+i),ic=$('hfi'+i),o=a.classList.contains('open');
+  a.classList.toggle('open',!o);ic.classList.toggle('open',!o);}
+
+function scrollToProps(){$('props-wrap')?.scrollIntoView({behavior:'smooth'});}
+
+renderGrid();
+
+</script>
+
+</body>
+</html>
