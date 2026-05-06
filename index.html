@@ -34,7 +34,7 @@ nav{position:sticky;top:0;z-index:200;background:var(--ink);height:var(--nav-h);
 .nav-phone{color:white;font-size:.85rem;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:5px}
 @media(max-width:680px){.nav-brand small{display:none}}
 
-.page-options{position:sticky;top:var(--nav-h);z-index:190;background:#fff;border-bottom:1px solid var(--border);display:flex;justify-content:center;gap:6px;padding:9px 14px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.page-options{position:sticky;top:var(--nav-h);z-index:190;background:#fff;border-bottom:1px solid var(--border);display:none;justify-content:center;gap:6px;padding:9px 14px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .page-option{color:var(--ink);text-decoration:none;font-size:.82rem;font-weight:700;padding:7px 13px;border-radius:20px;border:1px solid transparent;white-space:nowrap;transition:.15s}
 .page-option:hover,.page-option.active{background:var(--forest);color:white;border-color:var(--forest)}
 .page-option.pay{background:var(--paper);border-color:var(--border)}
@@ -42,7 +42,7 @@ nav{position:sticky;top:0;z-index:200;background:var(--ink);height:var(--nav-h);
 @media(max-width:680px){
   .nav-links .nav-phone,.nav-links .nav-cta{display:none}
   .nav-links .nav-link:not(.nav-phone){display:none}
-  .page-options{overflow-x:auto;justify-content:flex-start;top:var(--nav-h);padding:8px 10px;-webkit-overflow-scrolling:touch}
+  .page-options{display:flex;overflow-x:auto;justify-content:flex-start;top:var(--nav-h);padding:8px 10px;-webkit-overflow-scrolling:touch}
   .page-option{font-size:.78rem;padding:7px 12px}
 }
 
@@ -247,23 +247,23 @@ footer{background:var(--ink);color:white;padding:40px 24px}
 </div>
 
 <nav>
-  <div class="nav-logo" onclick="showPage('home')">
+  <a class="nav-logo" href="./index.html">
     <img src="https://pueblodepalmas.com/wp-content/uploads/2025/01/PDP-WP-350-x-350-Logo.png" alt="PDP">
     <div class="nav-brand">Pueblo de Palmas<small>NMLS #319106 &middot; Owner Finance Land</small></div>
-  </div>
+  </a>
   <div class="nav-links">
-    <span class="nav-link active" id="nav-home" onclick="showPage('home')">Properties</span>
-    <a class="nav-link" href="how-it-works.html">How It Works</a>
-    <a class="nav-link" href="contact.html">Contact</a>
+    <a class="nav-link active" id="nav-home" href="./index.html">Properties</a>
+    <a class="nav-link" href="./how-it-works.html">How It Works</a>
+    <a class="nav-link" href="./contact.html">Contact</a>
     <a class="nav-link nav-phone" href="tel:9563833222">☎️ (956) 383-3222</a>
     <a class="nav-cta" href="https://pueblodepalmas.com/make-a-payment/" target="_blank">💳 Make a Payment</a>
   </div>
 </nav>
 
 <div class="page-options">
-  <a href="index.html" class="page-option active">Properties</a>
-  <a href="how-it-works.html" class="page-option">How It Works</a>
-  <a href="contact.html" class="page-option">Contact</a>
+  <a href="./index.html" class="page-option active">Properties</a>
+  <a href="./how-it-works.html" class="page-option">How It Works</a>
+  <a href="./contact.html" class="page-option">Contact</a>
   <a href="https://pueblodepalmas.com/make-a-payment/" target="_blank" class="page-option pay">Make a Payment</a>
 </div>
 

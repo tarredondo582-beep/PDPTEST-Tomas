@@ -297,16 +297,16 @@ footer{background:var(--ink);color:white;padding:38px 24px}
 </style>
 </head>
 <body>
-<div class="promo-bar">&#127881; Seller Paid Closing Costs on Select Properties &mdash; <a href="index.html">View Available Lots</a></div>
+<div class="promo-bar">&#127881; Seller Paid Closing Costs on Select Properties &mdash; <a href="./index.html">View Available Lots</a></div>
 <nav>
-  <a class="nav-logo" href="index.html">
+  <a class="nav-logo" href="./index.html">
     <img src="https://pueblodepalmas.com/wp-content/uploads/2025/01/PDP-WP-350-x-350-Logo.png" alt="Logo" onerror="this.style.display='none'">
     <div class="nav-brand">Pueblo de Palmas<small>NMLS #319106 &middot; Owner Finance Land</small></div>
   </a>
   <div class="nav-links">
-    <a class="nav-link" href="index.html">Properties</a>
-    <a class="nav-link" href="how-it-works.html">How It Works</a>
-    <a class="nav-link active" href="contact.html">Contact</a>
+    <a class="nav-link" href="./index.html">Properties</a>
+    <a class="nav-link" href="./how-it-works.html">How It Works</a>
+    <a class="nav-link active" href="./contact.html">Contact</a>
     <div class="nav-sep"></div>
     <a class="nav-link nav-phone" href="tel:9563833222">&#9990; (956) 383-3222</a>
     <a class="nav-cta" href="https://pueblodepalmas.com/make-a-payment/" target="_blank">&#128179; Make a Payment</a>
@@ -436,9 +436,9 @@ footer{background:var(--ink);color:white;padding:38px 24px}
     </div>
     <div class="fcol">
       <h4>Links</h4>
-      <a href="index.html">All Properties</a>
-      <a href="how-it-works.html">How It Works</a>
-      <a href="contact.html">Contact Us</a>
+      <a href="./index.html">All Properties</a>
+      <a href="./how-it-works.html">How It Works</a>
+      <a href="./contact.html">Contact Us</a>
       <a href="https://pueblodepalmas.com/make-a-payment/" target="_blank">Make a Payment</a>
       <a href="https://pueblodepalmas.com/complaint-recovery-fund-notice/" target="_blank" style="font-size:.74rem">Consumer Complaint Notice</a>
     </div>
@@ -463,24 +463,27 @@ footer{background:var(--ink);color:white;padding:38px 24px}
 </div>
 <script>
 function sendMsg(){
-  const fn=document.getElementById('cf-fn').value.trim(),
-    ln=document.getElementById('cf-ln').value.trim(),
-    ph=document.getElementById('cf-ph').value.trim(),
-    em=document.getElementById('cf-em').value.trim(),
-    it=document.getElementById('cf-int').value,
-    mg=document.getElementById('cf-msg').value.trim();
-  if(!fn||!ph){alert('Please enter your name and phone number.');return;}
-  const s=encodeURIComponent('Website Inquiry'+(it?' — '+it:''));
-  const b=encodeURIComponent('Name: '+fn+' '+ln+'
-Phone: '+ph+'
-Email: '+em+'
-Interested In: '+(it||'General')+'
+  const fn=document.getElementById('cf-fn').value.trim();
+  const ln=document.getElementById('cf-ln').value.trim();
+  const ph=document.getElementById('cf-ph').value.trim();
+  const em=document.getElementById('cf-em').value.trim();
+  const it=document.getElementById('cf-int').value;
+  const mg=document.getElementById('cf-msg').value.trim();
+  if(!fn || !ph){
+    alert('Please enter your name and phone number.');
+    return;
+  }
+  const subject=encodeURIComponent('Website Inquiry' + (it ? ' — ' + it : ''));
+  const body=encodeURIComponent(`Name: ${fn} ${ln}
+Phone: ${ph}
+Email: ${em}
+Interested In: ${it || 'General'}
 
 Message:
-'+mg+'
+${mg}
 
-Sent from Pueblo de Palmas website contact form.');
-  window.open('mailto:CustomerService@PueblodePalmas.com?subject='+s+'&body='+b);
+Sent from Pueblo de Palmas website contact form.`);
+  window.location.href='mailto:CustomerService@PueblodePalmas.com?subject='+subject+'&body='+body;
 }
 </script>
 
