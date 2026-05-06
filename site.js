@@ -60,10 +60,9 @@ function renderPlat(){
   document.querySelectorAll('.lot-chips[data-slug]').forEach(box=>{let p=bySlug(box.dataset.slug);if(!p)return;renderLotControls(box,p)})
 }
 function renderLotControls(box,p){
-  const lots=p.lots||[]; const counts=lots.reduce((a,l)=>{a[slugStatus(l.status)]=(a[slugStatus(l.status)]||0)+1;return a},{})
-  box.innerHTML=`<div class="lot-filter-head"><strong>Lot inventory</strong><span>${lots.length} listed lots</span></div><div class="lot-status-filters"><button class="active" data-status-filter="all">All</button><button data-status-filter="available">Available ${counts.available||0}</button><button data-status-filter="reserved">Reserved ${counts.reserved||0}</button><button data-status-filter="sold">Sold ${counts.sold||0}</button></div><div class="lot-chip-grid">${lots.map(l=>`<button class="lot-chip ${slugStatus(l.status)}" data-chip="${safe(l.number)}" data-status="${slugStatus(l.status)}"><strong>Lot ${safe(l.number)}</strong><span>${safe(l.price)}</span></button>`).join('')}</div>`;
+  const lots=p.lots||[]; const counts=lots.reduce((a,l)=>{a[slugStatus(l.status)]=(a[slugStatus(l.status)]||0)+1;return a},{});
+  box.innerHTML=`<div class="visual-filter-card"><div class="lot-filter-head"><strong>Filter map</strong><span>${lots.length} mapped lots</span></div><p class="visual-filter-note">Use these filters to dim the plat by status. Tap the green lot shapes on the map for pricing and dimensions.</p><div class="lot-status-filters"><button class="active" data-status-filter="all">All</button><button data-status-filter="available">Available ${counts.available||0}</button><button data-status-filter="reserved">Reserved ${counts.reserved||0}</button><button data-status-filter="sold">Sold ${counts.sold||0}</button></div></div>`;
   box.querySelectorAll('[data-status-filter]').forEach(btn=>btn.addEventListener('click',()=>filterLotStatus(p,btn.dataset.statusFilter,box,btn)));
-  box.querySelectorAll('[data-chip]').forEach(b=>b.addEventListener('click',()=>selectLot(p,b.dataset.chip)));
 }
 function filterLotStatus(p,status,box,btn){
   box.querySelectorAll('[data-status-filter]').forEach(x=>x.classList.remove('active')); btn.classList.add('active');
@@ -74,7 +73,7 @@ function selectLot(p,num){
   let l=(p.lots||[]).find(x=>String(x.number)===String(num));if(!l)return;
   document.querySelectorAll('.lot-shape,.lot-chip').forEach(x=>x.classList.remove('selected'));
   document.querySelectorAll(`[data-lot="${cssesc(num)}"],[data-chip="${cssesc(num)}"]`).forEach(x=>x.classList.add('selected'));
-  const d=document.getElementById('lotDetail'); if(d)d.innerHTML=`<span class="status ${slugStatus(l.status)}">${slugStatus(l.status).toUpperCase()}</span><h2>Lot ${safe(l.number)}</h2><p class="price">${safe(l.price)}</p><p>${safe(l.size||'')}${l.dims?' · '+safe(l.dims):''}</p><div class="mini-lot-actions"><a class="btn" href="tel:19563833222">Call About Lot ${safe(l.number)}</a><a class="btn ghost" href="mailto:CustomerService@PueblodePalmas.com?subject=${encodeURIComponent(p.name+' Lot '+l.number)}">Email</a><button class="btn ghost save-lot-btn" type="button">Save Lot</button></div><p class="note">Pricing and availability must be confirmed by the office.</p>`;
+  const d=document.getElementById('lotDetail'); if(d)d.innerHTML=`<span class="status ${slugStatus(l.status)}">${slugStatus(l.status).toUpperCase()}</span><h2>Lot ${safe(l.number)}</h2><p class="price">${safe(l.price)}</p><p>${safe(l.size||'')}${l.dims?' · '+safe(l.dims):''}</p><div class="mini-lot-actions"><a class="btn" href="tel:19563833222">Call Now About Lot ${safe(l.number)}</a><a class="btn ghost" href="mailto:CustomerService@PueblodePalmas.com?subject=${encodeURIComponent(p.name+' Lot '+l.number)}">Email</a><button class="btn ghost save-lot-btn" type="button">Save Lot</button></div><p class="note">Pricing and availability must be confirmed by the office.</p>`;
   d?.querySelector('.save-lot-btn')?.addEventListener('click',()=>saveLot(p,num));
   renderSaved();
   document.querySelectorAll('.map-card').forEach(c=>c.classList.add('lot-selected'));
@@ -154,3 +153,25 @@ function initV16KeyboardSearch(){
   if(search){search.setAttribute('autocomplete','off');search.setAttribute('inputmode','search');}
 }
 document.addEventListener('DOMContentLoaded',()=>{initV16ImageFallbacks();initV16KeyboardSearch();});
+
+
+/* V18 community-first finder: filters subdivision cards, not individual lot rows. */
+function initCommunityFinder(){
+  const cards=[...document.querySelectorAll('.community-finder-card')];
+  if(!cards.length)return;
+  const q=document.getElementById('communitySearch'), city=document.getElementById('communityCity'), type=document.getElementById('communityType'), max=document.getElementById('communityMaxPrice'), clear=document.getElementById('clearCommunityFinder'), count=document.getElementById('communityCount');
+  const params=new URLSearchParams(location.search); if(params.get('city')&&city) city.value=params.get('city');
+  function run(){
+    const needle=(q?.value||'').toLowerCase().trim(); const c=(city?.value||'').toLowerCase(); const t=(type?.value||'').toLowerCase(); const m=parseInt(max?.value||'0',10)||0; let shown=0;
+    cards.forEach(card=>{
+      const text=card.innerText.toLowerCase()+' '+(card.dataset.name||'')+' '+(card.dataset.size||'');
+      const okQ=!needle||text.includes(needle); const okC=!c||(card.dataset.city||'').toLowerCase()===c; const okT=!t||(card.dataset.type||'').toLowerCase()===t; const px=parseInt(card.dataset.price||'0',10)||0; const okM=!m||!px||px<=m;
+      const ok=okQ&&okC&&okT&&okM; card.style.display=ok?'':'none'; if(ok)shown++;
+    });
+    if(count) count.textContent=shown+' communities shown';
+  }
+  [q,city,type,max].forEach(el=>el&&el.addEventListener(el.tagName==='SELECT'?'change':'input',run));
+  clear?.addEventListener('click',()=>{[q,city,type,max].forEach(el=>{if(el)el.value=''});run();});
+  run();
+}
+document.addEventListener('DOMContentLoaded',initCommunityFinder);
