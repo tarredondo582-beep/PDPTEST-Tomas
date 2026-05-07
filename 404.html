@@ -309,6 +309,20 @@ footer{background:var(--ink);color:white;padding:40px 24px}
   .filter-count{width:100%;margin-left:0;text-align:center}
 }
 
+
+/* V66: larger subdivision cards + better Las Gaviotas zoom framing */
+.properties-section{max-width:1380px}
+.prop-grid{grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:28px}
+.prop-card-img{height:235px}
+.prop-card-body{padding:22px}
+.prop-card-name{font-size:1.34rem;margin-bottom:7px}
+.prop-card-loc{font-size:.9rem;margin-bottom:20px}
+.prop-card-size{font-size:.85rem;padding:6px 12px}
+.prop-card-price{font-size:1.28rem}
+.prop-card-cta{margin-top:18px;padding:13px 16px;font-size:.92rem}
+@media(max-width:900px){.prop-grid{grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:20px}.prop-card-img{height:210px}.prop-card-body{padding:18px}}
+@media(max-width:520px){.prop-grid{grid-template-columns:1fr}.prop-card-img{height:220px}.properties-section{padding-left:16px;padding-right:16px}}
+
 </style>
 </head>
 <body>
@@ -683,7 +697,12 @@ function renderHome(){
     const minP=s.lots.filter(l=>l.status==="available").reduce((m,l)=>Math.min(m,l.price),Infinity);
     const card=document.createElement("div");
     card.className="prop-card";
-    card.innerHTML=`<div class="prop-card-img"><img src="${s.cardImage||s.image}" alt="${s.name}" loading="lazy" onerror="this.style.display='none'"><div class="prop-card-badges">${tagHTML(s.tags)}</div><div class="prop-avail-badge"><div class="prop-avail-dot"></div>${cnt.available} lots available</div></div><div class="prop-card-body"><div class="prop-card-name">${s.name}</div><div class="prop-card-loc">📍 ${s.city}, ${s.county} County</div><div class="prop-card-meta"><span class="prop-card-size">${s.size}</span><div class="prop-card-price">${minP<Infinity?fmtP(minP):"Call"}<small>Starting Price</small></div></div><button class="prop-card-cta" onclick="openDetail('${s.id}')">View Lot Map & Pricing &rarr;</button></div>`;
+    card.setAttribute("role","button");
+    card.setAttribute("tabindex","0");
+    card.setAttribute("aria-label","View lot map and pricing for "+s.name);
+    card.onclick=()=>openDetail(s.id);
+    card.onkeydown=(ev)=>{if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();openDetail(s.id)}};
+    card.innerHTML=`<div class="prop-card-img"><img src="${s.cardImage||s.image}" alt="${s.name}" loading="lazy" onerror="this.style.display='none'"><div class="prop-card-badges">${tagHTML(s.tags)}</div><div class="prop-avail-badge"><div class="prop-avail-dot"></div>${cnt.available} lots available</div></div><div class="prop-card-body"><div class="prop-card-name">${s.name}</div><div class="prop-card-loc">📍 ${s.city}, ${s.county} County</div><div class="prop-card-meta"><span class="prop-card-size">${s.size}</span><div class="prop-card-price">${minP<Infinity?fmtP(minP):"Call"}<small>Starting Price</small></div></div><button class="prop-card-cta" type="button">View Lot Map & Pricing &rarr;</button></div>`;
     grid.appendChild(card);
   });
   noR.style.display=shown===0?"block":"none";
