@@ -358,6 +358,14 @@ footer{background:var(--ink);color:white;padding:40px 24px}
 }
 
 .map-open-link{display:block;padding:10px 12px;text-align:center;background:var(--forest);color:white;text-decoration:none;font-weight:800;font-size:.82rem;border-top:1px solid var(--border)}.map-open-link:hover{background:var(--sage)}
+
+/* V71: keep homepage map underneath sticky header/filter while scrolling */
+.location-map-section{position:relative;z-index:1}
+.location-map-shell,.leaflet-container,#property-map,.map-list{position:relative;z-index:1}
+.filter-bar{z-index:175}
+nav{z-index:300}
+.promo-banner,.promo-bar{z-index:310}
+
 </style>
 </head>
 <body>
