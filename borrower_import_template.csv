@@ -1,0 +1,2 @@
+email,borrower_name,loan_number,active
+customer@example.com,Customer Name,LOAN-0001,true
