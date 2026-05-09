@@ -394,9 +394,13 @@ footer{background:var(--ink);color:white;padding:38px 24px}
 
 
 /* SOCIAL FLOAT + REQUEST PORTAL LINKS */
-.social-fab{position:fixed;right:22px;bottom:22px;z-index:250;display:flex;flex-direction:column;gap:10px}
-.social-fab a{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;font-weight:800;box-shadow:0 4px 18px rgba(0,0,0,.25);transition:.2s;font-size:1.05rem}
+.social-fab{position:fixed;right:22px;bottom:22px;z-index:250;display:flex;flex-direction:column;gap:12px}
+.social-fab a{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;box-shadow:0 8px 26px rgba(0,0,0,.28);transition:.2s}
 .social-fab a:hover{transform:scale(1.08)}
+.social-fab svg{width:30px;height:30px;display:block;fill:currentColor}
+.social-fab .social-fb svg{width:26px;height:26px}
+.social-fab .social-yt svg{width:32px;height:32px}
+.social-fab .social-ig svg{width:31px;height:31px}
 .social-fb{background:#1877f2}.social-ig{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)}.social-yt{background:#ff0000}
 .mob-forms{background:var(--sage);color:white}.mob-portal{background:var(--leaf);color:white}
 @media(max-width:640px){.social-fab{display:none}.nav-links .nav-link[href$="forms.html"],.nav-links .nav-link[href$="customer_portal.html"]{display:none}}
@@ -476,10 +480,10 @@ footer{background:var(--ink);color:white;padding:38px 24px}
     <a class="nav-link" href="./index.html">Properties</a>
     <a class="nav-link active" href="./how-it-works.html">How It Works</a>
     <a class="nav-link" href="./contact.html">Contact Us</a>
-    <a class="nav-link" href="./forms.html">Forms</a>
+    
     <a class="nav-link" href="./customer_portal.html">Customer Portal</a>
     <div class="nav-sep"></div>
-    <a class="nav-link nav-phone" href="tel:9563833222">&#9990; (956) 383-3222</a>
+    <a class="nav-link nav-phone" href="tel:9563833222">☎️ (956) 383-3222</a>
     <a class="nav-cta" href="https://www.paylease.com/registration/pay_portal/77472037/ACC?vpw=1536&crd=1" target="_blank">&#128179; Make a Payment</a>
   </div>
 </nav>
@@ -518,8 +522,8 @@ footer{background:var(--ink);color:white;padding:38px 24px}
 
   <div class="step-card">
     <div class="sc-num">5</div>
-    <div><h3>Deed Transfers to You</h3>
-    <p>Once your land is paid in full, the deed transfers to your name and you own the property free and clear. Many customers begin building or placing their home during the payment period &mdash; contact us first to ensure you have the right approvals in place.</p></div>
+    <div><h3>You Receive the Deed at Closing</h3>
+    <p>At closing, the buyer receives a deed to the property, and Pueblo de Palmas retains a vendor's lien as security for the unpaid balance. The buyer also signs a deed of trust and real estate lien note. After the note is paid in full, we provide a release of lien so the property is owned free and clear, subject to any recorded restrictions, easements, taxes, and applicable law.</p></div>
   </div>
 
   <!-- WHY OWNER FINANCE -->
@@ -539,7 +543,7 @@ footer{background:var(--ink);color:white;padding:38px 24px}
       <div style="background:white;border-radius:8px;padding:14px;border:1px solid var(--border)">
         <div style="font-size:1.4rem;margin-bottom:6px">&#9989;</div>
         <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;margin-bottom:4px;color:var(--forest)">No Prepayment Penalty</div>
-        <div style="font-size:.8rem;color:#555;line-height:1.55">Pay extra or pay off early anytime. The deed transfers as soon as you pay in full.</div>
+        <div style="font-size:.8rem;color:#555;line-height:1.55">Pay extra or pay off early anytime. You receive the deed at closing; after payoff, we provide a release of lien.</div>
       </div>
       <div style="background:white;border-radius:8px;padding:14px;border:1px solid var(--border)">
         <div style="font-size:1.4rem;margin-bottom:6px">&#9989;</div>
@@ -603,13 +607,19 @@ footer{background:var(--ink);color:white;padding:38px 24px}
   </div>
 </footer>
 <div class="social-fab" aria-label="Social media links">
-  <a class="social-fb" href="https://www.facebook.com/PuebloDePalmas" target="_blank" rel="noopener" title="Facebook">f</a>
-  <a class="social-ig" href="https://www.instagram.com/pueblodepalmas" target="_blank" rel="noopener" title="Instagram">◎</a>
-  <a class="social-yt" href="https://www.youtube.com/@PueblodePalmas" target="_blank" rel="noopener" title="YouTube">▶</a>
+  <a class="social-fb" href="https://www.facebook.com/PuebloDePalmas" target="_blank" rel="noopener" title="Facebook" aria-label="Facebook">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8.5V6.6c0-.8.2-1.2 1.3-1.2H17V2.2C16.2 2.1 15.4 2 14.6 2c-2.5 0-4.2 1.5-4.2 4.3v2.2H7.6V12h2.8v10H14V12h2.8l.4-3.5H14z"/></svg>
+  </a>
+  <a class="social-ig" href="https://www.instagram.com/pueblodepalmas" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9zM12 7.3a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4zm0 2a2.7 2.7 0 1 0 0 5.4 2.7 2.7 0 0 0 0-5.4zm5.05-2.05a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg>
+  </a>
+  <a class="social-yt" href="https://www.youtube.com/@PueblodePalmas" target="_blank" rel="noopener" title="YouTube" aria-label="YouTube">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2s-.2-1.5-.8-2.1c-.8-.8-1.6-.8-2-.9C16 4 12 4 12 4s-4 0-6.8.2c-.4.1-1.3.1-2 .9-.6.6-.8 2.1-.8 2.1S2.2 9 2.2 10.8v1.7c0 1.8.2 3.6.2 3.6s.2 1.5.8 2.1c.8.8 1.8.8 2.3.9 1.7.2 6.5.2 6.5.2s4 0 6.8-.2c.4-.1 1.3-.1 2-.9.6-.6.8-2.1.8-2.1s.2-1.8.2-3.6v-1.7c0-1.8-.2-3.6-.2-3.6zM9.9 14.9V8.7l5.6 3.1-5.6 3.1z"/></svg>
+  </a>
 </div>
 <div class="mob-bar">
   <a class="mob-btn mob-call" href="tel:9563833222">📞 Call</a>
-  <a class="mob-btn mob-forms" href="./forms.html">📄 Forms</a>
+  <a class="mob-btn mob-forms" href="./customer_portal.html">🔐 Portal</a>
   <a class="mob-btn mob-pay" href="https://www.paylease.com/registration/pay_portal/77472037/ACC?vpw=1536&crd=1" target="_blank">💳 Pay</a>
 </div>
 <script>
@@ -620,8 +630,8 @@ const HOW_FAQ=[
   {q:'What happens if I miss a payment?',a:'Contact our office as soon as possible. We work with our customers — please call before a payment is missed and we'll do our best to find a solution.'},
   {q:'Can I place a home on the lot during the payment period?',a:'In most subdivisions, yes — with developer approval and the appropriate county permits. Contact our office before starting construction or placing a home.'},
   {q:'What is NMLS #319106?',a:'NMLS stands for Nationwide Multistate Licensing System. Our NMLS number identifies us as a licensed mortgage loan originator. Verify at nmlsconsumeraccess.org.'},
-  {q:'Can I pay off my land early?',a:'Yes, absolutely. There are no prepayment penalties. Pay extra toward principal any month, or pay the full balance early and receive the deed immediately.'},
-  {q:'Is this the same as rent-to-own?',a:'No. With owner financing, you enter a real estate purchase contract from day one. You are the buyer and we are the lender. Once paid in full, the deed transfers to you.'},
+  {q:'Can I pay off my land early?',a:'Yes, absolutely. There are no prepayment penalties. Pay extra toward principal any month, or pay the full balance early. Because the deed is provided at closing, payoff results in a release of lien rather than a new deed transfer.'},
+  {q:'Is this the same as rent-to-own?',a:'No. With owner financing, you purchase the property through a real estate closing. The buyer receives a deed at closing, signs a real estate lien note and deed of trust, and Pueblo de Palmas retains a vendor’s lien until the note is paid in full.'},
   {q:'Can I build or place a manufactured home?',a:'Most of our subdivisions allow manufactured/mobile homes with developer approval. Setback requirements and county permits also apply. Call us to discuss your specific plans.'},
 ];
 const $=id=>document.getElementById(id);
