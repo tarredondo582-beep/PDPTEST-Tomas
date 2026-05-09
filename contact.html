@@ -401,6 +401,46 @@ footer{background:var(--ink);color:white;padding:38px 24px}
 .mob-forms{background:var(--sage);color:white}.mob-portal{background:var(--leaf);color:white}
 @media(max-width:640px){.social-fab{display:none}.nav-links .nav-link[href$="forms.html"],.nav-links .nav-link[href$="customer_portal.html"]{display:none}}
 
+
+
+/* V70 MOBILE NAV FIX: makes the full menu visible and consistent on phones */
+@media (max-width: 760px){
+  body{padding-bottom:58px!important;}
+  nav{
+    position:sticky!important;top:0!important;height:auto!important;min-height:auto!important;
+    padding:10px 12px!important;display:flex!important;flex-wrap:wrap!important;
+    align-items:center!important;gap:8px!important;overflow:visible!important;
+  }
+  .nav-logo{width:100%!important;flex:0 0 100%!important;min-width:0!important;max-width:100%!important;}
+  .nav-logo img{height:34px!important;width:34px!important;}
+  .nav-brand{font-size:1.05rem!important;line-height:1.08!important;}
+  .nav-brand small{display:block!important;font-size:.54rem!important;letter-spacing:.06em!important;}
+  .nav-links{
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    width:100%!important;flex:0 0 100%!important;margin-left:0!important;
+    gap:7px!important;align-items:stretch!important;overflow:visible!important;padding-top:2px!important;
+  }
+  .nav-links .nav-link:not(.nav-phone),
+  .nav-links .nav-cta{
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    min-height:38px!important;width:100%!important;margin:0!important;padding:8px 8px!important;
+    border-radius:10px!important;background:rgba(255,255,255,.09)!important;color:white!important;
+    font-size:.78rem!important;font-weight:800!important;line-height:1.1!important;text-align:center!important;
+    white-space:normal!important;text-decoration:none!important;border:1px solid rgba(255,255,255,.08)!important;
+  }
+  .nav-links .nav-link.active{background:var(--forest)!important;color:white!important;border-color:rgba(255,255,255,.16)!important;}
+  .nav-links .nav-cta{grid-column:1 / -1!important;background:var(--leaf)!important;color:white!important;}
+  .nav-links .nav-phone,.nav-sep{display:none!important;}
+  .page-options{display:none!important;}
+  .filter-bar{position:relative!important;top:auto!important;z-index:50!important;}
+  .mob-bar{display:flex!important;}
+  .social-fab{display:none!important;}
+}
+@media (max-width: 380px){
+  .nav-links .nav-link:not(.nav-phone),.nav-links .nav-cta{font-size:.72rem!important;padding:8px 5px!important;}
+  .nav-brand{font-size:.98rem!important;}
+}
+
 </style>
 </head>
 <body class="standalone-page contact">
