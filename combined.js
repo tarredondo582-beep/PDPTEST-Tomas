@@ -1,756 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pueblo de Palmas | Land Ownership in the RGV</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --ink:#1a2318;--forest:#2d5a3d;--sage:#4a7c59;--leaf:#6aab7a;
-  --cream:#faf7f2;--paper:#f2ece0;--sand:#e8dfc9;--border:#d8ceb8;
-  --sold:#8b1a1a;--sold-bg:rgba(139,26,26,.14);
-  --pend:#7a4a0a;--pend-bg:rgba(122,74,10,.14);
-  --avail:#2d5a3d;--avail-bg:rgba(45,90,61,.14);
-  --radius:8px;--shadow:0 4px 24px rgba(0,0,0,.1);--nav-h:64px;
-}
-html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.55;min-height:100vh}
-::-webkit-scrollbar{width:6px;height:6px}
-::-webkit-scrollbar-track{background:var(--paper)}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-nav{position:sticky;top:0;z-index:200;background:var(--ink);height:var(--nav-h);display:flex;align-items:center;padding:0 24px;gap:20px;box-shadow:0 2px 12px rgba(0,0,0,.3)}
-.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;cursor:pointer}
-.nav-logo img{height:38px;width:38px;border-radius:5px;background:white;padding:3px;object-fit:contain}
-.nav-brand{font-family:"Cormorant Garamond",serif;font-size:1.15rem;font-weight:700;color:white;line-height:1.1}
-.nav-brand small{display:block;font-family:"DM Sans",sans-serif;font-size:.65rem;font-weight:400;color:#8fb09a;letter-spacing:.08em;text-transform:uppercase}
-.nav-links{display:flex;gap:4px;margin-left:auto;align-items:center}
-.nav-link{color:rgba(255,255,255,.75);text-decoration:none;font-size:.85rem;padding:6px 12px;border-radius:5px;transition:.15s;cursor:pointer;border:none;background:none;font-family:inherit}
-.nav-link:hover,.nav-link.active{color:white;background:rgba(255,255,255,.1)}
-.nav-cta{background:var(--leaf);color:white;padding:7px 16px;border-radius:5px;text-decoration:none;font-size:.85rem;font-weight:600;transition:.15s;margin-left:8px;white-space:nowrap}
-.nav-cta:hover{background:var(--sage)}
-.nav-phone{color:white;font-size:.85rem;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:5px}
-@media(max-width:680px){.nav-brand small{display:none}}
 
-.page-options{position:sticky;top:var(--nh, var(--nav-h, 62px));z-index:190;background:#fff;border-bottom:1px solid var(--border);display:none;justify-content:center;gap:6px;padding:9px 14px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
-.page-option{color:var(--ink);text-decoration:none;font-size:.82rem;font-weight:700;padding:7px 13px;border-radius:20px;border:1px solid transparent;white-space:nowrap;transition:.15s}
-.page-option:hover,.page-option.active{background:var(--forest);color:white;border-color:var(--forest)}
-.page-option.pay{background:var(--paper);border-color:var(--border)}
-.page-option.pay:hover{background:var(--leaf);border-color:var(--leaf);color:white}
-@media(max-width:680px){
-  .nav-links .nav-phone,.nav-links .nav-cta{display:none}
-  .nav-links .nav-link:not(.nav-phone){display:none}
-  .page-options{display:flex;overflow-x:auto;justify-content:flex-start;top:var(--nav-h);padding:8px 10px;-webkit-overflow-scrolling:touch}
-  .page-option{font-size:.78rem;padding:7px 12px}
-}
-
-.page{display:none}.page.active{display:block}
-.hero{background:linear-gradient(135deg,#0f1f12 0%,#1e3828 50%,#253d29 100%);min-height:440px;display:flex;align-items:center;justify-content:center;text-align:center;padding:60px 24px;position:relative;overflow:hidden}
-.hero-inner{position:relative;max-width:680px}
-.hero-eyebrow{display:inline-block;background:rgba(106,171,122,.2);border:1px solid rgba(106,171,122,.4);color:#9fd4ad;font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 14px;border-radius:20px;margin-bottom:18px}
-.hero h1{font-family:"Cormorant Garamond",serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:700;color:white;line-height:1.2;margin-bottom:14px}
-.hero h1 em{font-style:italic;color:#9fd4ad}
-.hero p{font-size:1.05rem;color:#b0c9b5;max-width:500px;margin:0 auto 28px}
-.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.hero-btn{padding:12px 24px;border-radius:6px;font-size:.9rem;font-weight:600;text-decoration:none;cursor:pointer;border:none;font-family:inherit;transition:.18s}
-.hero-btn-primary{background:var(--leaf);color:white}.hero-btn-primary:hover{background:var(--sage)}
-.hero-btn-outline{background:transparent;color:white;border:1px solid rgba(255,255,255,.35)}.hero-btn-outline:hover{background:rgba(255,255,255,.1)}
-.hero-stats{margin-top:36px;display:flex;gap:28px;justify-content:center;flex-wrap:wrap}
-.hero-stat{text-align:center}
-.hero-stat-num{font-family:"Cormorant Garamond",serif;font-size:2rem;font-weight:700;color:white;line-height:1}
-.hero-stat-lbl{font-size:.72rem;color:#8fb09a;letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
-.filter-bar{background:white;border-bottom:1px solid var(--border);padding:14px 24px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;position:sticky;top:var(--nav-h);z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.05)}
-.filter-label{font-size:.75rem;font-weight:600;color:var(--sage);text-transform:uppercase;letter-spacing:.08em;margin-right:4px;white-space:nowrap}
-.filter-chips{display:flex;gap:6px;flex-wrap:wrap}
-.chip{padding:5px 14px;border-radius:20px;border:1px solid var(--border);background:white;font-size:.8rem;font-weight:500;cursor:pointer;transition:.15s;color:var(--ink);font-family:inherit;white-space:nowrap}
-.chip:hover{border-color:var(--sage);color:var(--sage)}.chip.on{background:var(--forest);color:white;border-color:var(--forest)}
-.filter-count{margin-left:auto;font-size:.8rem;color:var(--sage);font-weight:600;white-space:nowrap}
-.properties-section{max-width:1200px;margin:0 auto;padding:40px 24px}
-.section-title{font-family:"Cormorant Garamond",serif;font-size:1.6rem;font-weight:600;color:var(--ink);margin-bottom:6px}
-.section-sub{font-size:.85rem;color:var(--sage);margin-bottom:28px}
-.prop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
-.prop-card{background:white;border-radius:10px;border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:.2s;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.prop-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--sage)}
-.prop-card-img{position:relative;height:180px;overflow:hidden;background:var(--sand)}
-.prop-card-img img{width:100%;height:100%;object-fit:cover;transition:.3s}
-.prop-card:hover .prop-card-img img{transform:scale(1.04)}
-.prop-card-badges{position:absolute;top:10px;left:10px;display:flex;gap:5px;flex-wrap:wrap}
-.badge{font-size:.65rem;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:.05em;text-transform:uppercase}
-.badge-hot{background:#e85d04;color:white}.badge-new{background:var(--forest);color:white}
-.badge-low{background:#7a5c00;color:white}.badge-sold{background:var(--sold);color:white}
-.badge-promo{background:white;color:var(--forest);border:1px solid var(--forest)}.badge-soon{background:#4a6fa5;color:white}
-.prop-avail-badge{position:absolute;bottom:10px;right:10px;background:rgba(26,35,24,.82);backdrop-filter:blur(4px);color:white;font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:20px;display:flex;align-items:center;gap:5px}
-.prop-avail-dot{width:7px;height:7px;border-radius:50%;background:var(--leaf)}
-.prop-card-body{padding:16px}
-.prop-card-name{font-family:"Cormorant Garamond",serif;font-size:1.1rem;font-weight:600;margin-bottom:4px;color:var(--ink)}
-.prop-card-loc{font-size:.78rem;color:var(--sage);margin-bottom:12px;display:flex;align-items:center;gap:4px}
-.prop-card-meta{display:flex;justify-content:space-between;align-items:flex-end}
-.prop-card-size{font-size:.78rem;color:#666;background:var(--paper);padding:3px 8px;border-radius:4px}
-.prop-card-price{font-family:"Cormorant Garamond",serif;font-size:1.25rem;font-weight:700;color:var(--forest)}
-.prop-card-price small{font-family:"DM Sans",sans-serif;font-size:.65rem;font-weight:400;color:var(--sage);display:block;text-align:right}
-.prop-card-cta{display:block;text-align:center;margin-top:12px;padding:9px;background:var(--forest);color:white;border-radius:6px;font-size:.82rem;font-weight:600;border:none;cursor:pointer;width:100%;font-family:inherit;transition:.15s}
-.prop-card-cta:hover{background:var(--sage)}
-#page-detail{background:var(--cream)}
-.detail-back{display:flex;align-items:center;gap:6px;padding:14px 24px;cursor:pointer;color:var(--sage);font-size:.85rem;font-weight:600;border:none;background:none;font-family:inherit;border-bottom:1px solid var(--border);width:100%}
-.detail-back:hover{color:var(--forest)}
-.detail-layout{max-width:1200px;margin:0 auto;padding:24px 24px 60px;display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start}
-@media(max-width:900px){.detail-layout{grid-template-columns:1fr}}
-.detail-header{margin-bottom:20px}
-.detail-labels{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-.detail-name{font-family:"Cormorant Garamond",serif;font-size:2rem;font-weight:700;line-height:1.2;margin-bottom:6px}
-.detail-loc{color:var(--sage);font-size:.9rem;display:flex;align-items:center;gap:5px;margin-bottom:14px}
-.detail-price-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
-.detail-starting{font-family:"Cormorant Garamond",serif;font-size:1.8rem;font-weight:700;color:var(--forest)}
-.detail-starting small{font-family:"DM Sans",sans-serif;font-size:.75rem;font-weight:400;color:var(--sage);margin-left:4px}
-.detail-lot-count{font-size:.85rem;color:var(--sage);background:var(--paper);padding:4px 10px;border-radius:5px;border:1px solid var(--border)}
-.plat-section{margin-bottom:24px}
-.plat-section-title{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--sage);margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.plat-image-wrap{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:var(--sand);box-shadow:var(--shadow)}
-.plat-image-wrap img{width:100%;display:block}
-.plat-overlay-hint{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(26,35,24,.8);backdrop-filter:blur(6px);color:white;font-size:.72rem;padding:5px 14px;border-radius:20px;white-space:nowrap;pointer-events:none}
-.lot-section{margin-bottom:24px}
-.lot-legend{display:flex;gap:16px;margin-bottom:14px;flex-wrap:wrap}
-.lot-legend-item{display:flex;align-items:center;gap:7px;font-size:.8rem;color:#555}
-.legend-swatch{width:14px;height:14px;border-radius:3px}
-.legend-avail{background:var(--avail-bg);border:2px solid var(--avail)}
-.legend-sold{background:var(--sold-bg);border:2px solid var(--sold)}
-.legend-pend{background:var(--pend-bg);border:2px solid var(--pend)}
-.lot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:6px}
-.lot-btn{position:relative;aspect-ratio:1;border-radius:5px;border:2px solid;cursor:pointer;font-family:inherit;transition:.15s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px}
-.lot-btn.avail{background:var(--avail-bg);border-color:var(--avail);color:var(--avail)}
-.lot-btn.sold{background:var(--sold-bg);border-color:var(--sold);color:var(--sold);cursor:default;opacity:.7}
-.lot-btn.pending{background:var(--pend-bg);border-color:var(--pend);color:var(--pend)}
-.lot-btn:not(.sold):hover{transform:scale(1.08);box-shadow:0 2px 10px rgba(0,0,0,.15);z-index:1}
-.lot-btn.selected{box-shadow:0 0 0 3px var(--forest)!important;z-index:2}
-.lot-num{font-size:.72rem;font-weight:800;line-height:1}
-.lot-price-tiny{font-size:.58rem;font-weight:600;text-align:center;line-height:1.2}
-.lot-status-tiny{font-size:.55rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
-.side-card{background:white;border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.side-card-head{background:var(--ink);color:white;padding:14px 18px;font-size:.82rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
-.side-card-body{padding:18px}
-.calc-row{margin-bottom:14px}
-.calc-label{font-size:.75rem;font-weight:600;color:var(--sage);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px;display:block}
-.calc-input{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:5px;font-family:inherit;font-size:.9rem;background:var(--paper);color:var(--ink);transition:.15s}
-.calc-input:focus{outline:none;border-color:var(--sage);background:white}
-.calc-result{background:var(--forest);color:white;border-radius:6px;padding:16px;text-align:center;margin-top:6px}
-.calc-result-num{font-family:"Cormorant Garamond",serif;font-size:2rem;font-weight:700;line-height:1}
-.calc-result-lbl{font-size:.72rem;color:rgba(255,255,255,.75);margin-top:3px}
-.calc-disclaimer{font-size:.68rem;color:var(--sage);margin-top:10px;line-height:1.45;text-align:center}
-.faq-item{border-bottom:1px solid var(--border)}.faq-item:last-child{border-bottom:none}
-.faq-q{width:100%;text-align:left;padding:12px 0;background:none;border:none;font-family:inherit;font-size:.88rem;font-weight:600;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.faq-q:hover{color:var(--forest)}
-.faq-icon{font-size:.8rem;color:var(--sage);flex-shrink:0;transition:.2s}
-.faq-a{font-size:.82rem;color:#555;line-height:1.6;padding-bottom:12px;display:none}
-.faq-a.open{display:block}.faq-icon.open{transform:rotate(180deg)}
-.map-frame{width:100%;height:220px;border:none;border-radius:5px}
-.contact-form .calc-input{margin-bottom:10px}
-.contact-btn{width:100%;padding:11px;background:var(--forest);color:white;border:none;border-radius:6px;font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;transition:.15s}
-.contact-btn:hover{background:var(--sage)}
-.contact-select{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:5px;font-family:inherit;font-size:.9rem;background:var(--paper);color:var(--ink);margin-bottom:10px;-webkit-appearance:none}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:.25s;z-index:300}
-.overlay.on{opacity:1;pointer-events:all}
-.lot-panel{position:fixed;right:-420px;top:0;bottom:0;width:400px;background:white;box-shadow:-6px 0 40px rgba(0,0,0,.18);transition:right .3s cubic-bezier(.4,0,.2,1);z-index:301;display:flex;flex-direction:column;overflow:hidden}
-.lot-panel.open{right:0}
-.panel-top{background:var(--ink);color:white;padding:20px 22px 16px;display:flex;justify-content:space-between;align-items:flex-start}
-.panel-lot-tag{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#8fb09a;margin-bottom:4px}
-.panel-lot-num{font-family:"Cormorant Garamond",serif;font-size:2.4rem;font-weight:700;line-height:1}
-.panel-close{background:none;border:none;color:rgba(255,255,255,.65);font-size:1.4rem;cursor:pointer;padding:0;line-height:1;transition:.15s}
-.panel-close:hover{color:white}
-.status-pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;margin-top:8px}
-.status-pill.avail{background:var(--avail-bg);color:var(--avail)}.status-pill.sold{background:var(--sold-bg);color:var(--sold)}.status-pill.pending{background:var(--pend-bg);color:var(--pend)}
-.panel-body{flex:1;overflow-y:auto;padding:20px 22px}
-.panel-price{font-family:"Cormorant Garamond",serif;font-size:2.2rem;font-weight:700;color:var(--forest);line-height:1}
-.panel-price.sold-price{color:var(--sold)}
-.panel-price-note{font-size:.75rem;color:var(--sage);margin-bottom:16px;margin-top:2px}
-.panel-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px}
-.panel-card{background:var(--paper);border-radius:6px;padding:10px 12px}
-.panel-card-lbl{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--sage);margin-bottom:2px}
-.panel-card-val{font-size:.9rem;font-weight:700}
-.panel-hr{border:none;border-top:1px solid var(--border);margin:14px 0}
-.panel-note{font-size:.75rem;color:#777;line-height:1.5;margin-bottom:16px}
-.panel-actions{display:flex;flex-direction:column;gap:8px}
-.panel-actions .btn{padding:12px;justify-content:center;font-size:.9rem;text-decoration:none;border-radius:6px;font-family:inherit;font-weight:700;cursor:pointer;border:none;display:flex;align-items:center;gap:7px;transition:.15s;text-align:center}
-.btn-call{background:var(--forest);color:white}.btn-call:hover{background:var(--sage)}
-.btn-wa{background:#25d366;color:white}.btn-wa:hover{background:#1ebe5d}
-.btn-email{background:white;color:var(--forest);border:2px solid var(--forest)}.btn-email:hover{background:var(--avail-bg)}
-.btn-pay{background:var(--leaf);color:white}.btn-pay:hover{background:var(--sage)}
-.panel-foot{padding:12px 22px;border-top:1px solid var(--border);font-size:.68rem;color:var(--sage);text-align:center;line-height:1.6}
-footer{background:var(--ink);color:white;padding:40px 24px}
-.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px}
-.footer-brand-name{font-family:"Cormorant Garamond",serif;font-size:1.3rem;font-weight:700;color:white}
-.footer-brand-name small{display:block;font-family:"DM Sans",sans-serif;font-size:.65rem;font-weight:400;color:#8fb09a;letter-spacing:.08em;text-transform:uppercase}
-.footer-brand p{font-size:.8rem;color:#8fb09a;margin-top:8px;line-height:1.6;max-width:260px}
-.footer-col h4{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#8fb09a;margin-bottom:12px}
-.footer-col a,.footer-col p{font-size:.82rem;color:rgba(255,255,255,.7);text-decoration:none;display:block;margin-bottom:7px;transition:.15s}
-.footer-col a:hover{color:white}
-.footer-bottom{max-width:1200px;margin:28px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.72rem;color:rgba(255,255,255,.4)}
-.social-links{display:flex;gap:10px;margin-top:12px}
-.social-link{color:rgba(255,255,255,.6);text-decoration:none;font-size:.8rem;transition:.15s}
-.social-link:hover{color:white}
-.wa-fab{position:fixed;bottom:24px;right:24px;z-index:250;background:#25d366;color:white;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:.2s;font-size:1.5rem}
-.wa-fab:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,.5)}
-.promo-banner{background:linear-gradient(90deg,var(--forest),var(--sage));color:white;text-align:center;padding:10px 24px;font-size:.82rem;font-weight:600;display:flex;align-items:center;justify-content:center;gap:10px}
-.promo-banner a{color:white;text-decoration:underline;cursor:pointer}
-.alert-box{border-radius:6px;padding:11px 14px;font-size:.83rem;font-weight:600;text-align:center;margin-bottom:12px}
-.alert-sold{background:var(--sold-bg);color:var(--sold)}.alert-pend{background:var(--pend-bg);color:var(--pend)}
-.no-results{text-align:center;padding:60px 24px;color:var(--sage);font-size:.95rem}
-.video-wrap{position:relative;padding-top:56.25%;border-radius:var(--radius);overflow:hidden;margin-bottom:16px;background:#000}
-.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%}
-@media(max-width:600px){
-  .hero{min-height:360px;padding:40px 16px}
-  .filter-bar{padding:10px 16px}
-  .properties-section{padding:24px 14px}
-  .prop-grid{grid-template-columns:1fr 1fr;gap:12px}
-  .detail-layout{padding:16px 14px 40px}
-  .lot-panel{width:100%;right:-100%}
-  .lot-grid{grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:5px}
-}
-@media(max-width:420px){.prop-grid{grid-template-columns:1fr}}
-
-/* V23 plat-only overlay system */
-.plat-image-wrap{position:relative;touch-action:pan-y pinch-zoom}
-.plat-image-wrap .plat-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
-.plat-lot{pointer-events:auto;cursor:pointer;transition:filter .15s, opacity .15s, stroke-width .15s}
-.plat-lot.available{fill:rgba(45,90,61,.09);stroke:#1f7a3a;stroke-width:.30}
-.plat-lot.pending{fill:rgba(122,74,10,.09);stroke:#8a5a13;stroke-width:.30}
-.plat-lot.sold{fill:rgba(139,26,26,.08);stroke:#8b1a1a;stroke-width:.28}
-.plat-lot:hover,.plat-lot.selected{filter:drop-shadow(0 0 3px rgba(45,90,61,.7));stroke-width:.58}
-.plat-lot-label{pointer-events:none;font:700 1.85px 'DM Sans', sans-serif;fill:#132217;text-anchor:middle;paint-order:stroke;stroke:rgba(255,255,255,.72);stroke-width:.34}
-.plat-lot-label.sold{fill:#7f1d1d}.plat-lot-label.pending{fill:#8a5a13}
-.plat-overlay-toolbar{position:absolute;top:10px;left:10px;z-index:9;display:flex;gap:6px;flex-wrap:wrap}
-.plat-filter{border:1px solid rgba(255,255,255,.75);background:rgba(255,255,255,.88);backdrop-filter:blur(6px);border-radius:999px;padding:5px 9px;font-size:.68rem;font-weight:800;color:var(--ink);cursor:pointer}
-.plat-filter.on{background:var(--forest);color:white;border-color:var(--forest)}
-.plat-note{position:absolute;right:10px;bottom:10px;z-index:9;background:rgba(26,35,24,.82);color:white;border-radius:999px;padding:6px 11px;font-size:.7rem;font-weight:700;max-width:80%;text-align:center}
-.plat-missing{background:var(--paper);border:1px dashed var(--border);border-radius:var(--radius);padding:28px;text-align:center;color:var(--sage);font-size:.9rem}
-.plat-missing strong{display:block;color:var(--ink);font-family:'Cormorant Garamond',serif;font-size:1.35rem;margin-bottom:6px}
-.lot-section{display:none}
-@media(max-width:600px){.plat-overlay-toolbar{position:absolute;top:10px;left:10px;right:auto;margin:0;z-index:9;display:flex;gap:6px;flex-wrap:wrap}.plat-filter{font-size:.72rem}.plat-note{left:10px;right:10px;border-radius:8px;font-size:.68rem}.plat-lot-label{font-size:3px}}
-
-
-/* V53: consistent mobile page menu across all pages */
-.page-options{position:sticky;top:var(--nh, var(--nav-h, 62px));z-index:190;background:#fff;border-bottom:1px solid var(--border);display:none;justify-content:center;gap:6px;padding:9px 14px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
-.page-option{color:var(--ink);text-decoration:none;font-size:.82rem;font-weight:700;padding:7px 13px;border-radius:20px;border:1px solid transparent;white-space:nowrap;transition:.15s}
-.page-option:hover,.page-option.active{background:var(--forest);color:white;border-color:var(--forest)}
-.page-option.pay{background:var(--paper);border-color:var(--border)}
-.page-option.pay:hover{background:var(--leaf);border-color:var(--leaf);color:white}
-@media(max-width:720px){
-  .page-options{display:flex;overflow-x:auto;justify-content:flex-start;top:var(--nh, var(--nav-h, 62px));padding:8px 10px;-webkit-overflow-scrolling:touch}
-  .page-option{font-size:.78rem;padding:7px 12px}
-}
-
-
-/* V55: one consistent dark/green menu on mobile; no separate white menu strip */
-.page-options{display:none !important}
-@media(max-width:720px){
-  nav{
-    height:auto !important;
-    min-height:var(--nh, var(--nav-h, 62px));
-    padding:12px 16px !important;
-    flex-wrap:wrap !important;
-    align-items:center !important;
-    gap:10px !important;
-  }
-  .nav-logo{
-    flex:1 1 auto !important;
-    min-width:210px !important;
-  }
-  .nav-links{
-    display:flex !important;
-    flex:1 0 100% !important;
-    width:100% !important;
-    margin-left:0 !important;
-    gap:8px !important;
-    align-items:center !important;
-    overflow-x:auto !important;
-    padding-top:8px !important;
-    -webkit-overflow-scrolling:touch !important;
-  }
-  .nav-links .nav-link:not(.nav-phone),
-  .nav-links .nav-cta{
-    display:inline-flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    white-space:nowrap !important;
-    flex:0 0 auto !important;
-    padding:8px 12px !important;
-    border-radius:999px !important;
-    background:rgba(255,255,255,.08) !important;
-    color:white !important;
-    font-size:.82rem !important;
-    font-weight:700 !important;
-    text-decoration:none !important;
-  }
-  .nav-links .nav-link.active{
-    background:var(--forest) !important;
-    color:white !important;
-  }
-  .nav-links .nav-cta{
-    background:var(--leaf) !important;
-  }
-  .nav-links .nav-phone,
-  .nav-sep{
-    display:none !important;
-  }
-}
-
-
-/* V63 grouped homepage filters */
-.filter-groups{display:flex;gap:10px;align-items:end;flex-wrap:wrap}
-.filter-select-wrap{display:flex;flex-direction:column;gap:3px;font-size:.64rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--sage)}
-.filter-select{min-width:150px;border:1px solid var(--border);border-radius:999px;background:white;color:var(--ink);padding:7px 12px;font:600 .82rem 'DM Sans',sans-serif;outline:none;cursor:pointer}
-.filter-select:focus{border-color:var(--forest);box-shadow:0 0 0 2px rgba(45,90,61,.12)}
-@media(max-width:720px){
-  .filter-bar{align-items:flex-start}
-  .filter-groups{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .filter-groups #filter-all-btn{grid-column:1 / -1;width:100%}
-  .filter-select{width:100%;min-width:0;font-size:.78rem}
-  .filter-count{width:100%;margin-left:0;text-align:center}
-}
-
-
-/* V66: larger subdivision cards + better Las Gaviotas zoom framing */
-.properties-section{max-width:1380px}
-.prop-grid{grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:28px}
-.prop-card-img{height:235px}
-.prop-card-body{padding:22px}
-.prop-card-name{font-size:1.34rem;margin-bottom:7px}
-.prop-card-loc{font-size:.9rem;margin-bottom:20px}
-.prop-card-size{font-size:.85rem;padding:6px 12px}
-.prop-card-price{font-size:1.28rem}
-.prop-card-cta{margin-top:18px;padding:13px 16px;font-size:.92rem}
-@media(max-width:900px){.prop-grid{grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:20px}.prop-card-img{height:210px}.prop-card-body{padding:18px}}
-@media(max-width:520px){.prop-grid{grid-template-columns:1fr}.prop-card-img{height:220px}.properties-section{padding-left:16px;padding-right:16px}}
-
-
-/* V69 interactive property location map */
-.location-map-section{max-width:1280px;margin:0 auto 4px;padding:26px 24px 10px}
-.map-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:14px}
-.map-title{font-family:"Cormorant Garamond",serif;font-size:1.55rem;font-weight:700;color:var(--ink);line-height:1}
-.map-sub{font-size:.84rem;color:var(--sage);margin-top:6px}
-.map-toggle{border:1px solid var(--border);background:white;color:var(--forest);border-radius:999px;padding:8px 14px;font-weight:800;font-size:.82rem;cursor:pointer;font-family:inherit;white-space:nowrap}
-.map-toggle:hover{border-color:var(--forest);background:var(--paper)}
-.location-map-shell{display:none;grid-template-columns:minmax(0,1.5fr) minmax(260px,.72fr);gap:14px}
-.location-map-shell.open{display:grid}
-#property-map{height:430px;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;background:var(--paper)}
-.map-list{background:white;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);overflow:auto;max-height:430px}
-.map-list-item{display:flex;gap:10px;align-items:flex-start;width:100%;padding:12px 14px;border:0;border-bottom:1px solid var(--border);background:white;text-align:left;cursor:pointer;font-family:inherit;color:var(--ink)}
-.map-list-item:hover{background:var(--cream)}
-.map-list-item:last-child{border-bottom:0}
-.map-pin-num{flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:var(--forest);color:white;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.78rem}
-.map-item-name{font-weight:800;font-size:.86rem;line-height:1.2}
-.map-item-meta{font-size:.75rem;color:var(--sage);margin-top:3px}
-.map-popup-title{font-weight:800;color:#1a2318;margin-bottom:3px}
-.map-popup-meta{font-size:12px;color:#4a7c59;margin-bottom:8px}
-.map-popup-actions{display:flex;gap:6px;flex-wrap:wrap}
-.map-popup-actions button,.map-popup-actions a{font:700 12px "DM Sans",sans-serif;border-radius:999px;border:1px solid #d8ceb8;padding:6px 9px;text-decoration:none;cursor:pointer}
-.map-popup-actions button{background:#2d5a3d;color:white;border-color:#2d5a3d}
-.map-popup-actions a{background:#f2ece0;color:#1a2318}
-.leaflet-container{font-family:"DM Sans",sans-serif}
-@media(max-width:820px){
-  .location-map-section{padding:20px 16px 6px}
-  .map-head{align-items:flex-start;flex-direction:column}
-  .location-map-shell.open{display:block}
-  #property-map{height:360px;margin-bottom:10px}
-  .map-list{max-height:280px}
-}
-
-.map-open-link{display:block;padding:10px 12px;text-align:center;background:var(--forest);color:white;text-decoration:none;font-weight:800;font-size:.82rem;border-top:1px solid var(--border)}.map-open-link:hover{background:var(--sage)}
-
-/* V71: keep homepage map underneath sticky header/filter while scrolling */
-.location-map-section{position:relative;z-index:1}
-.location-map-shell,.leaflet-container,#property-map,.map-list{position:relative;z-index:1}
-.filter-bar{z-index:175}
-nav{z-index:300}
-.promo-banner,.promo-bar{z-index:310}
-
-
-/* V75: refined plat overlay styling to match Phase 31 look */
-.plat-lot.available{fill:rgba(45,90,61,.155);stroke:#2d5a3d;stroke-width:.22}
-.plat-lot.pending{fill:rgba(122,74,10,.135);stroke:#7a4a0a;stroke-width:.22}
-.plat-lot.sold{fill:rgba(139,26,26,.115);stroke:#7f1d1d;stroke-width:.22}
-.plat-lot:hover,.plat-lot.selected{filter:drop-shadow(0 0 3px rgba(45,90,61,.55));stroke-width:.38}
-.plat-lot-label{font:800 1.85px 'DM Sans', sans-serif;fill:#101510;stroke:rgba(255,255,255,.82);stroke-width:.36}
-.plat-lot-label.sold{fill:#7f1d1d}.plat-lot-label.pending{fill:#7a4a0a}
-
-
-/* V81: brighter/darker overlay colors */
-.plat-lot.available{fill:rgba(34,197,94,.26)!important;stroke:#16a34a!important;stroke-width:.24}
-.plat-lot.pending{fill:rgba(245,158,11,.22)!important;stroke:#d97706!important;stroke-width:.24}
-.plat-lot.sold{fill:rgba(239,68,68,.24)!important;stroke:#dc2626!important;stroke-width:.24}
-.plat-lot:hover,.plat-lot.selected{filter:drop-shadow(0 0 4px rgba(22,163,74,.62));stroke-width:.40}
-.plat-lot-label{fill:#0f172a!important;stroke:rgba(255,255,255,.92)!important}
-.plat-lot-label.sold{fill:#991b1b!important}
-.plat-lot-label.pending{fill:#92400e!important}
-
-
-/* V83: Milanos Phase IV photo gallery */
-.subdivision-photo-gallery{margin:22px 0 20px}
-.photo-gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.photo-gallery-grid img{width:100%;height:210px;object-fit:cover;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);display:block;background:var(--paper)}
-@media(max-width:820px){
-  .photo-gallery-grid{grid-template-columns:1fr}
-  .photo-gallery-grid img{height:230px}
-}
-
-
-/* V86: grey hold/reserved overlay style */
-.plat-lot.hold{fill:rgba(107,114,128,.28)!important;stroke:#6b7280!important;stroke-width:.24}
-.plat-lot-label.hold{fill:#374151!important;stroke:rgba(255,255,255,.92)!important}
-.lot-btn.hold{border-color:#9ca3af;background:rgba(107,114,128,.10);color:#374151}
-.status-pill.hold{background:rgba(107,114,128,.14);color:#374151;border-color:#9ca3af}
-.legend-swatch.legend-hold{background:rgba(107,114,128,.28);border:2px solid #6b7280}
-
-
-/* SOCIAL FLOAT + REQUEST PORTAL LINKS */
-.social-fab{position:fixed;right:22px;bottom:22px;z-index:250;display:flex;flex-direction:column;gap:12px}
-.social-fab a{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;box-shadow:0 8px 26px rgba(0,0,0,.28);transition:.2s}
-.social-fab a:hover{transform:scale(1.08)}
-.social-fab svg{width:30px;height:30px;display:block;fill:currentColor}
-.social-fab .social-fb svg{width:26px;height:26px}
-.social-fab .social-yt svg{width:32px;height:32px}
-.social-fab .social-ig svg{width:31px;height:31px}
-.social-fb{background:#1877f2}.social-ig{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)}.social-yt{background:#ff0000}
-.mob-forms{background:var(--sage);color:white}.mob-portal{background:var(--leaf);color:white}
-@media(max-width:640px){.social-fab{display:none}.nav-links .nav-link[href$="forms.html"],.nav-links .nav-link[href$="customer_portal.html"]{display:none}}
-
-
-
-/* V70 MOBILE NAV FIX: makes the full menu visible and consistent on phones */
-@media (max-width: 760px){
-  body{padding-bottom:58px!important;}
-  nav{
-    position:sticky!important;top:0!important;height:auto!important;min-height:auto!important;
-    padding:10px 12px!important;display:flex!important;flex-wrap:wrap!important;
-    align-items:center!important;gap:8px!important;overflow:visible!important;
-  }
-  .nav-logo{width:100%!important;flex:0 0 100%!important;min-width:0!important;max-width:100%!important;}
-  .nav-logo img{height:34px!important;width:34px!important;}
-  .nav-brand{font-size:1.05rem!important;line-height:1.08!important;}
-  .nav-brand small{display:block!important;font-size:.54rem!important;letter-spacing:.06em!important;}
-  .nav-links{
-    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
-    width:100%!important;flex:0 0 100%!important;margin-left:0!important;
-    gap:7px!important;align-items:stretch!important;overflow:visible!important;padding-top:2px!important;
-  }
-  .nav-links .nav-link:not(.nav-phone),
-  .nav-links .nav-cta{
-    display:flex!important;align-items:center!important;justify-content:center!important;
-    min-height:38px!important;width:100%!important;margin:0!important;padding:8px 8px!important;
-    border-radius:10px!important;background:rgba(255,255,255,.09)!important;color:white!important;
-    font-size:.78rem!important;font-weight:800!important;line-height:1.1!important;text-align:center!important;
-    white-space:normal!important;text-decoration:none!important;border:1px solid rgba(255,255,255,.08)!important;
-  }
-  .nav-links .nav-link.active{background:var(--forest)!important;color:white!important;border-color:rgba(255,255,255,.16)!important;}
-  .nav-links .nav-cta{grid-column:1 / -1!important;background:var(--leaf)!important;color:white!important;}
-  .nav-links .nav-phone,.nav-sep{display:none!important;}
-  .page-options{display:none!important;}
-  .filter-bar{position:relative!important;top:auto!important;z-index:50!important;}
-  .mob-bar{display:flex!important;}
-  .social-fab{display:none!important;}
-}
-@media (max-width: 380px){
-  .nav-links .nav-link:not(.nav-phone),.nav-links .nav-cta{font-size:.72rem!important;padding:8px 5px!important;}
-  .nav-brand{font-size:.98rem!important;}
-}
-
-
-/* V64 compact mobile nav: smaller sticky menu with horizontal chips */
-@media(max-width:720px){
-  body{padding-bottom:56px!important;}
-  nav{height:auto!important;min-height:0!important;padding:7px 10px 8px!important;flex-wrap:wrap!important;align-items:center!important;gap:6px!important;}
-  .nav-logo{flex:0 0 100%!important;width:100%!important;min-width:0!important;max-width:100%!important;gap:7px!important;}
-  .nav-logo img{height:30px!important;width:30px!important;padding:2px!important;}
-  .nav-brand{font-size:.98rem!important;line-height:1.02!important;}
-  .nav-brand small{font-size:.49rem!important;letter-spacing:.055em!important;}
-  .nav-links{display:flex!important;width:100%!important;flex:0 0 100%!important;margin-left:0!important;gap:6px!important;align-items:center!important;overflow-x:auto!important;overflow-y:hidden!important;padding:1px 1px 2px!important;-webkit-overflow-scrolling:touch!important;scrollbar-width:none!important;}
-  .nav-links::-webkit-scrollbar{display:none!important;}
-  .nav-links .nav-link:not(.nav-phone),.nav-links .nav-cta{display:inline-flex!important;align-items:center!important;justify-content:center!important;flex:0 0 auto!important;width:auto!important;min-height:30px!important;margin:0!important;padding:6px 10px!important;border-radius:999px!important;background:rgba(255,255,255,.09)!important;color:white!important;font-size:.72rem!important;font-weight:800!important;line-height:1!important;text-align:center!important;white-space:nowrap!important;text-decoration:none!important;border:1px solid rgba(255,255,255,.08)!important;}
-  .nav-links .nav-link.active{background:var(--forest)!important;color:white!important;border-color:rgba(255,255,255,.18)!important;}
-  .nav-links .nav-cta{background:var(--leaf)!important;color:white!important;}
-  .nav-links .nav-phone,.nav-sep{display:none!important;}
-  .page-options{display:none!important;}
-  .filter-bar{position:relative!important;top:auto!important;z-index:50!important;}
-  .mob-bar{display:flex!important;}
-  .social-fab{display:none!important;}
-}
-@media(max-width:380px){.nav-brand{font-size:.92rem!important}.nav-brand small{font-size:.46rem!important}.nav-links .nav-link:not(.nav-phone),.nav-links .nav-cta{font-size:.68rem!important;padding:6px 8px!important;}}
-
-</style>
-</head>
-<body>
-
-<div class="promo-banner">
-  🎉 Seller Paid Closing Costs on Select Properties &mdash; <a onclick="scrollToProps()">View Available Lots</a>
-</div>
-
-<nav>
-  <a class="nav-logo" href="./index.html">
-    <img src="https://pueblodepalmas.com/wp-content/uploads/2025/01/PDP-WP-350-x-350-Logo.png" alt="PDP">
-    <div class="nav-brand">Pueblo de Palmas<small>NMLS #319106 &middot; Loan Origination &amp; Servicing</small></div>
-  </a>
-  <div class="nav-links">
-    <a class="nav-link active" id="nav-home" href="./index.html">Properties</a>
-    <a class="nav-link" href="./how-it-works.html">How It Works</a>
-    <a class="nav-link" href="./contact.html">Contact Us</a>
-    
-    <a class="nav-link" href="./customer_portal.html">Customer Portal</a>
-    <a class="nav-link nav-phone" href="tel:9563833222">☎️ (956) 383-3222</a>
-    <a class="nav-cta" href="https://www.paylease.com/registration/pay_portal/77472037/ACC?vpw=1536&crd=1" target="_blank">💳 Make a Payment</a>
-  </div>
-</nav>
-
-<div id="page-home" class="page active">
-  <div class="hero">
-    <div class="hero-inner">
-      <div class="hero-eyebrow">Rio Grande Valley &middot; Texas</div>
-      <h1>Simple Land Ownership Starts Here</h1>
-      <p>Affordable lots across the RGV with seller-finance options and clear loan disclosures.</p>
-      <div class="hero-btns">
-        <button class="hero-btn hero-btn-primary" onclick="scrollToProps()">View All Properties</button>
-        <a class="hero-btn hero-btn-outline" href="tel:9563833222">Call (956) 383-3222</a>
-      </div>
-      <div class="hero-stats">
-        <div class="hero-stat"><div class="hero-stat-num">12</div><div class="hero-stat-lbl">Subdivisions</div></div>
-        <div class="hero-stat"><div class="hero-stat-num">7</div><div class="hero-stat-lbl">Cities</div></div>
-        <div class="hero-stat"><div class="hero-stat-num" id="hero-avail">200+</div><div class="hero-stat-lbl">Lots Available</div></div>
-        <div class="hero-stat"><div class="hero-stat-num">Seller</div><div class="hero-stat-lbl">Financing</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="filter-bar">
-    <span class="filter-label">Filter:</span>
-    <div class="filter-groups">
-      <button class="chip on" id="filter-all-btn" onclick="setFilter('all',this)">All Properties</button>
-
-      <label class="filter-select-wrap">
-        <span>Filter by City</span>
-        <select class="filter-select" id="city-filter" onchange="setFilterFromSelect(this,'city')">
-          <option value="">All Cities</option>
-          <option value="Donna">Donna</option>
-          <option value="Edinburg">Edinburg</option>
-          <option value="Weslaco">Weslaco</option>
-          <option value="Mercedes">Mercedes</option>
-          <option value="Sullivan City">Sullivan City</option>
-          <option value="Monte Alto">Monte Alto</option>
-          <option value="Rio Grande City">Rio Grande City</option>
-        </select>
-      </label>
-
-      <label class="filter-select-wrap">
-        <span>Filter by Size</span>
-        <select class="filter-select" id="size-filter" onchange="setFilterFromSelect(this,'size')">
-          <option value="">All Sizes</option>
-          <option value="city">City Size</option>
-          <option value="half">&frac12;–2 Acre</option>
-          <option value="midacre">3+ Acres</option>
-          <option value="tenplus">10+ Acre Ranches</option>
-        </select>
-      </label>
-    </div>
-    <span class="filter-count" id="filter-count"></span>
-  </div>
-
-
-  <div class="location-map-section" id="location-map-section">
-    <div class="map-head">
-      <div>
-        <div class="map-title">Browse by Location</div>
-        <div class="map-sub">Tap a subdivision pin or list item to view lot map, pricing, and directions.</div>
-      </div>
-      <button class="map-toggle" id="map-toggle" onclick="togglePropertyMap()">Hide Map View</button>
-    </div>
-    <div class="location-map-shell open" id="location-map-shell">
-      <div id="property-map"></div>
-      <div class="map-list" id="map-list"></div>
-    </div>
-  </div>
-
-  <div class="properties-section" id="props-section">
-    <div class="section-title">Available Subdivisions</div>
-    <div class="section-sub">Click any property to view interactive lot map, pricing &amp; details</div>
-    <div class="prop-grid" id="prop-grid"></div>
-    <div class="no-results" id="no-results" style="display:none">No properties match that filter.</div>
-  </div>
-</div>
-
-<div id="page-detail" class="page">
-  <button class="detail-back" onclick="showPage('home')">&larr; Back to All Properties</button>
-  <div class="detail-layout">
-    <div>
-      <div class="detail-header">
-        <div class="detail-labels" id="d-labels"></div>
-        <h1 class="detail-name" id="d-name"></h1>
-        <div class="detail-loc" id="d-loc">📍 <span></span></div>
-        <div class="detail-price-row">
-          <div class="detail-starting" id="d-price"></div>
-          <div class="detail-lot-count" id="d-lotcount"></div>
-        </div>
-      </div>
-      <div class="plat-section">
-        <div class="plat-section-title">📄 Interactive Plat Map &mdash; Tap Any Highlighted Lot</div>
-        <div class="plat-image-wrap" id="plat-wrap">
-          <img id="d-plat-img" src="" alt="Plat Map">
-          <div class="plat-overlay-toolbar" id="plat-toolbar">
-            <button class="plat-filter on" data-status="all" onclick="setPlatFilter('all',this)">All</button>
-            <button class="plat-filter" data-status="available" onclick="setPlatFilter('available',this)">Available</button>
-            <button class="plat-filter" data-status="pending" onclick="setPlatFilter('pending',this)">Pending</button>
-            <button class="plat-filter" data-status="sold" onclick="setPlatFilter('sold',this)">Sold</button>
-          </div>
-          <svg id="plat-svg" class="plat-svg" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
-          <div class="plat-note" id="plat-note">Tap a highlighted lot for pricing and Call Now</div>
-        </div>
-        <div id="plat-missing" class="plat-missing" style="display:none"><strong>Plat map needed</strong>This subdivision currently has aerial/photo media loaded. Upload the recorded marketing plat to trace exact clickable lots.</div>
-      </div>
-      <div class="lot-section">
-        <div class="plat-section-title">Legend</div>
-        <div class="lot-legend">
-          <div class="lot-legend-item"><div class="legend-swatch legend-avail"></div>Available</div>
-          <div class="lot-legend-item"><div class="legend-swatch legend-sold"></div>Sold</div>
-          <div class="lot-legend-item"><div class="legend-swatch legend-pend"></div>Pending</div><div class="lot-legend-item"><div class="legend-swatch legend-hold"></div>Reserved</div>
-        </div>
-        <div class="lot-grid" id="d-lot-grid"></div>
-      </div>
-      <div id="d-photo-gallery-wrap" class="subdivision-photo-gallery" style="display:none">
-        <div class="plat-section-title" style="margin-bottom:10px">📸 Property Photos</div>
-        <div class="photo-gallery-grid" id="d-photo-gallery"></div>
-      </div>
-      <div id="d-video-wrap" style="display:none">
-        <div class="plat-section-title" style="margin-bottom:10px">🎥 Property Video Tour</div>
-        <div class="video-wrap" id="d-video"></div>
-      </div>
-      <div class="plat-section-title" style="margin-top:24px">❓ Frequently Asked Questions</div>
-      <div class="side-card" style="margin-top:10px"><div class="side-card-body" id="d-faq"></div></div>
-    </div>
-    <div>
-      <div class="side-card">
-        <div class="side-card-head">📊 Inventory Summary</div>
-        <div class="side-card-body" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center">
-          <div><div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--forest)" id="stat-avail">0</div><div style="font-size:.7rem;color:var(--sage);text-transform:uppercase;letter-spacing:.08em">Available</div></div>
-          <div><div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--sold)" id="stat-sold">0</div><div style="font-size:.7rem;color:var(--sage);text-transform:uppercase;letter-spacing:.08em">Sold</div></div>
-          <div><div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--pend)" id="stat-pend">0</div><div style="font-size:.7rem;color:var(--sage);text-transform:uppercase;letter-spacing:.08em">Pending</div></div>
-        </div>
-      </div>
-      <div class="side-card">
-        <div class="side-card-head">🧮 Payment Estimator</div>
-        <div class="side-card-body">
-          <div class="calc-row"><label class="calc-label">Purchase Price</label><input class="calc-input" type="number" id="calc-price" placeholder="e.g. 82495" oninput="calcPayment()"></div>
-          <div class="calc-row"><label class="calc-label">Down Payment (%)</label><input class="calc-input" type="number" id="calc-down" value="10" min="0" max="90" oninput="calcPayment()"></div>
-          <div class="calc-row"><label class="calc-label">Interest Rate (%)</label><input class="calc-input" type="number" id="calc-rate" value="12" min="1" max="25" step="0.5" oninput="calcPayment()"></div>
-          <div class="calc-row"><label class="calc-label">Term (Years)</label><input class="calc-input" type="number" id="calc-term" value="15" min="1" max="30" oninput="calcPayment()"></div>
-          <div class="calc-result"><div class="calc-result-num" id="calc-monthly">&mdash;</div><div class="calc-result-lbl">Estimated Monthly Payment</div></div>
-          <p class="calc-disclaimer">This is an estimate only. Actual terms, rates and payments are confirmed by our office. Call us to discuss your options.</p>
-        </div>
-      </div>
-      <div class="side-card">
-        <div class="side-card-head">✉️ Express Interest</div>
-        <div class="side-card-body contact-form">
-          <input class="calc-input" type="text" id="cf-name" placeholder="Your Name">
-          <input class="calc-input" type="tel" id="cf-phone" placeholder="Phone Number">
-          <input class="calc-input" type="email" id="cf-email" placeholder="Email Address">
-          <select class="contact-select" id="cf-lot"><option value="">— Select a Lot —</option></select>
-          <button class="contact-btn" onclick="submitInquiry()">📨 Send Inquiry</button>
-          <p style="font-size:.7rem;color:var(--sage);margin-top:8px;text-align:center">Or call: <a href="tel:9563833222" style="color:var(--forest);font-weight:700">(956) 383-3222</a></p>
-        </div>
-      </div>
-      <div class="side-card">
-        <div class="side-card-head">📍 Location Map</div>
-        <div class="side-card-body" style="padding:0"><iframe id="d-map" class="map-frame" src="" allowfullscreen loading="lazy"></iframe><a id="d-map-link" class="map-open-link" href="#" target="_blank" rel="noopener">Open in Google Maps →</a></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="overlay" id="overlay" onclick="closePanel()"></div>
-<div class="lot-panel" id="lot-panel">
-  <div class="panel-top">
-    <div>
-      <div class="panel-lot-tag">Lot Number</div>
-      <div class="panel-lot-num" id="p-num">&mdash;</div>
-      <span class="status-pill" id="p-pill">&mdash;</span>
-    </div>
-    <button class="panel-close" onclick="closePanel()">&times;</button>
-  </div>
-  <div class="panel-body">
-    <div class="panel-price" id="p-price">&mdash;</div>
-    <div class="panel-price-note">Purchase Price / Seller-Finance Terms</div>
-    <div class="panel-grid">
-      <div class="panel-card"><div class="panel-card-lbl">Dimensions</div><div class="panel-card-val" id="p-dims">&mdash;</div></div>
-      <div class="panel-card"><div class="panel-card-lbl">Acreage</div><div class="panel-card-val" id="p-acres">&mdash;</div></div>
-      <div class="panel-card"><div class="panel-card-lbl">Subdivision</div><div class="panel-card-val" id="p-subdiv">&mdash;</div></div>
-      <div class="panel-card"><div class="panel-card-lbl">Financing</div><div class="panel-card-val">Seller Carry</div></div>
-    </div>
-    <hr class="panel-hr">
-    <p class="panel-note">Prices are subject to change without notice. Contact our office to confirm current pricing and availability.</p>
-    <div class="panel-actions" id="p-actions"></div>
-  </div>
-  <div class="panel-foot">Pueblo de Palmas, Inc. &middot; NMLS #319106<br>3505 E. FM 2812, Edinburg, TX 78542</div>
-</div>
-
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="footer-brand-name">Pueblo de Palmas<small>Loan Origination &amp; Servicing &middot; NMLS #319106</small></div>
-      <p>Helping buyers and sellers complete owner-financed land transactions with clear disclosures and servicing support.</p>
-      <div class="social-links">
-        <a class="social-link" href="https://www.facebook.com/PuebloDePalmas" target="_blank">Facebook</a>
-        <a class="social-link" href="https://www.instagram.com/pueblodepalmas" target="_blank">Instagram</a>
-        <a class="social-link" href="https://www.youtube.com/@PueblodePalmas" target="_blank">YouTube</a>
-      </div>
-    </div>
-    <div class="footer-col">
-      <h4>Office</h4>
-      <p>3505 E. FM 2812</p><p>Edinburg, TX 78542</p>
-      <a href="tel:9563833222">(956) 383-3222</a>
-      <a href="mailto:CustomerService@PueblodePalmas.com">CustomerService@PueblodePalmas.com</a>
-      <p style="margin-top:6px">Mon&ndash;Fri 8:30 AM &ndash; 5:30 PM</p>
-    </div>
-    <div class="footer-col">
-      <h4>Mailing Address</h4>
-      <p>P.O. Box 1000</p><p>Mission, TX 78573</p>
-      <h4 style="margin-top:16px">Links</h4>
-      <a href="https://www.paylease.com/registration/pay_portal/77472037/ACC?vpw=1536&crd=1" target="_blank">Make a Payment</a>
-      <a href="https://pueblodepalmas.com/complaint-recovery-fund-notice/" target="_blank">Consumer Complaint Notice</a>
-      <a href="https://www.nmlsconsumeraccess.org/EntityDetails.aspx/COMPANY/319106" target="_blank">NMLS Consumer Access</a>
-    </div>
-    <div class="footer-col">
-      <h4>Disclaimer</h4>
-      <p style="font-size:.75rem;color:rgba(255,255,255,.5);line-height:1.6">Prices and availability change daily without notice. Prices shown are for information purposes only. All dimensions approximate. Buyers should obtain a survey and confirm all details with proper authorities.</p>
-      <img src="https://pueblodepalmas.com/wp-content/uploads/2025/02/equal-housing-logowhite-250.png" alt="Equal Housing" style="margin-top:14px;height:30px;opacity:.5">
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>&copy; 2026 Pueblo de Palmas Inc. &middot; NMLS #319106</span>
-    <span>Prices subject to change without notice</span>
-  </div>
-</footer>
-
-<div class="social-fab" aria-label="Social media links">
-  <a class="social-fb" href="https://www.facebook.com/PuebloDePalmas" target="_blank" rel="noopener" title="Facebook" aria-label="Facebook">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8.5V6.6c0-.8.2-1.2 1.3-1.2H17V2.2C16.2 2.1 15.4 2 14.6 2c-2.5 0-4.2 1.5-4.2 4.3v2.2H7.6V12h2.8v10H14V12h2.8l.4-3.5H14z"/></svg>
-  </a>
-  <a class="social-ig" href="https://www.instagram.com/pueblodepalmas" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9zM12 7.3a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4zm0 2a2.7 2.7 0 1 0 0 5.4 2.7 2.7 0 0 0 0-5.4zm5.05-2.05a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg>
-  </a>
-  <a class="social-yt" href="https://www.youtube.com/@PueblodePalmas" target="_blank" rel="noopener" title="YouTube" aria-label="YouTube">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2s-.2-1.5-.8-2.1c-.8-.8-1.6-.8-2-.9C16 4 12 4 12 4s-4 0-6.8.2c-.4.1-1.3.1-2 .9-.6.6-.8 2.1-.8 2.1S2.2 9 2.2 10.8v1.7c0 1.8.2 3.6.2 3.6s.2 1.5.8 2.1c.8.8 1.8.8 2.3.9 1.7.2 6.5.2 6.5.2s4 0 6.8-.2c.4-.1 1.3-.1 2-.9.6-.6.8-2.1.8-2.1s.2-1.8.2-3.6v-1.7c0-1.8-.2-3.6-.2-3.6zM9.9 14.9V8.7l5.6 3.1-5.6 3.1z"/></svg>
-  </a>
-</div>
-<div class="mob-bar">
-  <a class="mob-btn mob-call" href="tel:9563833222">📞 Call</a>
-  <a class="mob-btn mob-forms" href="./customer_portal.html">🔐 Portal</a>
-  <a class="mob-btn mob-pay" href="https://www.paylease.com/registration/pay_portal/77472037/ACC?vpw=1536&crd=1" target="_blank">💳 Pay</a>
-</div>
-<script>
 const SUBDIVISIONS=[{id:"phase31",name:"Pueblo de Palmas Phase 31",city:"Donna",county:"Hidalgo",size:"Half Acre",sizeKey:"half",startPrice:109950,image:"assets/layouts/pueblo-de-palmas-phase-31.jpg",cardImage:"https://pueblodepalmas.com/wp-content/uploads/2026/04/V2.jpg",mapsEmbed:"https://maps.google.com/maps?q=Donna+TX&output=embed",lat:26.256075,lng:-98.058739,mapUrl:"https://maps.app.goo.gl/sEsHmMpZt1MBWYVb8",videoId:"",tags:["hot","new","promo"],address:"Corner of Wisconsin & Dillon Rd, Donna, TX",lots:[{id:"1",price:109950,acres:".50",dims:"128.25'x171'"},{id:"2",price:109950,acres:".50",dims:"128.25'x171'"},{id:"3",price:109950,acres:".50",dims:"128.25'x171'"},{id:"4",price:109950,acres:".50",dims:"128.25'x171'"},{id:"5",price:109950,acres:".50",dims:"128.25'x171'"},{id:"6",price:109950,acres:".50",dims:"127.50'x171'"},{id:"7",price:109950,acres:".50",dims:"127.50'x171'"},{id:"8",price:109950,acres:".50",dims:"127.50'x171'"},{id:"9",price:109950,acres:".50",dims:"127.50'x171'"},{id:"10",price:109950,acres:".50",dims:"127.50'x171'"},{id:"11",price:109950,acres:".50",dims:"127.50'x171'"},{id:"12",price:109950,acres:".50",dims:"127.50'x171'"},{id:"13",price:109950,acres:".50",dims:"127.50'x171'"},{id:"14",price:109950,acres:".50",dims:"127.50'x171'"},{id:"15",price:109950,acres:".50",dims:"127.50'x171'"},{id:"16",price:109950,acres:".50",dims:"128.25'x171'"},{id:"17",price:109950,acres:".50",dims:"128.25'x171'"},{id:"18",price:109950,acres:".50",dims:"128.25'x171'",status:"sold"},{id:"19",price:117495,acres:".50",dims:"122'x175'"},{id:"20",price:119950,acres:".50",dims:"122'x175'"},{id:"21",price:114950,acres:".50",dims:"100'x218'"},{id:"22",price:114950,acres:".50",dims:"100'x218'"},{id:"23",price:114950,acres:".50",dims:"100'x218'"},{id:"24",price:114950,acres:".50",dims:"100'x218'"},{id:"25",price:114950,acres:".50",dims:"100'x218'"},{id:"26",price:114950,acres:".50",dims:"100'x218'"},{id:"27",price:114950,acres:".50",dims:"100'x218'"},{id:"28",price:114950,acres:".50",dims:"100'x218'"},{id:"29",price:114950,acres:".50",dims:"100'x218'"},{id:"30",price:114950,acres:".50",dims:"100'x218'"}].map(l=>({...l,status:l.status||"available"})),faq:[{q:"Are Mobile Homes Allowed?",a:"Yes, with developer approval. Check with Hidalgo County Precinct. Only 1 single family home per lot."},{q:"Setback Requirements?",a:"Front: 25 ft | Rear: 15 ft | Side: 6 ft | Corner Side: 10 ft | Corner: 20 ft. Easements take precedence."},{q:"Can Lots 19-30 Be Commercial?",a:"Yes, Lots 19-30 may be used for commercial and/or residential use with proper Hidalgo County approvals. All other lots are residential only."},{q:"Can I Park An 18-Wheeler?",a:"No. Tractor-trailers are not allowed in the subdivision except for delivery or pickup of household items."}]},{id:"lasgaviotas",name:"Las Gaviotas Subdivision",city:"Donna",county:"Hidalgo",size:"Half Acre",sizeKey:"half",startPrice:82495,image:"https://pueblodepalmas.com/wp-content/uploads/2025/10/Las-Gaviotas-Subdivision-Marketing-Plat-scaled.jpg",cardImage:"assets/photos/lasgaviotas/las-gaviotas-aerial-1.jpg",photoGallery:["assets/photos/lasgaviotas/las-gaviotas-aerial-1.jpg","assets/photos/lasgaviotas/las-gaviotas-aerial-2.jpg","assets/photos/lasgaviotas/las-gaviotas-aerial-3.jpg"],mapsEmbed:"https://maps.google.com/maps?q=Donna+TX&output=embed",lat:26.213545,lng:-98.079976,mapUrl:"https://maps.app.goo.gl/gPy8TG6eDRsrMFjJ9",videoId:"pX38PXeFQUc",tags:["hot","new","promo"],address:"N Val Verde Rd & El Dora Rd, Donna, TX",lots:[{id:"1",price:99995,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"2",price:84995,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"3",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"4",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"5",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"6",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"7",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"8",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"9",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"10",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"11",price:82495,acres:".50",dims:"1/2 Acre",status:"available"},{id:"12",price:82495,acres:".50",dims:"1/2 Acre",status:"available"},{id:"13",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"14",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"15",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"16",price:84995,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"17",price:84995,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"18",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"19",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"20",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"21",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"22",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"23",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"24",price:82495,acres:".50",dims:"1/2 Acre",status:"available"},{id:"25",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"26",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"27",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"28",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"29",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"30",price:84995,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"31",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"32",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"33",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"34",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"35",price:82495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"36",price:89995,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"37",price:130000,acres:".50",dims:"Corner Lot",status:"sold"},{id:"38",price:130000,acres:".50",dims:"Corner Lot",status:"sold"},{id:"39",price:130000,acres:".50",dims:"Corner Lot",status:"sold"},{id:"40",price:130000,acres:".50",dims:"Corner/Commercial",status:"sold"},{id:"41",price:84995,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"42",price:84995,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"43",price:84995,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"44",price:84995,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"45",price:84995,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"46",price:84995,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"47",price:84995,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"48",price:84995,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"49",price:84995,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"50",price:84995,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"51",price:84995,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"52",price:84995,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"53",price:135000,acres:".50",dims:"Corner/Commercial",status:"sold"},{id:"54",price:140000,acres:".50",dims:"Corner/Commercial",status:"sold"}],faq:[{q:"Are Mobile Homes Allowed?",a:"Yes, with developer and Hidalgo County Precinct approval. Only 1 single family home per lot."},{q:"Animals Allowed?",a:"No livestock. Small fowl (chickens, guinea hens) allowed if fully penned. House pets allowed but leashed when outside."},{q:"Setback Requirements?",a:"Front (Eldora Rd): 20 ft | Front (Val Verde Rd): 50 ft | Front: 25 ft | Rear: 15 ft | Side: 6 ft | Corner Side: 10 ft."},{q:"Which Lots Are Commercial?",a:"Lots 1, 37-40, 53, and 54 (fronting Eldora Rd) may be commercial or residential. All others are residential only."}]},{id:"ph27",name:"Pueblo de Palmas PH 27",city:"Edinburg",county:"Hidalgo",size:"Half Acre",sizeKey:"half",startPrice:79995,image:"https://pueblodepalmas.com/wp-content/uploads/2025/02/P27-Marketing-Map-scaled.jpg",mapsEmbed:"https://maps.google.com/maps?q=Edinburg+TX&output=embed",lat:26.345068,lng:-98.112233,mapUrl:"https://maps.app.goo.gl/1p6ADENLqR7yxwfE7",videoId:"AOKbuG1jNVE",tags:["hot","new","promo","low"],address:"E Mile 19 N Rd & N Kenyon Rd, Edinburg, TX",lots:[{id:"1",price:99995,acres:".51",dims:"Irregular Corner",status:"sold"},{id:"2",price:92495,acres:".50",dims:"96'x228'",status:"available"},{id:"3",price:79995,acres:".50",dims:"75'x290'",status:"sold"},{id:"4",price:79995,acres:".50",dims:"75'x290'",status:"sold"},{id:"5",price:79995,acres:".50",dims:"75'x290'",status:"sold"},{id:"6",price:79995,acres:".50",dims:"75'x290'",status:"sold"},{id:"7",price:79995,acres:".50",dims:"75'x290'",status:"sold"},{id:"8",price:79995,acres:".50",dims:"75'x290'",status:"sold"},{id:"9",price:79995,acres:".50",dims:"75'x290'",status:"sold"},{id:"10",price:79995,acres:".50",dims:"75'x290'",status:"sold"},{id:"11",price:79995,acres:".50",dims:"75'x290'",status:"sold"},{id:"12",price:79995,acres:".50",dims:"75'x290'",status:"sold"},{id:"13",price:79995,acres:".50",dims:"75'x290'",status:"sold"},{id:"14",price:79995,acres:".50",dims:"75'x290'",status:"sold"},{id:"15",price:79995,acres:".50",dims:"75'x290'",status:"sold"},{id:"16",price:79995,acres:".50",dims:"75'x290'",status:"sold"},{id:"17",price:79995,acres:".50",dims:"75'x290'",status:"sold"}],faq:[{q:"Are Mobile Homes Allowed?",a:"Yes, with developer and Hidalgo County Precinct approval. Only 1 single family home per lot."},{q:"Animals Allowed?",a:"Horses, cattle, pigs not prohibited. Poultry, goats, sheep, household pets allowed with suitable fence. No livestock tethered in front yard."},{q:"Setback Requirements?",a:"Lots 2 & 3 (Kenyon Rd): 40 ft front | Lots 1, 4-17 (Mile 19): 60 ft front | Rear: 15 ft | Side: 6 ft | Corner Side: 45 ft."},{q:"Is Lot 1 Commercial?",a:"Yes, Lot 1 may be commercial or residential with Hidalgo County approvals. Lots 2-17 are residential only."}]},{id:"uri4",name:"URI Estates No. 4 Subdivision",city:"Donna",county:"Hidalgo",size:"Half Acre",sizeKey:"half",startPrice:82495,image:"assets/layouts/uri-estates-no-4.jpg",cardImage:"https://pueblodepalmas.com/wp-content/uploads/2026/04/V4.png",mapsEmbed:"https://maps.google.com/maps?q=Donna+TX&output=embed",lat:26.209926,lng:-98.064342,mapUrl:"https://maps.app.goo.gl/QefQNCjqV1mMw18p8",videoId:"",tags:["hot","new","promo","soon"],address:"N Val Verde Rd & El Dora Rd, Donna, TX",lots:[{id:"1",price:69995,acres:".62",dims:"Corner Lot",status:"pending"},{id:"2",price:92495,acres:".57",dims:"Irregular"},{id:"3",price:92495,acres:".50",dims:"87'x250'"},{id:"4",price:92495,acres:".50",dims:"87'x250'"},{id:"5",price:84950,acres:".50",dims:"1/2 Acre"},{id:"6",price:82495,acres:".50",dims:"1/2 Acre"},{id:"7",price:82495,acres:".54",dims:"1/2+ Acre"},{id:"8",price:82495,acres:".50",dims:"1/2 Acre"},{id:"9",price:82495,acres:".50",dims:"1/2 Acre"},{id:"10",price:82950,acres:".51",dims:"76'x293'"},{id:"11",price:82495,acres:".51",dims:"76'x293'"},{id:"12",price:82495,acres:".51",dims:"76'x293'"},{id:"13",price:82495,acres:".51",dims:"76'x293'"},{id:"14",price:82495,acres:".51",dims:"76'x293'"},{id:"15",price:82495,acres:".50",dims:"1/2 Acre"},{id:"16",price:82495,acres:".50",dims:"1/2 Acre"},{id:"17",price:82495,acres:".51",dims:"76'x293'"},{id:"18",price:82495,acres:".51",dims:"76'x293'"},{id:"19",price:82495,acres:".51",dims:"76'x293'"},{id:"20",price:82495,acres:".51",dims:"76'x293'"},{id:"21",price:82495,acres:".51",dims:"1/2+ Acre"},{id:"22",price:84995,acres:".56",dims:"Irregular"},{id:"23",price:99995,acres:".84",dims:"Large Corner"},{id:"24",price:82495,acres:".51",dims:"1/2+ Acre"},{id:"25",price:82495,acres:".51",dims:"1/2+ Acre"},{id:"26",price:82495,acres:".51",dims:"76'x293'"},{id:"27",price:82495,acres:".51",dims:"76'x293'"},{id:"28",price:82495,acres:".51",dims:"76'x293'"},{id:"29",price:82495,acres:".50",dims:"1/2 Acre"},{id:"30",price:82495,acres:".50",dims:"1/2 Acre"},{id:"31",price:82495,acres:".51",dims:"76'x293'"},{id:"32",price:82495,acres:".51",dims:"76'x293'"},{id:"33",price:94950,acres:".55",dims:"Irregular"},{id:"34",price:94950,acres:".55",dims:"97'x246'"},{id:"35",price:94950,acres:".55",dims:"97'x246'"}].map(l=>({...l,status:l.status||"available"})),faq:[{q:"Are Mobile Homes Allowed?",a:"Yes, with developer and Hidalgo County Precinct approval. Only 1 single family home per lot."},{q:"Setback Requirements?",a:"Front: 25 ft | Rear: 15 ft or easement | Side: 6 ft or easement."},{q:"Allowed Uses?",a:"All lots are restricted to permanent single-family residential use only, with necessary Hidalgo County Planning Dept approvals."}]},{id:"riorico2",name:"Rio Rico Ranchettes No. 2",city:"Mercedes",county:"Hidalgo",size:"Half Acre",sizeKey:"half",startPrice:62495,image:"https://pueblodepalmas.com/wp-content/uploads/2024/07/RIO_RICO-II-New-Map-min-scaled.jpg",mapsEmbed:"https://maps.google.com/maps?q=Mercedes+TX&output=embed",lat:26.108871,lng:-97.887556,mapUrl:"https://maps.app.goo.gl/Wo6idNupBmR81j2T6",videoId:"",tags:["promo","low"],address:"Mercedes, Hidalgo County, TX",lots:[{id:"1",price:62495,acres:".50",dims:"1/2 Acre",status:"available"},{id:"2",price:62495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"3",price:62495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"4",price:62495,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"5",price:62495,acres:".50",dims:"1/2 Acre",status:"available"}],faq:[{q:"Are Mobile Homes Allowed?",a:"Yes, with developer approval. Contact our office for details."},{q:"Current Availability",a:"Call (956) 383-3222 for current lot availability — this subdivision has low inventory."}]},{id:"milanos1",name:"Milanos Estates PH I",city:"Weslaco",county:"Hidalgo",size:"City Size",sizeKey:"city",startPrice:44950,image:"https://pueblodepalmas.com/wp-content/uploads/2024/08/MILANOS-PHASE-1-min-scaled.webp",mapsEmbed:"https://maps.google.com/maps?q=Weslaco+TX&output=embed",lat:26.131206,lng:-98.013279,mapUrl:"https://maps.app.goo.gl/GdnyEyqkPngdLPyT7",videoId:"",tags:["promo","low"],address:"S. Milanos Rd, Weslaco, TX",lots:[{id:"4",price:67500,acres:".24",dims:"70'x150'",status:"available"},{id:"6",price:67500,acres:".24",dims:"10,500 sf",status:"available"},{id:"11",price:169995,acres:".40",dims:"Commercial",status:"available"},{id:"16",price:44950,acres:".15",dims:"60'x110'",status:"available"},{id:"30",price:47950,acres:".19",dims:"City Size",status:"available"},{id:"31",price:46950,acres:".19",dims:"City Size",status:"available"},{id:"36",price:44950,acres:".15",dims:"60'x110'",status:"available"},{id:"38",price:47950,acres:".19",dims:"8,094 sf",status:"available"},{id:"40",price:44950,acres:".15",dims:"60'x110'",status:"available"},{id:"42",price:129950,acres:".15",dims:"60'x110'",status:"available"},{id:"44",price:44950,acres:".15",dims:"6,600 sf",status:"available"},{id:"58",price:44950,acres:".14",dims:"6,000 sf",status:"available"},{id:"60",price:82500,acres:".15",dims:"55'x110'",status:"available"},{id:"62",price:129950,acres:".15",dims:"Home Incl.",status:"available"},{id:"73",price:129950,acres:".16",dims:"63'x110'",status:"available"}],faq:[{q:"Are Mobile Homes Allowed?",a:"Yes, with developer and Hidalgo County Precinct approval. Only 1 single family home per lot."},{q:"Setback Requirements?",a:"Front: 20 ft | Rear: 10 ft | Side: 6 ft | Corner Side: 10 ft. Easements take precedence."},{q:"Which Lots Are Commercial?",a:"Lots 1 and 40 may be commercial or residential. Lots 2-39 are residential only."}]},{id:"milanos2",name:"Milanos Estates PH II",city:"Weslaco",county:"Hidalgo",size:"City Size",sizeKey:"city",startPrice:50950,image:"https://pueblodepalmas.com/wp-content/uploads/2024/08/MILANOS-PHASE-2-Map-test-min-scaled.webp",cardImage:"assets/milanos-phase-2-drone.jpg",mapsEmbed:"https://maps.google.com/maps?q=Weslaco+TX&output=embed",lat:26.134928,lng:-98.013327,mapUrl:"https://maps.app.goo.gl/Ld4Lput6PgZGwnTs8",videoId:"",tags:["promo","low"],address:"S. Milanos Rd, Weslaco, TX",lots:[{id:"1",price:50950,acres:".15",dims:"City Size",status:"available"},{id:"2",price:50950,acres:".15",dims:"City Size",status:"sold"},{id:"3",price:50950,acres:".15",dims:"City Size",status:"available"},{id:"4",price:50950,acres:".15",dims:"City Size",status:"available"},{id:"5",price:50950,acres:".15",dims:"City Size",status:"sold"}],faq:[{q:"Are Mobile Homes Allowed?",a:"Yes, with developer approval."},{q:"Current Availability",a:"Call (956) 383-3222 for current lot availability and pricing."}]},{id:"milanos3",name:"Milanos Estates Phase III",city:"Weslaco",county:"Hidalgo",size:"City Size",sizeKey:"city",startPrice:51950,image:"assets/layouts/milanos-estates-phase-iii-plat.png",cardImage:"assets/layouts/milanos-estates-phase-iii-plat.png",mapsEmbed:"https://maps.google.com/maps?q=Weslaco+TX&output=embed",lat:26.134011,lng:-98.010058,mapUrl:"https://maps.app.goo.gl/HmSrMaPofzbPmLGB8",videoId:"",tags:["promo","low"],address:"Weslaco, Hidalgo County, TX",lots:[{id:"211",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"212",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"213",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"214",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"215",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"216",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"217",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"218",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"219",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"220",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"221",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"222",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"223",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"224",price:51950,acres:".15",dims:"City Size",status:"available",status:"hold"},{id:"225",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"226",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"227",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"228",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"229",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"230",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"231",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"261",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"262",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"263",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"264",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"265",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"266",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"267",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"268",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"269",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"270",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"271",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"272",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"273",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"274",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"275",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"276",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"277",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"278",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"279",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"280",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"303",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"304",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"305",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"306",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"307",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"308",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"309",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"310",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"311",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"},{id:"312",price:51950,acres:".15",dims:"City Size",status:"available",status:"sold"}],faq:[{q:"Are Mobile Homes Allowed?",a:"Yes, with developer approval."},{q:"Call For Info",a:"Call (956) 383-3222 for full lot details."}]},{id:"milanos4",name:"Milanos Estates Phase IV",city:"Weslaco",county:"Hidalgo",size:"City Size",sizeKey:"city",startPrice:51950,image:"assets/layouts/milanos-estates-phase-4.png",cardImage:"assets/photos/milanos4/milanos-phase-iv-aerial-1.jpg",photoGallery:["assets/photos/milanos4/milanos-phase-iv-aerial-1.jpg","assets/photos/milanos4/milanos-phase-iv-aerial-2.jpg","assets/photos/milanos4/milanos-phase-iv-aerial-3.jpg"],mapsEmbed:"https://maps.google.com/maps?q=Weslaco+TX&output=embed",lat:26.131524,lng:-98.014975,mapUrl:"https://maps.app.goo.gl/xJC2hyaQjkBNCB2T9",videoId:"",tags:["hot","low","new"],address:"Weslaco, Hidalgo County, TX",lots:[{id:"313",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"314",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"315",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"316",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"317",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"318",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"319",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"320",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"321",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"322",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"332",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"333",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"334",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"335",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"336",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"337",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"338",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"339",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"340",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"341",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"351",price:51950,acres:".15",dims:"City Size",status:"available"},{id:"352",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"353",price:51950,acres:".15",dims:"City Size",status:"available"},{id:"354",price:51950,acres:".15",dims:"City Size",status:"available"},{id:"355",price:51950,acres:".15",dims:"City Size",status:"available"},{id:"356",price:51950,acres:".15",dims:"City Size",status:"available"},{id:"357",price:51950,acres:".15",dims:"City Size",status:"available"},{id:"358",price:51950,acres:".15",dims:"City Size",status:"available"},{id:"359",price:51950,acres:".15",dims:"City Size",status:"available"},{id:"371",price:51950,acres:".15",dims:"City Size",status:"available"},{id:"372",price:51950,acres:".15",dims:"City Size",status:"available"},{id:"373",price:51950,acres:".15",dims:"City Size",status:"available"},{id:"374",price:51950,acres:".15",dims:"City Size",status:"available"},{id:"375",price:51950,acres:".15",dims:"City Size",status:"available"},{id:"376",price:51950,acres:".15",dims:"City Size",status:"available"},{id:"377",price:51950,acres:".15",dims:"City Size",status:"available"},{id:"378",price:51950,acres:".15",dims:"City Size",status:"available"},{id:"379",price:51950,acres:".15",dims:"City Size",status:"available"},{id:"389",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"390",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"391",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"392",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"393",price:51950,acres:".15",dims:"City Size",status:"pending"},{id:"394",price:51950,acres:".15",dims:"City Size",status:"pending"}],faq:[{q:"Are Mobile Homes Allowed?",a:"Yes, with developer approval."},{q:"Call For Info",a:"Call (956) 383-3222 for full lot details."}]},{id:"grapefruit",name:"Grapefruit Acres 1 & 2",city:"Monte Alto",county:"Hidalgo",size:"Half & 1 Acre",sizeKey:"acre",startPrice:64995,image:"https://pueblodepalmas.com/wp-content/uploads/2024/08/Grapefruit-Acres-Map_rev2.webp",mapsEmbed:"https://maps.google.com/maps?q=Monte+Alto+TX&output=embed",lat:26.385318,lng:-97.99715,mapUrl:"https://maps.app.goo.gl/P5DvQXvbwCy9YyHcA",videoId:"",tags:["promo","low"],address:"Monte Alto, Hidalgo County, TX",lots:[{id:"1",price:64995,acres:".50",dims:"1/2 Acre",status:"available"},{id:"2",price:64995,acres:".50",dims:"1/2 Acre",status:"sold"},{id:"3",price:79995,acres:"1.0",dims:"1 Acre",status:"available"},{id:"4",price:79995,acres:"1.0",dims:"1 Acre",status:"available"},{id:"5",price:64995,acres:".50",dims:"1/2 Acre",status:"sold"}],faq:[{q:"Are Mobile Homes Allowed?",a:"Yes, with developer approval."},{q:"Call For Info",a:"Call (956) 383-3222 for current availability."}]},{id:"elpinto3",name:"El Pinto Estates PH III",city:"Sullivan City",county:"Hidalgo",size:"1 Acre",sizeKey:"acre",startPrice:79995,image:"https://pueblodepalmas.com/wp-content/uploads/2024/08/El-Pinto-P3-New.webp",mapsEmbed:"https://maps.google.com/maps?q=Sullivan+City+TX&output=embed",lat:26.307898,lng:-98.544017,mapUrl:"https://maps.app.goo.gl/y6bMgKtccdQvLA727",videoId:"",tags:["promo","low"],address:"Sullivan City, Hidalgo County, TX",lots:[{id:"1",price:79995,acres:"1.0",dims:"1 Acre",status:"available"},{id:"2",price:79995,acres:"1.0",dims:"1 Acre",status:"available"},{id:"3",price:79995,acres:"1.0",dims:"1 Acre",status:"sold"},{id:"4",price:79995,acres:"1.0",dims:"1 Acre",status:"available"},{id:"5",price:79995,acres:"1.0",dims:"1 Acre",status:"sold"},{id:"6",price:79995,acres:"1.0",dims:"1 Acre",status:"available"}],faq:[{q:"Are Mobile Homes Allowed?",a:"Yes, with developer approval."},{q:"Call For Info",a:"Call (956) 383-3222 for current availability."}]},{id:"lamulada2",name:"La Mulada Phase 2",unitLabel:"Tract",unitLabelPlural:"Tracts",city:"Rio Grande City",county:"Starr",size:"10 Acre Tracts",sizeKey:"tenplus",startPrice:122500,image:"assets/layouts/la-mulada-phase-2-layout.jpg",cardImage:"https://pueblodepalmas.com/wp-content/uploads/2025/05/1000009942.jpg",mapsEmbed:"https://maps.google.com/maps?q=Rio+Grande+City+TX&output=embed",lat:26.470214,lng:-98.866694,mapUrl:"https://maps.app.goo.gl/o51TFtHdH7zbV7Mz5",videoId:"",tags:["hot","new","low"],address:"Rio Grande City, Starr County, TX",lots:[{id:"1",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"2",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"3",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"4",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"5",price:135000,acres:"10",dims:"10 Acres",status:"sold"},{id:"6",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"7",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"8",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"9",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"10",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"11",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"12",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"13",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"14",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"15",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"16",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"17",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"18",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"19",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"20",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"21",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"22",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"23",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"24",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"25",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"26",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"27",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"28",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"29",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"30",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"31",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"32",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"33",price:122500,acres:"10",dims:"10 Acres",status:"sold"},{id:"34",price:122500,acres:"10",dims:"10 Acres",status:"sold"}],faq:[{q:"Are Mobile Homes Allowed?",a:"Yes, with developer approval."},{q:"Call For Info",a:"Call (956) 383-3222 for current availability on 10-acre ranch tracts."}]}];
 
-let currentFilter="all",currentCityFilter="",currentSizeFilter="",currentSubdiv=null,activeLotId=null;
+let currentFilter="combined",currentCityFilter="",currentSizeFilter="",currentStatusFilter="available",currentSearchFilter="",currentSubdiv=null,activeLotId=null;
 const fmtP=n=>"$"+n.toLocaleString();
-function tagHTML(tags){const m={hot:'<span class="badge badge-hot">🔥 Hot</span>',new:'<span class="badge badge-new">New</span>',low:'<span class="badge badge-low">Low Inventory</span>',promo:'<span class="badge badge-promo">Seller Paid Closing</span>',soon:'<span class="badge badge-soon">Coming Soon</span>'};return(tags||[]).map(t=>m[t]||"").join("")}
+function tagHTML(tags){const m={hot:'<span class="badge badge-hot">🔥 Hot</span>',new:'<span class="badge badge-new">New</span>',low:'<span class="badge badge-low">Low Inventory</span>',soldout:'<span class="badge badge-soldout">Sold Out</span>',promo:'<span class="badge badge-promo">Seller Paid Closing</span>',soon:'<span class="badge badge-soon">Coming Soon</span>'};return(tags||[]).map(t=>m[t]||"").join("")}
 function countStatus(lots){const c={available:0,sold:0,pending:0};lots.forEach(l=>c[l.status]=(c[l.status]||0)+1);return c}
+function subdivisionStatus(s){
+  const cnt=countStatus(s.lots||[]);
+  if((s.tags||[]).includes("soon")) return "coming";
+  if(cnt.available>0) return "available";
+  return "soldout";
+}
+function statusRank(s){const st=subdivisionStatus(s);return st==="available"?0:st==="coming"?1:2}
+function statusLabel(s){const st=subdivisionStatus(s);return st==="available"?"Available":st==="coming"?"Coming Soon":"Sold Out"}
+function tagsForSubdivision(s){
+  const st=subdivisionStatus(s);
+  let tags=(s.tags||[]).filter(t=>!(st==="soldout" && t==="low"));
+  if(st==="soldout"&&!tags.includes("soldout")) tags=[...tags,"soldout"];
+  return tags;
+}
 
 
 /* V23: Plat-only clickable overlays. Do not place overlays on aerial/drone photos. */
@@ -821,13 +89,10 @@ function phase31Shape(lot){
 
 function lasGaviotasShape(lot){
   const n=String(lot.id);
-  // V32: Las Gaviotas polygon data imported from Chris's tracing-editor JSON.
-  // The difficult/irregular lots use the user's traced points; the remaining regular lots were filled by interpolation.
-  // Coordinate base: tracing editor display space approx. 1500 x 1000, normalized to this SVG's 0–100 viewBox.
-  const LAS_GAVIOTAS_POLYGONS={"1":[[81.4867,91.83],[81.6867,98.23],[73.22,98.13],[71.8867,96.43],[71.82,91.93]],"2":[[71.7533,91.63],[81.4867,91.63],[81.62,85.63],[70.5533,85.63]],"3":[[69.7533,80.43],[81.5533,80.43],[81.62,85.43],[70.4867,85.43],[69.6867,82.43]],"4":[[69.7533,75.03],[81.5533,75.13],[81.5533,80.23],[69.7533,80.23]],"5":[[69.7533,70.03],[81.4867,69.83],[81.62,75.03],[69.82,74.83]],"6":[[69.7533,69.83],[81.4867,69.63],[81.4867,64.43],[70.2867,64.43],[70.6867,65.43],[70.9533,66.83],[70.62,68.03],[70.2867,69.23]],"7":[[70.1533,64.23],[69.7533,64.13],[69.7533,59.23],[81.4867,59.23],[81.5533,64.33]],"8":[[69.7533,54.03],[81.4867,54.03],[81.4867,59.23],[69.7533,59.23]],"9":[[69.7533,48.73],[81.4867,48.73],[81.4867,54.03],[69.7533,54.03]],"10":[[69.7533,43.43],[81.42,43.43],[81.4867,48.73],[69.7533,48.73]],"11":[[69.7533,40.33],[69.7533,43.43],[81.42,43.43],[81.4867,36.53]],"12":[[70.82,37.43],[70.6867,38.33],[70.2867,39.03],[69.8867,39.63],[69.7533,39.93],[69.7533,40.23],[81.4867,36.43],[81.42,27.63]],"13":[[70.1533,34.43],[70.42,35.23],[70.6867,35.93],[70.7533,36.83],[70.6867,37.43],[81.5533,27.43],[81.42,20.33]],"14":[[68.02,33.93],[68.5533,33.63],[69.0867,33.73],[69.62,34.13],[70.02,34.43],[81.4867,20.03],[81.3533,19.63],[75.8867,19.63]],"15":[[66.1533,35.23],[66.6867,35.43],[67.02,34.73],[67.3533,34.23],[67.82,33.83],[75.7533,19.63],[68.6867,19.83]],"16":[[66.1533,35.33],[63.42,35.23],[63.4867,19.63],[68.62,19.63]],"17":[[59.5533,19.83],[63.4867,19.63],[63.42,35.23],[59.5533,35.23]],"18":[[55.62,19.83],[59.5533,19.83],[59.5533,35.23],[55.62,35.23]],"19":[[51.6867,19.83],[55.62,19.83],[55.62,35.23],[51.6867,35.23]],"20":[[47.82,19.83],[51.6867,19.83],[51.6867,35.23],[47.82,35.23]],"21":[[43.4867,33.63],[44.02,33.43],[44.62,33.33],[45.22,33.73],[45.8867,34.23],[46.2867,35.03],[46.4867,35.43],[47.82,35.23],[47.82,19.83],[43.7533,19.83]],"22":[[38.9533,39.83],[42.02,37.93],[41.9533,37.53],[41.9533,36.83],[41.8867,35.83],[42.0867,35.03],[42.2867,34.53],[42.6867,34.03],[43.22,33.73],[43.42,33.53],[43.6867,19.73],[40.9533,19.83]],"23":[[37.62,55.73],[40.6867,55.73],[43.3533,40.43],[42.82,39.73],[42.2867,39.03],[42.0867,38.13],[39.02,40.03]],"24":[[45.62,55.93],[46.42,38.73],[46.02,39.93],[45.22,40.43],[44.1533,40.83],[43.4867,40.43],[40.82,55.73]],"25":[[45.62,38.73],[49.4867,38.73],[49.4867,55.93],[45.62,55.93]],"26":[[49.4867,38.73],[53.3533,38.73],[53.3533,55.93],[49.4867,55.93]],"27":[[53.3533,38.73],[57.22,38.73],[57.22,55.93],[53.3533,55.93]],"28":[[57.22,38.73],[61.0867,38.73],[61.0867,55.93],[57.22,55.93]],"29":[[61.0867,38.73],[63.8867,38.63],[63.8867,56.03],[61.0867,55.93]],"30":[[63.8867,56.03],[67.5533,55.83],[67.4867,40.23],[66.42,38.63],[63.8867,38.63]],"31":[[55.82,56.03],[67.5533,55.83],[67.4867,61.23],[55.82,61.23]],"32":[[55.82,61.23],[67.4867,61.23],[67.4867,63.83],[67.0867,64.53],[66.62,65.63],[66.4867,66.43],[55.82,66.43]],"33":[[55.7533,71.93],[67.4867,71.93],[67.62,69.73],[66.9533,69.13],[66.62,68.23],[66.42,66.53],[55.82,66.63]],"34":[[55.7533,71.93],[67.4867,71.93],[67.5533,77.23],[55.7533,77.23]],"35":[[55.7533,77.23],[67.5533,77.23],[67.5533,82.33],[55.7533,82.53]],"36":[[68.62,87.53],[67.5533,83.03],[67.5533,82.33],[55.7533,82.53],[55.7533,87.63]],"37":[[68.6867,98.23],[69.82,96.63],[69.7533,92.63],[68.6867,87.73],[63.0867,87.83],[63.02,98.03]],"38":[[56.6867,87.73],[63.02,87.83],[63.02,98.03],[56.6867,98.13]],"39":[[50.3533,87.73],[56.6867,87.73],[56.6867,98.13],[50.3533,98.13]],"40":[[44.02,87.83],[50.3533,87.73],[50.3533,98.13],[45.0867,98.23],[43.8867,96.63]],"41":[[55.62,87.53],[55.62,82.63],[43.8867,82.53],[44.02,87.63]],"42":[[43.8867,77.23],[55.7533,77.23],[55.62,82.63],[43.8867,82.53]],"43":[[43.8867,71.93],[55.7533,71.93],[55.7533,77.23],[43.8867,77.23]],"44":[[43.8867,66.83],[55.7533,66.73],[55.7533,71.93],[43.8867,71.93]],"45":[[43.8867,66.83],[44.5533,66.23],[45.02,65.03],[45.22,64.03],[55.7533,58.13],[55.7533,66.73]],"46":[[43.3533,60.03],[43.82,60.43],[44.3533,60.83],[44.82,61.63],[45.0867,62.63],[45.22,63.83],[55.7533,58.03],[55.6867,56.03],[43.3533,56.23]],"47":[[40.4867,64.43],[40.42,63.53],[40.4867,62.43],[40.8867,61.53],[41.3533,60.83],[42.0867,60.23],[42.6867,59.93],[43.3533,59.93],[43.22,55.93],[37.4867,55.93],[37.4867,56.83],[31.42,57.03],[31.02,60.33]],"48":[[30.22,68.33],[41.6867,68.23],[41.7533,66.93],[41.0867,66.03],[40.6867,65.43],[40.5533,64.53],[31.0867,60.43]],"49":[[29.8867,68.33],[41.6867,68.23],[41.6867,73.33],[29.3533,73.43]],"50":[[29.3533,73.43],[41.6867,73.33],[41.6867,78.33],[28.8867,78.43]],"51":[[28.8867,78.43],[41.6867,78.33],[41.6867,83.23],[28.5533,83.33]],"52":[[28.1533,87.73],[41.6867,87.63],[41.6867,83.23],[28.5533,83.33]],"53":[[34.7533,98.23],[40.6867,98.13],[41.7533,96.43],[41.6867,88.03],[34.7533,87.83]],"54":[[34.62,98.03],[29.22,98.23],[27.3533,95.03],[28.1533,87.93],[34.6867,87.93]]};
-  // V35 correction: Chris's tracing-editor JSON already matched the plat visually.
-  // Do NOT recalibrate/scale it again. The data was normalized from the traced 1500 x 1000 display space.
-  // Extra calibration caused the overlay to become larger than the actual plat layout.
+  // V36: exact Las Gaviotas polygon points imported from Chris's completed tracing JSON.
+  // These are raw tracing-editor coordinates. Do NOT normalize, stretch, or shift them.
+  // The renderer places the plat image and these polygons inside the same SVG viewBox.
+  const LAS_GAVIOTAS_POLYGONS={"1":[[1222.3,936.3],[1225.3,1000.3],[1098.3,999.3],[1078.3,982.3],[1077.3,937.3]],"2":[[1076.3,934.3],[1222.3,934.3],[1224.3,874.3],[1058.3,874.3]],"3":[[1046.3,822.3],[1223.3,822.3],[1224.3,872.3],[1057.3,872.3],[1045.3,842.3]],"4":[[1046.3,768.3],[1223.3,769.3],[1223.3,820.3],[1046.3,820.3]],"5":[[1046.3,718.3],[1222.3,716.3],[1224.3,768.3],[1047.3,766.3]],"6":[[1046.3,716.3],[1222.3,714.3],[1222.3,662.3],[1054.3,662.3],[1060.3,672.3],[1064.3,686.3],[1059.3,698.3],[1054.3,710.3]],"7":[[1052.3,660.3],[1046.3,659.3],[1046.3,610.3],[1222.3,610.3],[1223.3,661.3]],"8":[[1046.3,608.3],[1222.3,608.3],[1222.3,558.3],[1046.3,558.3]],"9":[[1046.3,506.3],[1222.3,505.3],[1223.3,556.3],[1046.3,556.3]],"10":[[1046.3,454.3],[1222.3,454.3],[1222.3,503.3],[1046.3,504.3]],"11":[[1046.3,421.3],[1046.3,452.3],[1221.3,452.3],[1222.3,383.3]],"12":[[1062.3,392.3],[1060.3,401.3],[1054.3,408.3],[1048.3,414.3],[1046.3,417.3],[1046.3,420.3],[1222.3,382.3],[1221.3,294.3]],"13":[[1052.3,362.3],[1056.3,370.3],[1060.3,377.3],[1061.3,386.3],[1060.3,392.3],[1223.3,292.3],[1221.3,221.3]],"14":[[1020.3,357.3],[1028.3,354.3],[1036.3,355.3],[1044.3,359.3],[1050.3,362.3],[1222.3,218.3],[1220.3,214.3],[1138.3,214.3]],"15":[[992.3,370.3],[1000.3,372.3],[1005.3,365.3],[1010.3,360.3],[1017.3,356.3],[1136.3,214.3],[1030.3,216.3]],"16":[[992.3,371.3],[951.3,370.3],[952.3,214.3],[1029.3,214.3]],"17":[[950.3,214.3],[894.3,214.3],[896.3,371.3],[949.3,369.3]],"18":[[836.3,214.3],[892.3,215.3],[892.3,371.3],[834.3,371.3]],"19":[[775.3,215.3],[834.3,216.3],[832.3,370.3],[776.3,370.3]],"20":[[718.3,215.3],[772.3,214.3],[774.3,370.3],[718.3,370.3]],"21":[[652.3,354.3],[660.3,352.3],[669.3,351.3],[678.3,355.3],[688.3,360.3],[694.3,368.3],[697.3,372.3],[717.3,370.3],[717.3,216.3],[656.3,216.3]],"22":[[584.3,416.3],[630.3,397.3],[629.3,393.3],[629.3,386.3],[628.3,376.3],[631.3,368.3],[634.3,363.3],[640.3,358.3],[648.3,355.3],[651.3,353.3],[655.3,215.3],[614.3,216.3]],"23":[[564.3,575.3],[610.3,575.3],[650.3,422.3],[642.3,415.3],[634.3,408.3],[631.3,399.3],[585.3,418.3]],"24":[[684.3,577.3],[696.3,405.3],[690.3,417.3],[678.3,422.3],[662.3,426.3],[652.3,422.3],[612.3,575.3]],"25":[[698.3,406.3],[744.3,406.3],[744.3,576.3],[686.3,576.3]],"26":[[745.3,406.3],[797.3,405.3],[798.3,576.3],[746.3,576.3]],"27":[[798.3,405.3],[851.3,405.3],[852.3,576.3],[799.3,576.3]],"28":[[852.3,405.3],[904.3,404.3],[905.3,577.3],[853.3,576.3]],"29":[[905.3,405.3],[956.3,404.3],[956.3,575.3],[906.3,576.3]],"30":[[958.3,578.3],[1013.3,576.3],[1012.3,420.3],[996.3,404.3],[958.3,404.3]],"31":[[836.3,580.3],[1012.3,578.3],[1012.3,628.3],[837.3,628.3]],"32":[[837.3,630.3],[1012.3,630.3],[1012.3,656.3],[1006.3,663.3],[999.3,674.3],[997.3,682.3],[837.3,682.3]],"33":[[836.3,737.3],[1012.3,737.3],[1014.3,715.3],[1004.3,709.3],[999.3,700.3],[996.3,683.3],[837.3,684.3]],"34":[[837.3,739.3],[1013.3,740.3],[1012.3,788.3],[838.3,789.3]],"35":[[837.3,792.3],[1013.3,790.3],[1012.3,838.3],[837.3,840.3]],"36":[[1029.3,893.3],[1013.3,848.3],[1013.3,841.3],[836.3,843.3],[836.3,894.3]],"37":[[1030.3,1000.3],[1047.3,984.3],[1046.3,944.3],[1030.3,895.3],[946.3,896.3],[945.3,998.3]],"38":[[851.3,1000.3],[852.3,895.3],[944.3,896.3],[943.3,998.3]],"39":[[756.3,895.3],[851.3,895.3],[851.3,999.3],[756.3,1000.3]],"40":[[660.3,896.3],[755.3,895.3],[755.3,999.3],[676.3,1000.3],[658.3,984.3]],"41":[[834.3,893.3],[834.3,844.3],[658.3,843.3],[660.3,894.3]],"42":[[660.3,841.3],[836.3,841.3],[836.3,790.3],[660.3,792.3]],"43":[[660.3,739.3],[834.3,739.3],[835.3,788.3],[658.3,790.3]],"44":[[658.3,688.3],[835.3,687.3],[835.3,738.3],[659.3,738.3]],"45":[[658.3,686.3],[668.3,680.3],[675.3,668.3],[678.3,658.3],[836.3,599.3],[836.3,685.3]],"46":[[650.3,618.3],[657.3,622.3],[665.3,626.3],[672.3,634.3],[676.3,644.3],[678.3,656.3],[836.3,598.3],[835.3,578.3],[650.3,580.3]],"47":[[607.3,662.3],[606.3,653.3],[607.3,642.3],[613.3,633.3],[620.3,626.3],[631.3,620.3],[640.3,617.3],[650.3,617.3],[648.3,577.3],[562.3,577.3],[562.3,586.3],[471.3,588.3],[465.3,621.3]],"48":[[453.3,701.3],[625.3,700.3],[626.3,687.3],[616.3,678.3],[610.3,672.3],[608.3,663.3],[466.3,622.3]],"49":[[454.3,702.3],[625.3,701.3],[626.3,750.3],[444.3,751.3]],"50":[[437.3,801.3],[625.3,800.3],[625.3,752.3],[444.3,753.3]],"51":[[626.3,802.3],[626.3,850.3],[428.3,849.3],[436.3,803.3]],"52":[[422.3,895.3],[625.3,894.3],[625.3,850.3],[428.3,851.3]],"53":[[521.3,1000.3],[610.3,999.3],[626.3,982.3],[625.3,898.3],[521.3,896.3]],"54":[[519.3,998.3],[438.3,1000.3],[410.3,968.3],[422.3,897.3],[520.3,897.3]]};
   const pts=LAS_GAVIOTAS_POLYGONS[n];
   if(!pts) return null;
   return poly(pts);
@@ -864,6 +129,63 @@ function renderPlatOverlay(s){
   }
   wrap.style.display='block';
   missing.style.display='none';
+  const useUnifiedSvg=s.id==='lasgaviotas';
+  // Keep subdivision-specific visual tuning scoped to the current plat only.
+  wrap.className = wrap.className
+    .split(/\s+/)
+    .filter(c => c && !c.startsWith('plat-id-'))
+    .join(' ');
+  wrap.classList.add('plat-id-'+s.id);
+  wrap.classList.toggle('svg-canvas',useUnifiedSvg);
+  if(s.id==='phase31'){
+    wrap.style.setProperty('--plat-aspect','2048/1061');
+  }else if(s.id==='uri4'){
+    wrap.style.setProperty('--plat-aspect','1366/1332');
+  }else if(s.id==='lamulada2'){
+    wrap.style.setProperty('--plat-aspect','2048/1035');
+  }else if(s.id==='milanos4'){
+    wrap.style.setProperty('--plat-aspect','1604/868');
+  }else if(s.id==='milanos3'){
+    wrap.style.setProperty('--plat-aspect','2031/1586');
+  }else{
+    wrap.style.removeProperty('--plat-aspect');
+  }
+  let overlayRoot=svg;
+  if(useUnifiedSvg){
+    const lgZoom = s.id==='lasgaviotas' ? '300 180 1093 820' : '0 0 1400 1050';
+    svg.setAttribute('viewBox',lgZoom);
+    svg.setAttribute('preserveAspectRatio','xMidYMid meet');
+    const img=document.createElementNS('http://www.w3.org/2000/svg','image');
+    img.setAttribute('x','0');img.setAttribute('y','0');img.setAttribute('width','1400');img.setAttribute('height','1050');
+    img.setAttribute('preserveAspectRatio','none');
+    img.setAttributeNS('http://www.w3.org/1999/xlink','href',s.image);
+    img.setAttribute('href',s.image);
+    svg.appendChild(img);
+    overlayRoot=document.createElementNS('http://www.w3.org/2000/svg','g');
+    overlayRoot.setAttribute('transform','matrix(1 0 0 0.9645 0 -1.25)');
+    svg.appendChild(overlayRoot);
+  }else{
+    wrap.classList.remove('svg-canvas');
+    if(s.id==='phase31'){
+      svg.setAttribute('viewBox','0 0 2048 1061');
+      svg.setAttribute('preserveAspectRatio','none');
+    }else if(s.id==='uri4'){
+      svg.setAttribute('viewBox','0 0 1366 1332');
+      svg.setAttribute('preserveAspectRatio','none');
+    }else if(s.id==='lamulada2'){
+      svg.setAttribute('viewBox','0 0 2048 1035');
+      svg.setAttribute('preserveAspectRatio','none');
+    }else if(s.id==='milanos4'){
+      svg.setAttribute('viewBox','0 0 1604 868');
+      svg.setAttribute('preserveAspectRatio','none');
+    }else if(s.id==='milanos3'){
+      svg.setAttribute('viewBox','0 0 2031 1586');
+      svg.setAttribute('preserveAspectRatio','none');
+    }else{
+      svg.setAttribute('viewBox','0 0 100 100');
+      svg.setAttribute('preserveAspectRatio','none');
+    }
+  }
   note.textContent=s.id==='ph27'||s.id==='lasgaviotas'||s.id==='phase31'||s.id==='uri4'||s.id==='lamulada2'||s.id==='milanos4'||s.id==='milanos3'?'Tap a highlighted lot on the plat for pricing and Call Now':'Tap a highlighted lot. Overlay is plat-only and can be tuned after final tracing.';
   s.lots.forEach((lot,i)=>{
     const shape=getLotShape(s,lot,i);
@@ -883,14 +205,18 @@ function renderPlatOverlay(s){
     el.dataset.status=lot.status;
     el.onclick=(ev)=>{ev.stopPropagation();openPanel(lot)};
     overlayRoot.appendChild(el);
-    const cx=shape.type==='poly'?shape.points.reduce((a,p)=>a+p[0],0)/shape.points.length:shape.x+shape.w/2;
-    const cy=shape.type==='poly'?shape.points.reduce((a,p)=>a+p[1],0)/shape.points.length:shape.y+shape.h/2;
-    const t=document.createElementNS('http://www.w3.org/2000/svg','text');
-    t.setAttribute('x',cx);t.setAttribute('y',cy);
-    t.classList.add('plat-lot-label',cls);
-    t.dataset.status=lot.status;
-    t.textContent='#'+lot.id;
-    overlayRoot.appendChild(t);
+    // Match Phase 31 behavior: these plats use clean color overlays without lot-number text inside the overlay.
+    const noOverlayLabels = s.id==='phase31' || s.id==='lasgaviotas' || s.id==='ph27';
+    if(!noOverlayLabels){
+      const cx=shape.type==='poly'?shape.points.reduce((a,p)=>a+p[0],0)/shape.points.length:shape.x+shape.w/2;
+      const cy=shape.type==='poly'?shape.points.reduce((a,p)=>a+p[1],0)/shape.points.length:shape.y+shape.h/2;
+      const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('x',cx);t.setAttribute('y',cy);
+      t.classList.add('plat-lot-label',cls);
+      t.dataset.status=lot.status;
+      t.textContent='#'+lot.id;
+      overlayRoot.appendChild(t);
+    }
   });
 }
 
@@ -920,10 +246,14 @@ let propertyMap=null,propertyMarkers=[],propertyMapOpen=true;
 function subdivisionMatchesFilters(s){
   const cityMatch=!currentCityFilter||s.city===currentCityFilter;
   const sizeMatch=!currentSizeFilter||s.sizeKey===currentSizeFilter||acreBucketMatch(s,currentSizeFilter);
-  return cityMatch&&sizeMatch;
+  const statusMatch=!currentStatusFilter||currentStatusFilter==="all"||subdivisionStatus(s)===currentStatusFilter;
+  const q=(currentSearchFilter||"").trim().toLowerCase();
+  const searchText=[s.name,s.city,s.county,s.size,s.sizeKey,(s.tags||[]).join(" ")].join(" ").toLowerCase();
+  const searchMatch=!q||searchText.includes(q);
+  return cityMatch&&sizeMatch&&statusMatch&&searchMatch;
 }
 function getFilteredSubdivisions(){
-  return SUBDIVISIONS.filter(subdivisionMatchesFilters);
+  return SUBDIVISIONS.filter(subdivisionMatchesFilters).sort((a,b)=>statusRank(a)-statusRank(b)||a.name.localeCompare(b.name));
 }
 function togglePropertyMap(){
   propertyMapOpen=!propertyMapOpen;
@@ -960,7 +290,7 @@ function renderPropertyMap(){
     const minP=s.lots.filter(l=>l.status==="available").reduce((m,l)=>Math.min(m,l.price),Infinity);
     const marker=L.marker([s.lat,s.lng]).addTo(propertyMap);
     const popup=`<div class="map-popup-title">${s.name}</div>
-      <div class="map-popup-meta">${s.city}, ${s.county} County<br>${cnt.available} available lot${cnt.available===1?"":"s"} · ${minP<Infinity?fmtP(minP):"Call"} starting</div>
+      <div class="map-popup-meta">${s.city}, ${s.county} County<br>${statusLabel(s)} · ${minP<Infinity?fmtP(minP):"Call"} starting</div>
       <div class="map-popup-actions">
         <button onclick="openDetail('${s.id}')">View Lots</button>
         <a href="${s.mapUrl||('https://www.google.com/maps?q='+s.lat+','+s.lng)}" target="_blank" rel="noopener">Directions</a>
@@ -971,7 +301,7 @@ function renderPropertyMap(){
     const row=document.createElement("button");
     row.className="map-list-item";
     row.type="button";
-    row.innerHTML=`<span class="map-pin-num">${idx+1}</span><span><span class="map-item-name">${s.name}</span><span class="map-item-meta">${s.city} · ${s.size} · ${cnt.available} available</span></span>`;
+    row.innerHTML=`<span class="map-pin-num">${idx+1}</span><span><span class="map-item-name">${s.name}</span><span class="map-item-meta">${s.city} · ${s.size} · ${statusLabel(s)}</span></span>`;
     row.onclick=()=>{propertyMap.setView([s.lat,s.lng],13);marker.openPopup();};
     listEl.appendChild(row);
   });
@@ -986,21 +316,26 @@ function renderHome(){
   const grid=document.getElementById("prop-grid"),noR=document.getElementById("no-results"),cntEl=document.getElementById("filter-count");
   let shown=0,totalAvail=0;
   grid.innerHTML="";
-  SUBDIVISIONS.forEach(s=>{
-    const match=subdivisionMatchesFilters(s);
-    if(!match)return;
+  getFilteredSubdivisions().forEach(s=>{
     shown++;
     const cnt=countStatus(s.lots);
     totalAvail+=cnt.available;
     const minP=s.lots.filter(l=>l.status==="available").reduce((m,l)=>Math.min(m,l.price),Infinity);
     const card=document.createElement("div");
-    card.className="prop-card";
+    const st=subdivisionStatus(s);
+    const isSoldOut=st==="soldout";
+    const isComing=st==="coming";
+    card.className="prop-card"+(isSoldOut?" sold-out":"");
     card.setAttribute("role","button");
     card.setAttribute("tabindex","0");
     card.setAttribute("aria-label","View lot map and pricing for "+s.name);
     card.onclick=()=>openDetail(s.id);
     card.onkeydown=(ev)=>{if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();openDetail(s.id)}};
-    card.innerHTML=`<div class="prop-card-img"><img src="${s.cardImage||s.image}" alt="${s.name}" loading="lazy" onerror="this.style.display='none'"><div class="prop-card-badges">${tagHTML(s.tags)}</div><div class="prop-avail-badge"><div class="prop-avail-dot"></div>${cnt.available} lots available</div></div><div class="prop-card-body"><div class="prop-card-name">${s.name}</div><div class="prop-card-loc">📍 ${s.city}, ${s.county} County</div><div class="prop-card-meta"><span class="prop-card-size">${s.size}</span><div class="prop-card-price">${minP<Infinity?fmtP(minP):"Call"}<small>Starting Price</small></div></div><button class="prop-card-cta" type="button">View Lot Map & Pricing &rarr;</button></div>`;
+    const availText=isSoldOut?"Sold Out":(isComing?"Coming Soon":`${cnt.available} lot${cnt.available===1?"":"s"} available`);
+    const priceText=isSoldOut?"Sold Out":(minP<Infinity?fmtP(minP):"Call");
+    const priceSmall=isSoldOut?"Past Community":(isComing?"More Info Coming Soon":"Starting Price");
+    const ctaText=isSoldOut?"Join Interest List / Similar Lots →":(isComing?"Call for Upcoming Details →":"View Lot Map & Pricing →");
+    card.innerHTML=`<div class="prop-card-img"><img src="${s.cardImage||s.image}" alt="${s.name}" loading="lazy" onerror="this.style.display='none'"><div class="prop-card-badges">${tagHTML(tagsForSubdivision(s))}</div><div class="prop-avail-badge ${isSoldOut?'soldout':''}"><div class="prop-avail-dot ${isSoldOut?'soldout':''}"></div>${availText}</div></div><div class="prop-card-body"><div class="prop-card-name">${s.name}</div><div class="prop-card-loc">📍 ${s.city}, ${s.county} County</div><div class="prop-card-meta"><span class="prop-card-size">${s.size}</span><div class="prop-card-price">${priceText}<small>${priceSmall}</small></div></div><button class="prop-card-cta" type="button">${ctaText}</button></div>`;
     grid.appendChild(card);
   });
   noR.style.display=shown===0?"block":"none";
@@ -1011,21 +346,28 @@ function renderHome(){
 
 function syncFilterUI(){
   document.querySelectorAll(".chip").forEach(c=>c.classList.remove("on"));
-  const allBtn=document.getElementById("filter-all-btn");
+  document.querySelectorAll(".status-chip").forEach(c=>c.classList.remove("on"));
   const citySel=document.getElementById("city-filter");
   const sizeSel=document.getElementById("size-filter");
+  const searchInput=document.getElementById("subdivision-search");
   if(citySel) citySel.value=currentCityFilter;
   if(sizeSel) sizeSel.value=currentSizeFilter;
-  if(!currentCityFilter&&!currentSizeFilter){
-    allBtn?.classList.add("on");
-  }
+  if(searchInput && searchInput.value!==currentSearchFilter) searchInput.value=currentSearchFilter;
+  const statusBtn=document.getElementById("status-"+currentStatusFilter+"-btn");
+  if(statusBtn) statusBtn.classList.add("on");
 }
 function setFilter(f,el){
   if(f==="all"){
     currentCityFilter="";
     currentSizeFilter="";
   }
-  currentFilter=f;
+  currentFilter=(currentCityFilter||currentSizeFilter||currentStatusFilter!=="all") ? "combined" : "all";
+  syncFilterUI();
+  renderHome();
+}
+function setStatusFilter(f,el){
+  currentStatusFilter=f||"all";
+  currentFilter=(currentCityFilter||currentSizeFilter||currentStatusFilter!=="all") ? "combined" : "all";
   syncFilterUI();
   renderHome();
 }
@@ -1035,8 +377,13 @@ function setFilterFromSelect(sel,type){
   }else if(type==="size"){
     currentSizeFilter=sel.value||"";
   }
-  currentFilter=(currentCityFilter||currentSizeFilter) ? "combined" : "all";
+  currentFilter=(currentCityFilter||currentSizeFilter||currentStatusFilter!=="all") ? "combined" : "all";
   syncFilterUI();
+  renderHome();
+}
+function setSearchFilter(v){
+  currentSearchFilter=(v||"").trim();
+  currentFilter=(currentCityFilter||currentSizeFilter||currentSearchFilter||currentStatusFilter!=="all") ? "combined" : "all";
   renderHome();
 }
 function scrollToProps(){document.getElementById("props-section").scrollIntoView({behavior:"smooth"})}
@@ -1048,11 +395,30 @@ function openDetail(id){
   showPage("detail");
   const cnt=countStatus(s.lots);
   const minP=s.lots.filter(l=>l.status==="available").reduce((m,l)=>Math.min(m,l.price),Infinity);
-  document.getElementById("d-labels").innerHTML=tagHTML(s.tags);
+  document.getElementById("d-labels").innerHTML=tagHTML(tagsForSubdivision(s));
   document.getElementById("d-name").textContent=s.name;
   document.getElementById("d-loc").innerHTML=`📍 <a href="${s.mapUrl||s.mapsEmbed}" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px">${s.address}</a>`;
-  document.getElementById("d-price").innerHTML=(minP<Infinity?fmtP(minP):"Call for Price")+"<small> Starting Price &middot; Seller Financing</small>";
+  const st=subdivisionStatus(s);
+  const isSoldOut=st==="soldout";
+  document.getElementById("d-price").innerHTML=(isSoldOut?"Sold Out":(minP<Infinity?fmtP(minP):"Call for Price"))+"<small> "+(isSoldOut?"Past Community":"Starting Price &middot; Seller Financing")+"</small>";
   document.getElementById("d-lotcount").textContent=s.lots.length+" Total "+(s.unitLabelPlural||"Lots");
+  const soldBanner=document.getElementById("soldout-banner");
+  const similarBox=document.getElementById("similar-subdivisions");
+  if(soldBanner){
+    if(isSoldOut){
+      soldBanner.style.display="block";
+      soldBanner.innerHTML=`<strong>This subdivision is currently sold out.</strong> We keep this page available for reference. For similar available properties, call <a href="tel:9563833222">(956) 383-3222</a> or send an interest request below.`;
+    }else{ soldBanner.style.display="none"; soldBanner.innerHTML=""; }
+  }
+  if(similarBox){
+    if(isSoldOut){
+      const similar=SUBDIVISIONS.filter(x=>x.id!==s.id && subdivisionStatus(x)==="available" && (x.city===s.city || x.sizeKey===s.sizeKey)).slice(0,3);
+      if(similar.length){
+        similarBox.style.display="block";
+        similarBox.innerHTML=`<div class="similar-box-title">Similar available subdivisions</div><div class="similar-links">${similar.map(x=>`<button type="button" onclick="openDetail('${x.id}')">${x.name}</button>`).join("")}</div>`;
+      }else{ similarBox.style.display="none"; similarBox.innerHTML=""; }
+    }else{ similarBox.style.display="none"; similarBox.innerHTML=""; }
+  }
   document.getElementById("stat-avail").textContent=cnt.available;
   document.getElementById("stat-sold").textContent=cnt.sold||0;
   document.getElementById("stat-pend").textContent=cnt.pending||0;
@@ -1079,6 +445,7 @@ function openDetail(id){
   const sel=document.getElementById("cf-lot");
   sel.innerHTML=`<option value="">— Select a ${s.unitLabel||"Lot"} —</option>`;
   s.lots.filter(l=>l.status==="available").forEach(l=>{sel.innerHTML+=`<option value="${s.unitLabel||"Lot"} #${l.id}">${s.unitLabel||"Lot"} #${l.id} — ${fmtP(l.price)}</option>`});
+    if(isSoldOut){sel.innerHTML+=`<option value="Interest List / Similar Lots">Interest List / Similar Lots</option>`;}
 }
 
 function renderLotGrid(s){
@@ -1162,12 +529,8 @@ function showPage(p){
 }
 
 renderHome();
-</script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 
-<!-- V96_HOME_MAP_OPEN_DEFAULT_FIX -->
-<script>
 window.addEventListener('DOMContentLoaded', function(){
   try{
     var shell=document.getElementById('location-map-shell');
@@ -1179,7 +542,3 @@ window.addEventListener('DOMContentLoaded', function(){
     }
   }catch(e){}
 });
-</script>
-
-</body>
-</html>
