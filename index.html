@@ -512,9 +512,9 @@ nav{z-index:300}
         <div class="map-title">Browse by Location</div>
         <div class="map-sub">Tap a subdivision pin or list item to view lot map, pricing, and directions.</div>
       </div>
-      <button class="map-toggle" id="map-toggle" onclick="togglePropertyMap()">Show Map View</button>
+      <button class="map-toggle" id="map-toggle" onclick="togglePropertyMap()">Hide Map View</button>
     </div>
-    <div class="location-map-shell" id="location-map-shell">
+    <div class="location-map-shell open" id="location-map-shell">
       <div id="property-map"></div>
       <div class="map-list" id="map-list"></div>
     </div>
@@ -903,7 +903,7 @@ function acreBucketMatch(s,filter){
 }
 
 
-let propertyMap=null,propertyMarkers=[],propertyMapOpen=false;
+let propertyMap=null,propertyMarkers=[],propertyMapOpen=true;
 function subdivisionMatchesFilters(s){
   const cityMatch=!currentCityFilter||s.city===currentCityFilter;
   const sizeMatch=!currentSizeFilter||s.sizeKey===currentSizeFilter||acreBucketMatch(s,currentSizeFilter);
@@ -1151,17 +1151,20 @@ function showPage(p){
 renderHome();
 </script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<!-- V95_MAP_DEFAULT_OPEN -->
+
+
+<!-- V96_HOME_MAP_OPEN_DEFAULT_FIX -->
 <script>
 window.addEventListener('DOMContentLoaded', function(){
-  var ids=['property-map-wrap','home-map-wrap','location-map-wrap','subdivision-map-wrap','mapSection','property-location-map'];
-  ids.forEach(function(id){var el=document.getElementById(id); if(el){el.style.display='block'; el.classList.remove('collapsed','hidden');}});
-  if(typeof toggleLocationMap==='function'){
-    try{
-      var mapEl=document.getElementById('property-map-wrap')||document.getElementById('home-map-wrap')||document.getElementById('location-map-wrap');
-      if(mapEl && (mapEl.style.display==='none' || mapEl.classList.contains('collapsed'))) toggleLocationMap();
-    }catch(e){}
-  }
+  try{
+    var shell=document.getElementById('location-map-shell');
+    var btn=document.getElementById('map-toggle');
+    if(shell) shell.classList.add('open');
+    if(btn) btn.textContent='Hide Map View';
+    if(typeof renderPropertyMap==='function'){
+      setTimeout(function(){ renderPropertyMap(); if(window.propertyMap&&propertyMap.invalidateSize) propertyMap.invalidateSize(); }, 100);
+    }
+  }catch(e){}
 });
 </script>
 
