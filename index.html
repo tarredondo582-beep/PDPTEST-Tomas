@@ -621,6 +621,23 @@ nav{z-index:300}
 #plat-wrap.plat-id-ph27 .plat-lot.sold{fill:rgba(239,68,68,.24)!important;stroke:#dc2626!important;stroke-width:.24!important;}
 #plat-wrap.plat-id-ph27 .plat-lot.hold{fill:rgba(107,114,128,.28)!important;stroke:#6b7280!important;stroke-width:.24!important;}
 
+
+/* V75: desktop filters left, status chips right */
+@media(min-width:721px){
+  .filter-bar{display:flex;align-items:flex-end;gap:14px;justify-content:flex-start;padding-top:16px;padding-bottom:16px}
+  .filter-bar .filter-label{align-self:center;margin-right:4px}
+  .filter-groups{display:flex;align-items:flex-end;gap:12px;flex:0 1 auto}
+  .status-filter-row{margin-left:auto;display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;width:auto}
+  .filter-count{margin-left:8px;align-self:center;font-size:.76rem}
+}
+@media(max-width:720px){
+  .filter-bar{display:flex;align-items:flex-start;gap:10px}
+  .filter-bar .filter-label{width:100%;margin-bottom:0}
+  .filter-groups{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .status-filter-row{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px}
+  .filter-count{width:100%;margin-left:0;text-align:center}
+}
+
 </style>
 </head>
 <body>
@@ -692,12 +709,13 @@ nav{z-index:300}
         </select>
       </label>
 
-      <div class="status-filter-row" aria-label="Subdivision status filter">
-        <button class="status-chip" id="status-all-btn" onclick="setStatusFilter('all',this)">All Statuses</button>
-        <button class="status-chip on" id="status-available-btn" onclick="setStatusFilter('available',this)">Available</button>
-        <button class="status-chip" id="status-coming-btn" onclick="setStatusFilter('coming',this)">Coming Soon</button>
-        <button class="status-chip" id="status-soldout-btn" onclick="setStatusFilter('soldout',this)">Sold Out</button>
-      </div>
+    </div>
+
+    <div class="status-filter-row" aria-label="Subdivision status filter">
+      <button class="status-chip" id="status-all-btn" onclick="setStatusFilter('all',this)">All Statuses</button>
+      <button class="status-chip on" id="status-available-btn" onclick="setStatusFilter('available',this)">Available</button>
+      <button class="status-chip" id="status-coming-btn" onclick="setStatusFilter('coming',this)">Coming Soon</button>
+      <button class="status-chip" id="status-soldout-btn" onclick="setStatusFilter('soldout',this)">Sold Out</button>
     </div>
     <span class="filter-count" id="filter-count"></span>
   </div>
