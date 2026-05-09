@@ -436,6 +436,49 @@ nav{z-index:300}
 .legend-swatch.legend-hold{background:rgba(107,114,128,.28);border:2px solid #6b7280}
 
 
+/* V92: make Las Gaviotas and PDP Phase 27 overlays match Phase 31 visual style */
+#plat-wrap.plat-id-lasgaviotas .plat-lot.available,
+#plat-wrap.plat-id-ph27 .plat-lot.available{fill:rgba(34,197,94,.26)!important;stroke:#16a34a!important}
+#plat-wrap.plat-id-lasgaviotas .plat-lot.pending,
+#plat-wrap.plat-id-ph27 .plat-lot.pending{fill:rgba(245,158,11,.22)!important;stroke:#d97706!important}
+#plat-wrap.plat-id-lasgaviotas .plat-lot.sold,
+#plat-wrap.plat-id-ph27 .plat-lot.sold{fill:rgba(239,68,68,.24)!important;stroke:#dc2626!important}
+#plat-wrap.plat-id-lasgaviotas .plat-lot-label,
+#plat-wrap.plat-id-ph27 .plat-lot-label{fill:#0f172a!important;stroke:rgba(255,255,255,.92)!important}
+#plat-wrap.plat-id-lasgaviotas .plat-lot-label.sold,
+#plat-wrap.plat-id-ph27 .plat-lot-label.sold{fill:#991b1b!important}
+#plat-wrap.plat-id-lasgaviotas .plat-lot-label.pending,
+#plat-wrap.plat-id-ph27 .plat-lot-label.pending{fill:#92400e!important}
+#plat-wrap.plat-id-ph27 .plat-lot{stroke-width:.24!important}
+#plat-wrap.plat-id-ph27 .plat-lot:hover,
+#plat-wrap.plat-id-ph27 .plat-lot.selected{stroke-width:.40!important;filter:drop-shadow(0 0 4px rgba(22,163,74,.62))}
+#plat-wrap.plat-id-lasgaviotas.svg-canvas .plat-lot.available,
+#plat-wrap.plat-id-lasgaviotas.svg-canvas .plat-lot.pending{stroke-width:2.35!important}
+#plat-wrap.plat-id-lasgaviotas.svg-canvas .plat-lot.sold{stroke-width:2.25!important}
+#plat-wrap.plat-id-lasgaviotas.svg-canvas .plat-lot:hover,
+#plat-wrap.plat-id-lasgaviotas.svg-canvas .plat-lot.selected{stroke-width:3.65!important;filter:drop-shadow(0 0 4px rgba(22,163,74,.62))}
+
+
+/* V93: exact Phase 31 overlay visual match for Las Gaviotas and PDP PH 27.
+   These rules intentionally override the prior bright/thick SVG-canvas styling. */
+#plat-wrap.plat-id-lasgaviotas .plat-lot.available,
+#plat-wrap.plat-id-ph27 .plat-lot.available{fill:rgba(34,197,94,.26)!important;stroke:#16a34a!important;stroke-width:.24!important}
+#plat-wrap.plat-id-lasgaviotas .plat-lot.pending,
+#plat-wrap.plat-id-ph27 .plat-lot.pending{fill:rgba(245,158,11,.22)!important;stroke:#d97706!important;stroke-width:.24!important}
+#plat-wrap.plat-id-lasgaviotas .plat-lot.sold,
+#plat-wrap.plat-id-ph27 .plat-lot.sold{fill:rgba(239,68,68,.24)!important;stroke:#dc2626!important;stroke-width:.24!important}
+#plat-wrap.plat-id-lasgaviotas .plat-lot:hover,
+#plat-wrap.plat-id-lasgaviotas .plat-lot.selected,
+#plat-wrap.plat-id-ph27 .plat-lot:hover,
+#plat-wrap.plat-id-ph27 .plat-lot.selected{stroke-width:.40!important;filter:drop-shadow(0 0 4px rgba(22,163,74,.62))!important}
+#plat-wrap.plat-id-lasgaviotas .plat-lot-label,
+#plat-wrap.plat-id-ph27 .plat-lot-label{font:800 1.85px 'DM Sans',sans-serif!important;fill:#0f172a!important;stroke:rgba(255,255,255,.92)!important;stroke-width:.36px!important}
+#plat-wrap.plat-id-lasgaviotas .plat-lot-label.sold,
+#plat-wrap.plat-id-ph27 .plat-lot-label.sold{fill:#991b1b!important}
+#plat-wrap.plat-id-lasgaviotas .plat-lot-label.pending,
+#plat-wrap.plat-id-ph27 .plat-lot-label.pending{fill:#92400e!important}
+
+
 /* SOCIAL FLOAT + REQUEST PORTAL LINKS */
 .social-fab{position:fixed;right:22px;bottom:22px;z-index:250;display:flex;flex-direction:column;gap:12px}
 .social-fab a{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;box-shadow:0 8px 26px rgba(0,0,0,.28);transition:.2s}
@@ -509,6 +552,40 @@ nav{z-index:300}
   .social-fab{display:none!important;}
 }
 @media(max-width:380px){.nav-brand{font-size:.92rem!important}.nav-brand small{font-size:.46rem!important}.nav-links .nav-link:not(.nav-phone),.nav-links .nav-cta{font-size:.68rem!important;padding:6px 8px!important;}}
+
+
+
+/* V94: Force Las Gaviotas + Pueblo de Palmas PH 27 to visually match Phase 31 overlay behavior.
+   Phase 31 uses clean translucent lot fills with no lot-number text printed inside the overlay. */
+#plat-wrap.plat-id-lasgaviotas .plat-lot.available,
+#plat-wrap.plat-id-lasgaviotas.svg-canvas .plat-lot.available,
+#plat-wrap.plat-id-ph27 .plat-lot.available{fill:rgba(34,197,94,.26)!important;stroke:#16a34a!important;stroke-width:.24!important}
+#plat-wrap.plat-id-lasgaviotas .plat-lot.pending,
+#plat-wrap.plat-id-lasgaviotas.svg-canvas .plat-lot.pending,
+#plat-wrap.plat-id-ph27 .plat-lot.pending{fill:rgba(245,158,11,.22)!important;stroke:#d97706!important;stroke-width:.24!important}
+#plat-wrap.plat-id-lasgaviotas .plat-lot.sold,
+#plat-wrap.plat-id-lasgaviotas.svg-canvas .plat-lot.sold,
+#plat-wrap.plat-id-ph27 .plat-lot.sold{fill:rgba(239,68,68,.24)!important;stroke:#dc2626!important;stroke-width:.24!important}
+#plat-wrap.plat-id-lasgaviotas .plat-lot.hold,
+#plat-wrap.plat-id-lasgaviotas.svg-canvas .plat-lot.hold,
+#plat-wrap.plat-id-ph27 .plat-lot.hold{fill:rgba(107,114,128,.28)!important;stroke:#6b7280!important;stroke-width:.24!important}
+#plat-wrap.plat-id-lasgaviotas .plat-lot:hover,
+#plat-wrap.plat-id-lasgaviotas .plat-lot.selected,
+#plat-wrap.plat-id-lasgaviotas.svg-canvas .plat-lot:hover,
+#plat-wrap.plat-id-lasgaviotas.svg-canvas .plat-lot.selected,
+#plat-wrap.plat-id-ph27 .plat-lot:hover,
+#plat-wrap.plat-id-ph27 .plat-lot.selected{stroke-width:.40!important;filter:drop-shadow(0 0 4px rgba(22,163,74,.62))!important}
+#plat-wrap.plat-id-lasgaviotas .plat-lot-label,
+#plat-wrap.plat-id-lasgaviotas.svg-canvas .plat-lot-label,
+#plat-wrap.plat-id-ph27 .plat-lot-label{display:none!important}
+
+
+/* V95: final Phase 27 fix — same clean overlay behavior as Las Gaviotas/Phase 31, with no in-overlay lot labels. */
+#plat-wrap.plat-id-ph27 .plat-lot-label{display:none!important;visibility:hidden!important;opacity:0!important;}
+#plat-wrap.plat-id-ph27 .plat-lot.available{fill:rgba(34,197,94,.26)!important;stroke:#16a34a!important;stroke-width:.24!important;}
+#plat-wrap.plat-id-ph27 .plat-lot.pending{fill:rgba(245,158,11,.22)!important;stroke:#d97706!important;stroke-width:.24!important;}
+#plat-wrap.plat-id-ph27 .plat-lot.sold{fill:rgba(239,68,68,.24)!important;stroke:#dc2626!important;stroke-width:.24!important;}
+#plat-wrap.plat-id-ph27 .plat-lot.hold{fill:rgba(107,114,128,.28)!important;stroke:#6b7280!important;stroke-width:.24!important;}
 
 </style>
 </head>
@@ -894,6 +971,12 @@ function renderPlatOverlay(s){
   wrap.style.display='block';
   missing.style.display='none';
   const useUnifiedSvg=s.id==='lasgaviotas';
+  // Keep subdivision-specific visual tuning scoped to the current plat only.
+  wrap.className = wrap.className
+    .split(/\s+/)
+    .filter(c => c && !c.startsWith('plat-id-'))
+    .join(' ');
+  wrap.classList.add('plat-id-'+s.id);
   wrap.classList.toggle('svg-canvas',useUnifiedSvg);
   if(s.id==='phase31'){
     wrap.style.setProperty('--plat-aspect','2048/1061');
@@ -963,14 +1046,18 @@ function renderPlatOverlay(s){
     el.dataset.status=lot.status;
     el.onclick=(ev)=>{ev.stopPropagation();openPanel(lot)};
     overlayRoot.appendChild(el);
-    const cx=shape.type==='poly'?shape.points.reduce((a,p)=>a+p[0],0)/shape.points.length:shape.x+shape.w/2;
-    const cy=shape.type==='poly'?shape.points.reduce((a,p)=>a+p[1],0)/shape.points.length:shape.y+shape.h/2;
-    const t=document.createElementNS('http://www.w3.org/2000/svg','text');
-    t.setAttribute('x',cx);t.setAttribute('y',cy);
-    t.classList.add('plat-lot-label',cls);
-    t.dataset.status=lot.status;
-    t.textContent='#'+lot.id;
-    overlayRoot.appendChild(t);
+    // Match Phase 31 behavior: these plats use clean color overlays without lot-number text inside the overlay.
+    const noOverlayLabels = s.id==='phase31' || s.id==='lasgaviotas' || s.id==='ph27';
+    if(!noOverlayLabels){
+      const cx=shape.type==='poly'?shape.points.reduce((a,p)=>a+p[0],0)/shape.points.length:shape.x+shape.w/2;
+      const cy=shape.type==='poly'?shape.points.reduce((a,p)=>a+p[1],0)/shape.points.length:shape.y+shape.h/2;
+      const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('x',cx);t.setAttribute('y',cy);
+      t.classList.add('plat-lot-label',cls);
+      t.dataset.status=lot.status;
+      t.textContent='#'+lot.id;
+      overlayRoot.appendChild(t);
+    }
   });
 }
 
