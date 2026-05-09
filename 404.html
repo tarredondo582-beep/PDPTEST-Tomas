@@ -452,6 +452,28 @@ nav{z-index:300}
   .nav-brand{font-size:.98rem!important;}
 }
 
+
+/* V64 compact mobile nav: smaller sticky menu with horizontal chips */
+@media(max-width:720px){
+  body{padding-bottom:56px!important;}
+  nav{height:auto!important;min-height:0!important;padding:7px 10px 8px!important;flex-wrap:wrap!important;align-items:center!important;gap:6px!important;}
+  .nav-logo{flex:0 0 100%!important;width:100%!important;min-width:0!important;max-width:100%!important;gap:7px!important;}
+  .nav-logo img{height:30px!important;width:30px!important;padding:2px!important;}
+  .nav-brand{font-size:.98rem!important;line-height:1.02!important;}
+  .nav-brand small{font-size:.49rem!important;letter-spacing:.055em!important;}
+  .nav-links{display:flex!important;width:100%!important;flex:0 0 100%!important;margin-left:0!important;gap:6px!important;align-items:center!important;overflow-x:auto!important;overflow-y:hidden!important;padding:1px 1px 2px!important;-webkit-overflow-scrolling:touch!important;scrollbar-width:none!important;}
+  .nav-links::-webkit-scrollbar{display:none!important;}
+  .nav-links .nav-link:not(.nav-phone),.nav-links .nav-cta{display:inline-flex!important;align-items:center!important;justify-content:center!important;flex:0 0 auto!important;width:auto!important;min-height:30px!important;margin:0!important;padding:6px 10px!important;border-radius:999px!important;background:rgba(255,255,255,.09)!important;color:white!important;font-size:.72rem!important;font-weight:800!important;line-height:1!important;text-align:center!important;white-space:nowrap!important;text-decoration:none!important;border:1px solid rgba(255,255,255,.08)!important;}
+  .nav-links .nav-link.active{background:var(--forest)!important;color:white!important;border-color:rgba(255,255,255,.18)!important;}
+  .nav-links .nav-cta{background:var(--leaf)!important;color:white!important;}
+  .nav-links .nav-phone,.nav-sep{display:none!important;}
+  .page-options{display:none!important;}
+  .filter-bar{position:relative!important;top:auto!important;z-index:50!important;}
+  .mob-bar{display:flex!important;}
+  .social-fab{display:none!important;}
+}
+@media(max-width:380px){.nav-brand{font-size:.92rem!important}.nav-brand small{font-size:.46rem!important}.nav-links .nav-link:not(.nav-phone),.nav-links .nav-cta{font-size:.68rem!important;padding:6px 8px!important;}}
+
 </style>
 </head>
 <body>
@@ -468,7 +490,7 @@ nav{z-index:300}
   <div class="nav-links">
     <a class="nav-link active" id="nav-home" href="./index.html">Properties</a>
     <a class="nav-link" href="./how-it-works.html">How It Works</a>
-    <a class="nav-link" href="./contact.html">Contact</a>
+    <a class="nav-link" href="./contact.html">Contact Us</a>
     <a class="nav-link" href="./forms.html">Forms</a>
     <a class="nav-link" href="./customer_portal.html">Customer Portal</a>
     <a class="nav-link nav-phone" href="tel:9563833222">☎️ (956) 383-3222</a>
